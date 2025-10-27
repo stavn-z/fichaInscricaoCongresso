@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrição Congresso Jovem 2026 - Safira</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7fafc; }
+        .form-card {
+            background-color: #ffffff;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .primary-color { background-color: #10B981; } /* Emerald Green - Cor de Igreja/Esperança */
+        .primary-color:hover { background-color: #059669; }
+        input:focus, textarea:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.5); }
+        .radio-checked:checked { background-color: #10B981; border-color: #10B981; }
+        /* Centralizando o modal de sucesso */
+        #success-modal { min-height: 100vh; }
+        /* Estilo para simular o botão de upload de arquivo */
+        .file-upload-label {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.15s;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="text-white text-xl font-semibold flex items-center">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Processando inscrição...
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- Área vazia para manter o espaçamento do topo -->
+        <div class="text-right mb-4 h-6">
+        </div>
+
+        <!-- Registration View -->
+        <div id="registration-view" class="form-card rounded-xl p-6 md:p-10 mb-10">
+            <header class="text-center mb-8">
+                <!-- Título - Clique 5x rapidamente para acesso Admin -->
+                <h1 id="main-title" class="text-4xl font-bold text-gray-800 select-none cursor-pointer">Inscrição | Congresso Jovem 2026</h1>
+                <p class="text-xl text-gray-600 mt-2">Igreja Batista do Parque Safira</p>
+                <p class="text-sm text-gray-500 mt-1">
+                    Fim de Semana do Carnaval | 28/Fev a 3/Mar de 2026
+                </p>
+                <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <p class="text-sm font-medium text-yellow-800">Taxa de Inscrição por pessoa: R$ <span id="base-fee">150,00</span></p>
+                    <p class="text-xs text-yellow-700">O valor inclui hospedagem, alimentação e material do congresso.</p>
+                </div>
+                <div id="total-registrants-summary" class="mt-2 text-md font-semibold text-gray-700">
+                    Total de Congressistas: 1 | Valor Total: R$ 150,00
+                </div>
+            </header>
+
+            <form id="registration-form" class="space-y-8">
+                
+                <!-- Container para Múltiplos Congressistas -->
+                <div id="attendees-container" class="space-y-6 border-b pb-4">
+                    <!-- O primeiro congressista será adicionado via JS -->
+                </div>
+
+                <!-- Botão Adicionar Congressista -->
+                <button type="button" id="add-attendee-btn" class="w-full bg-gray-200 text-gray-700 py-2 rounded-xl font-semibold hover:bg-gray-300 transition duration-150 flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Adicionar Outro Jovem/Adolescente
+                </button>
+
+                <!-- 2. Dados do Responsável (Condicional) -->
+                <section id="responsible-section" class="border-b pb-4 hidden">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        Dados do Pai/Responsável
+                    </h2>
+                    <div class="p-3 mb-4 bg-red-50 rounded-lg text-red-700 text-sm">
+                        <p id="age-message" class="font-medium">Pelo menos um dos inscritos é menor de 18 anos. Preencha os dados do responsável.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="responsible-name" class="block text-sm font-medium text-gray-700">Nome Completo do Responsável</label>
+                            <input type="text" id="responsible-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
+                        </div>
+                        <div>
+                            <label for="responsible-phone" class="block text-sm font-medium text-gray-700">Telefone do Responsável</label>
+                            <input type="tel" id="responsible-phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="(DDD) 9xxxx-xxxx" maxlength="15">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="responsible-cpf" class="block text-sm font-medium text-gray-700">CPF do Responsável (Para Termo)</label>
+                            <input type="text" id="responsible-cpf" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="xxx.xxx.xxx-xx" maxlength="14">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. Termo de Autorização e Assinatura Digital (Apenas para Menores) -->
+                <section id="terms-section" class="pb-4 hidden">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        Termo de Autorização e Assinatura
+                    </h2>
+                    <div id="term-box" class="p-4 bg-gray-50 border border-gray-200 rounded-lg text-sm max-h-96 overflow-y-auto">
+                        <p class="text-gray-500 text-center italic">Preencha os dados do responsável acima para gerar o termo.</p>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg flex flex-col sm:flex-row justify-between items-center">
+                        <div class="flex items-center space-x-3 mb-3 sm:mb-0">
+                            <input type="checkbox" id="terms-agreement" class="form-checkbox h-4 w-4 text-blue-600 radio-checked" required>
+                            <span class="text-sm text-gray-700 font-semibold">Li e concordo com o Termo.</span>
+                        </div>
+                        <input type="hidden" id="signature-timestamp" value="">
+                        <button type="button" id="sign-term-btn" class="primary-color text-white py-2 px-4 rounded-lg font-semibold text-sm transition duration-150">
+                            Assinar Termo Digitalmente
+                        </button>
+                    </div>
+                    <p id="signature-status" class="text-center text-xs text-green-700 mt-2 font-medium hidden">
+                        Termo assinado digitalmente em: --
+                    </p>
+                </section>
+
+                <!-- 3. Opções de Pagamento -->
+                <section class="border-b pb-4">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2-5a2 2 0 002 2h2a2 2 0 002-2V9a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 01-2 2h4m-4-2h12a2 2 0 002-2V9a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 01-2 2z"></path></svg>
+                        Opções de Pagamento
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <!-- Pix Option -->
+                        <div class="p-4 border rounded-lg cursor-pointer" id="pix-option">
+                            <input type="radio" name="payment-method" value="pix" id="radio-pix" class="radio-checked text-green-500 hidden" required>
+                            <label for="radio-pix" class="font-semibold flex justify-between items-center">
+                                Pagamento via PIX (À Vista)
+                                <span class="text-sm font-normal text-green-600">R$ <span id="pix-total-amount">0,00</span></span>
+                            </label>
+                            <p class="text-xs text-gray-500 mt-1">Confirmação imediata. Sem juros.</p>
+                        </div>
+                        <!-- Card Option -->
+                        <div class="p-4 border rounded-lg cursor-pointer" id="card-option">
+                            <input type="radio" name="payment-method" value="card" id="radio-card" class="radio-checked text-green-500 hidden">
+                            <label for="radio-card" class="font-semibold flex justify-between items-center">
+                                Cartão de Crédito
+                                <span class="text-xs text-red-500">Até 12x com juros</span>
+                            </label>
+                            <p class="text-xs text-gray-500 mt-1">Parcelamento com taxa de juros de 2.99% a.m.</p>
+                        </div>
+                    </div>
+
+                    <!-- Payment Details Area -->
+                    <div id="payment-details" class="mt-4 p-4 rounded-lg border border-dashed hidden">
+                        <h3 class="text-lg font-medium text-gray-700 mb-3">Detalhes Finais do Pagamento</h3>
+
+                        <div id="pix-instructions" class="hidden space-y-2">
+                            <p class="font-bold text-green-600">Valor a Pagar: R$ <span id="pix-final-amount">0,00</span></p>
+                            <p class="text-sm">Por favor, envie o PIX para a chave:</p>
+                            <div class="p-2 bg-gray-100 rounded-md font-mono text-center text-sm break-all">
+                                <span id="pix-key-display">21.999.888/0001-00 (CNPJ)</span>
+                                <button type="button" id="copy-pix-btn" class="ml-2 text-blue-500 hover:text-blue-700 text-xs font-semibold">Copiar</button>
+                            </div>
+                        </div>
+
+                        <div id="card-fields" class="hidden">
+                            <p class="font-bold text-purple-600 mb-2">Valor Total: R$ <span id="card-total-amount">0,00</span></p>
+                            <label for="installments" class="block text-sm font-medium text-gray-700">Parcelas</label>
+                            <select id="installments" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
+                                <!-- Options will be generated by JS -->
+                            </select>
+                            <p class="mt-2 text-sm text-gray-600" id="installment-summary"></p>
+                            <!-- Texto ajustado para remover menção a envio de e-mail -->
+                            <p class="text-xs text-blue-600 mt-1 font-semibold">
+                                O envio desta ficha <strong>registra sua intenção</strong> e <strong>gera o link de pagamento</strong> (via Mercado Pago ou similar). A vaga só é garantida após a conclusão do pagamento no link.
+                            </p>
+                        </div>
+                        
+                        <!-- COMMON Proof Section for PIX and CARD -->
+                        <div id="proof-section" class="mt-4 pt-4 border-t border-gray-200 hidden">
+                            <label for="proof-file" class="block text-sm font-medium text-gray-700 mb-1">
+                                Anexar Comprovante (Imagem/Documento) <span id="proof-requirement-text" class="text-red-600">(Obrigatório)</span>
+                            </label>
+                            <div class="flex items-center space-x-3">
+                                <input type="file" id="proof-file" accept="image/*,.pdf" class="hidden" required>
+                                <label for="proof-file" id="proof-label" class="file-upload-label bg-gray-200 text-gray-700 hover:bg-gray-300">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                    Escolher Arquivo
+                                </label>
+                                <span id="proof-status" class="text-sm text-gray-500 truncate max-w-xs">Nenhum arquivo selecionado.</span>
+                            </div>
+                            <!-- Campo de texto oculto que será preenchido com o nome do arquivo para validação -->
+                            <input type="hidden" id="proof-input" required>
+                            
+                            <p class="text-xs text-red-600 mt-1">
+                                <span class="font-bold">Atenção:</span> O comprovante é <strong>obrigatório</strong> para a submissão da ficha.
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submit-button" class="w-full primary-color text-white py-3 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition duration-200">
+                    Finalizar Inscrição e Enviar Dados
+                </button>
+                <div id="error-message" class="text-red-600 text-center font-medium hidden"></div>
+
+            </form>
+        </div>
+
+        <!-- Report/Admin View -->
+        <div id="report-view" class="form-card rounded-xl p-6 md:p-10 mb-10 hidden">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                <svg class="w-7 h-7 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V17a2 2 0 01-2 2z"></path></svg>
+                Relatório de Inscritos (Admin)
+            </h1>
+            <p class="text-gray-600 mb-4">Visualização de todas as inscrições salvas no Firestore, ordenadas por data de registro.</p>
+            
+            <div id="report-loading-status" class="text-center text-gray-500 p-8">Carregando dados...</div>
+            <div id="report-first-registrant" class="p-3 bg-green-50 rounded-lg border border-green-200 text-green-800 font-semibold mb-4 hidden"></div>
+
+            <div id="registrants-list" class="space-y-4">
+                <!-- Lista de inscritos será preenchida aqui -->
+            </div>
+             <div class="mt-8 text-center flex justify-center space-x-4">
+                <button id="export-csv-btn" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-semibold flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Exportar para CSV
+                </button>
+                <button id="close-report-btn" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-6 rounded-lg font-semibold">Fechar Relatório</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Modal de Sucesso -->
+    <div id="success-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 hidden flex items-center justify-center min-h-screen">
+        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-lg w-full text-center">
+            <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h3 class="text-2xl font-bold text-gray-800 mb-3">Inscrição Concluída com Sucesso!</h3>
+            <p class="text-gray-600 mb-4">Seus <strong><span id="submitted-count">X</span></strong> registro(s) foram salvos. ID da Transação:</p>
+            <div class="p-3 bg-green-50 rounded-lg font-mono text-lg font-semibold text-green-800 break-all mb-4" id="registration-id-display"></div>
+            <p class="text-sm text-gray-700 mb-6">
+                Todos os dados, termos e comprovantes foram armazenados. Você pode iniciar uma nova inscrição abaixo.
+            </p>
+            <button id="modal-reload-button" class="primary-color text-white py-2 px-6 rounded-lg font-semibold">Fazer Nova Inscrição</button>
+        </div>
+    </div>
+
+    <!-- Modal de Acesso Admin -->
+    <div id="admin-login-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 hidden flex items-center justify-center">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Acesso Administrativo</h3>
+            <p class="text-sm text-gray-600 mb-4">Insira a chave de acesso para visualizar o relatório de inscritos.</p>
+            <input type="password" id="admin-key-input-modal" class="w-full rounded-md border-gray-300 shadow-sm p-2 border text-sm" placeholder="Chave de Acesso">
+            <p id="admin-error-message-modal" class="text-red-600 text-xs mt-2 hidden">Chave incorreta. Tente novamente.</p>
+            <div class="mt-5 flex justify-end space-x-3">
+                <button type="button" id="admin-cancel-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-lg font-semibold text-sm">Cancelar</button>
+                <button type="button" id="admin-key-check-btn-modal" class="primary-color text-white py-2 px-4 rounded-lg font-semibold text-sm">Acessar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Variáveis globais obrigatórias no ambiente Canvas
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth, userId;
+        let attendeeCounter = 0; // Mantido para IDs únicos
+
+        // --- Variáveis de Configuração ---
+        const ADMIN_KEY = 'safira2026'; // Chave de acesso administrativo
+        const BASE_FEE = 150.00;
+        const MONTHLY_INTEREST_RATE = 0.0299; // 2.99% a.m.
+        const CONGRESS_START_DATE = '2026-02-28';
+
+        // --- Funções Auxiliares de UI/Lógica ---
+        
+        /**
+         * Aplica máscara de CPF no input (XXX.XXX.XXX-XX).
+         */
+        function maskCPF(input) {
+            let value = input.value.replace(/\D/g, "");
+            value = value.replace(/(\d{3})(\d)/, "$1.$2");
+            value = value.replace(/(\d{3})(\d)/, "$1.$2");
+            value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            input.value = value.slice(0, 14);
+        }
+
+        /**
+         * Aplica máscara de telefone no input (XX) XXXXX-XXXX.
+         */
+        function maskPhone(input) {
+            let value = input.value.replace(/\D/g, "");
+            value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
+            value = value.replace(/(\d)(\d{4})$/, "$1-$2");
+            input.value = value.slice(0, 15);
+        }
+
+        function getPaymentLink(method, amount) {
+            // Simulação de link de pagamento Mercado Pago ou similar
+            return `https://mercadopago.com/safira-congresso?metodo=${method}&valor=${amount.toFixed(2)}`;
+        }
+
+        function generateRegistrationId() {
+            const date = new Date();
+            const year = date.getFullYear().toString().slice(-2);
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const day = date.getDate().toString().padStart(2, '0');
+            const uuid = crypto.randomUUID().split('-')[0].toUpperCase();
+            return `SAFIRA-${year}${month}${day}-${uuid}`;
+        }
+
+        function calculateInstallmentValue(P, i, n) {
+            if (n === 1) return P;
+            const installmentValue = (P * i) / (1 - Math.pow(1 + i, -n));
+            return installmentValue;
+        }
+
+        function calculateInstallments(numRegistrants) {
+            const select = document.getElementById('installments');
+            const summary = document.getElementById('installment-summary');
+            const totalFee = BASE_FEE * numRegistrants;
+            
+            // Atualiza o valor base do cartão
+            document.getElementById('card-total-amount').textContent = totalFee.toFixed(2);
+            
+            const installments = parseInt(select.value);
+            let totalAmount = totalFee;
+
+            if (installments > 1) {
+                const installmentValue = calculateInstallmentValue(totalFee, MONTHLY_INTEREST_RATE, installments);
+                totalAmount = installmentValue * installments;
+                summary.innerHTML = `<span class="font-bold text-blue-700">${installments}x de R$ ${installmentValue.toFixed(2)}</span> - Total a prazo: R$ ${totalAmount.toFixed(2)}`;
+            } else {
+                summary.innerHTML = `<span class="font-bold text-green-700">1x de R$ ${totalFee.toFixed(2)}</span> - Sem juros.`;
+            }
+            return totalAmount;
+        }
+
+        function selectPayment(method) {
+            const details = document.getElementById('payment-details');
+            const pix = document.getElementById('pix-instructions');
+            const card = document.getElementById('card-fields');
+            const pixOption = document.getElementById('pix-option');
+            const cardOption = document.getElementById('card-option');
+            const radioPix = document.getElementById('radio-pix');
+            const radioCard = document.getElementById('radio-card');
+            
+            const proofSection = document.getElementById('proof-section');
+            const proofInput = document.getElementById('proof-input'); 
+            const proofRequirementText = document.getElementById('proof-requirement-text');
+
+            details.classList.remove('hidden');
+            pixOption.classList.remove('border-green-500');
+            cardOption.classList.remove('border-green-500');
+
+            // Atualiza valores PIX/Cartão com o total de inscritos
+            const numRegistrants = document.querySelectorAll('.attendee-card').length;
+            const totalFee = BASE_FEE * numRegistrants;
+            
+            // Sempre mostra a seção de comprovante e a torna obrigatória
+            proofSection.classList.remove('hidden');
+            proofInput.setAttribute('required', 'true');
+
+            if (method === 'pix') {
+                pix.classList.remove('hidden');
+                card.classList.add('hidden');
+                pixOption.classList.add('border-green-500');
+                radioPix.checked = true;
+
+                document.getElementById('pix-total-amount').textContent = totalFee.toFixed(2);
+                document.getElementById('pix-final-amount').textContent = totalFee.toFixed(2);
+                document.getElementById('installment-summary').innerHTML = '';
+                proofRequirementText.textContent = '(Obrigatório)';
+            } else if (method === 'card') {
+                pix.classList.add('hidden');
+                card.classList.remove('hidden');
+                cardOption.classList.add('border-green-500');
+                radioCard.checked = true;
+
+                // Garante que o cálculo de parcelas é feito para o total correto
+                calculateInstallments(numRegistrants);
+                proofRequirementText.textContent = '(Obrigatório - Comprovante de Intenção)';
+            }
+        }
+
+        function formatBRLDate(dateString) {
+            if (!dateString) return '--';
+            const date = new Date(dateString);
+            return date.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+        }
+
+        function generateTerms(responsavel, registrantNames) {
+            const eventDate = new Date(CONGRESS_START_DATE);
+            const formattedDate = eventDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+            
+            if (!responsavel.name || !responsavel.cpf) {
+                return '<p class="text-gray-500 text-center italic">Por favor, preencha o Nome e CPF do Responsável para gerar o Termo de Autorização.</p>';
+            }
+            
+            const registrantList = registrantNames.map(name => `<li>- ${name}</li>`).join('');
+
+            return `
+                <div class="space-y-3">
+                    <p class="font-bold text-center text-gray-800">TERMO DE AUTORIZAÇÃO E RESPONSABILIDADE</p>
+                    <p class="text-xs">
+                        Eu, <strong>${responsavel.name}</strong>, portador do CPF <strong>${responsavel.cpf}</strong>, e telefone <strong>${responsavel.phone}</strong>,
+                        na qualidade de Pai/Responsável legal pelos congressistas listados abaixo, autorizo a participação integral de:
+                    </p>
+                    <ul class="list-disc ml-6 text-xs font-semibold">${registrantList}</ul>
+                    
+                    <p class="text-xs">
+                        no <strong>Congresso de Jovens e Adolescentes 2026 da Igreja Batista do Parque Safira</strong>,
+                        a ser realizado no período do Carnaval, com início em <strong>${formattedDate}</strong>.
+                    </p>
+                    <p class="text-xs">
+                        Declaro estar ciente e concordar com as normas e regras do evento. Assumo total responsabilidade
+                        por despesas médicas e hospitalares.
+                    </p>
+                    <p id="term-signature-info" class="text-xs mt-4 text-right italic">
+                        Assinatura digital pendente. Clique em "Assinar Termo Digitalmente".
+                    </p>
+                    <div class="h-px w-full bg-gray-300"></div>
+                </div>
+            `;
+        }
+        
+        // --- Funções de Múltiplos Congressistas e Dinâmica de UI ---
+        
+        /**
+         * Reajusta dinamicamente o título e o botão de remover para cada congressista.
+         */
+        function updateAttendeeTitles() {
+            const attendeeCards = document.querySelectorAll('.attendee-card');
+            attendeeCards.forEach((card, index) => {
+                const titleContainer = card.querySelector('.attendee-title');
+                
+                let titleText = (index === 0) ? "Congressista Principal" : `Congressista #${index + 1}`;
+                
+                // Remove todos os filhos para reconstruir
+                titleContainer.innerHTML = '';
+                
+                // Adiciona o texto do título
+                const titleSpan = document.createElement('span');
+                titleSpan.textContent = titleText;
+                titleContainer.appendChild(titleSpan);
+
+                // Adiciona botão de remover para não-principais
+                if (index > 0) {
+                    const removeBtn = document.createElement('button');
+                    removeBtn.type = 'button';
+                    removeBtn.classList.add('remove-attendee-btn', 'text-red-500', 'hover:text-red-700', 'text-sm', 'font-normal');
+                    removeBtn.textContent = 'Remover';
+                    removeBtn.addEventListener('click', () => {
+                        card.remove();
+                        updateResponsibleSection(); // Chama a atualização de títulos e tudo mais
+                    });
+                    titleContainer.appendChild(removeBtn);
+                }
+            });
+        }
+
+        /**
+         * Verifica a idade de todos os congressistas e atualiza a seção do responsável,
+         * o resumo de inscritos e os títulos.
+         */
+        function updateResponsibleSection() {
+            const birthdateInputs = document.querySelectorAll('.attendee-birthdate');
+            const responsibleSection = document.getElementById('responsible-section');
+            const termsSection = document.getElementById('terms-section');
+            const ageMessage = document.getElementById('age-message');
+            
+            let needsResponsible = false;
+            let minorCount = 0;
+
+            const today = new Date(CONGRESS_START_DATE);
+
+            birthdateInputs.forEach(input => {
+                if (input.value) {
+                    const birthDate = new Date(input.value);
+                    let age = today.getFullYear() - birthDate.getFullYear();
+                    const m = today.getMonth() - birthDate.getMonth();
+                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+                    if (age < 18) {
+                        needsResponsible = true;
+                        minorCount++;
+                    }
+                }
+            });
+
+            const responsibleInputs = document.querySelectorAll('#responsible-section input');
+            const signTermBtn = document.getElementById('sign-term-btn');
+
+            if (needsResponsible) {
+                responsibleSection.classList.remove('hidden');
+                termsSection.classList.remove('hidden');
+                ageMessage.textContent = `${minorCount} congressista(s) terão menos de 18 anos. É obrigatório preencher os dados do responsável e assinar o Termo.`;
+                responsibleInputs.forEach(input => input.setAttribute('required', 'true'));
+                signTermBtn.removeAttribute('disabled');
+            } else {
+                responsibleSection.classList.add('hidden');
+                termsSection.classList.add('hidden');
+                responsibleInputs.forEach(input => {
+                    input.removeAttribute('required');
+                });
+                // Limpa assinatura se não for mais necessária
+                document.getElementById('signature-timestamp').value = '';
+                document.getElementById('signature-status').classList.add('hidden');
+            }
+
+            // --- Atualização de UI ---
+            
+            // 1. Numeração Dinâmica
+            updateAttendeeTitles();
+
+            // 2. Atualiza resumo de inscritos e valor total
+            const numRegistrants = document.querySelectorAll('.attendee-card').length;
+            const totalFee = BASE_FEE * numRegistrants;
+            document.getElementById('total-registrants-summary').textContent = 
+                `Total de Congressistas: ${numRegistrants} | Valor Total: R$ ${totalFee.toFixed(2)}`;
+            
+            // 3. Recalcula pagamento se já selecionado
+            const selectedMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
+            if (selectedMethod) {
+                selectPayment(selectedMethod);
+            } else {
+                // Atualiza valores do PIX para o caso de não ter selecionado nada
+                document.getElementById('pix-total-amount').textContent = totalFee.toFixed(2);
+            }
+
+            updateTermsDisplay();
+        }
+
+        function updateTermsDisplay() {
+            const responsavel = {
+                name: document.getElementById('responsible-name').value,
+                cpf: document.getElementById('responsible-cpf').value,
+                phone: document.getElementById('responsible-phone').value,
+            };
+
+            const registrantNames = Array.from(document.querySelectorAll('.attendee-name')).map(input => input.value || '(Não preenchido)');
+
+            // Se for maior de idade, o termo é invisível, então a atualização não importa
+            if (!document.getElementById('terms-section').classList.contains('hidden')) {
+                document.getElementById('term-box').innerHTML = generateTerms(responsavel, registrantNames);
+            }
+        }
+        
+        function signTerm() {
+            const timestamp = new Date().toISOString();
+            document.getElementById('signature-timestamp').value = timestamp;
+            
+            const formattedDate = formatBRLDate(timestamp);
+            const statusElement = document.getElementById('signature-status');
+            const signBtn = document.getElementById('sign-term-btn');
+
+            statusElement.textContent = `Termo assinado digitalmente em: ${formattedDate}`;
+            statusElement.classList.remove('hidden');
+            signBtn.textContent = 'Assinatura Registrada!';
+            signBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+            signBtn.classList.remove('primary-color', 'hover:bg-059669');
+            signBtn.setAttribute('disabled', 'true');
+            document.getElementById('terms-agreement').checked = true; // Marca o acordo
+
+            document.getElementById('term-signature-info').innerHTML = `
+                <strong class="text-green-600">Termo Assinado Digitalmente</strong> em ${formattedDate}.
+            `;
+        }
+
+        function createAttendeeCard(id) {
+            const card = document.createElement('div');
+            card.id = `attendee-${id}`;
+            card.classList.add('attendee-card', 'p-6', 'border', 'rounded-xl', 'shadow-md', 'space-y-4');
+            
+            // Título é genérico e será preenchido dinamicamente por updateAttendeeTitles
+            card.innerHTML = `
+                <h3 class="attendee-title text-xl font-semibold text-gray-800 flex justify-between items-center">
+                    <!-- Título e botão de remover serão adicionados/atualizados aqui -->
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="attendee-name-${id}" class="block text-sm font-medium text-gray-700">Nome Completo</label>
+                        <input type="text" id="attendee-name-${id}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border attendee-name" required>
+                    </div>
+                    <div>
+                        <label for="attendee-birthdate-${id}" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
+                        <input type="date" id="attendee-birthdate-${id}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border attendee-birthdate" required>
+                    </div>
+                    <div>
+                        <label for="attendee-email-${id}" class="block text-sm font-medium text-gray-700">E-mail</label>
+                        <input type="email" id="attendee-email-${id}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border attendee-email" required>
+                    </div>
+                    <div>
+                        <label for="attendee-phone-${id}" class="block text-sm font-medium text-gray-700">Telefone (WhatsApp)</label>
+                        <input type="tel" id="attendee-phone-${id}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border attendee-phone" placeholder="(DDD) 9xxxx-xxxx" maxlength="15" required>
+                    </div>
+                </div>
+            `;
+            
+            // Adiciona listeners para máscaras e validação
+            card.querySelector(`.attendee-birthdate`).addEventListener('change', updateResponsibleSection);
+            card.querySelector(`.attendee-name`).addEventListener('input', updateTermsDisplay);
+            card.querySelector(`.attendee-phone`).addEventListener('input', (e) => maskPhone(e.target));
+            
+            return card;
+        }
+
+        function addAttendee() {
+            attendeeCounter++; // Apenas para garantir ID único no DOM e no Firebase
+            const container = document.getElementById('attendees-container');
+            const newCard = createAttendeeCard(attendeeCounter);
+            container.appendChild(newCard);
+            updateResponsibleSection(); // Atualiza contagem e títulos
+        }
+        
+        // --- Funções de Relatório (Admin) ---
+        
+        function convertToCSV(data) {
+            if (data.length === 0) return '';
+            
+            const headers = [
+                'ID_Registro', 'Data_Registro', 'Num_Inscritos', 'Nome_Congressista', 'Idade', 'Email', 'Telefone',
+                'Menor_Idade', 'Nome_Responsavel', 'CPF_Responsavel', 'Telefone_Responsavel', 
+                'Pagamento_Metodo', 'Pagamento_Total', 'Comprovante_Anexado', 'Assinatura_Data'
+            ];
+            
+            const rows = data.flatMap(record => {
+                const base = {
+                    'ID_Registro': record.registrationId,
+                    'Data_Registro': formatBRLDate(record.registrationDate),
+                    'Num_Inscritos': record.attendees.length,
+                    'Nome_Responsavel': record.responsibleName || 'N/A',
+                    'CPF_Responsavel': record.responsibleCpf || 'N/A',
+                    'Telefone_Responsavel': record.responsiblePhone || 'N/A',
+                    'Pagamento_Metodo': record.payment.method.toUpperCase(),
+                    'Pagamento_Total': record.payment.totalAmountPaid.toFixed(2),
+                    // Usando o campo pixProof para o nome do comprovante genérico
+                    'Comprovante_Anexado': record.payment.pixProof ? 'Sim' : 'Não', 
+                    'Assinatura_Data': record.signatureTimestamp ? formatBRLDate(record.signatureTimestamp) : 'N/A'
+                };
+
+                return record.attendees.map(attendee => {
+                    return {
+                        ...base,
+                        'Nome_Congressista': attendee.attendeeName,
+                        'Idade': attendee.attendeeAge,
+                        'Email': attendee.attendeeEmail,
+                        'Telefone': attendee.attendeePhone,
+                        'Menor_Idade': attendee.isMinor ? 'Sim' : 'Não'
+                    };
+                });
+            });
+
+            const csvRows = [];
+            csvRows.push(headers.join(';')); 
+
+            for (const row of rows) {
+                const values = headers.map(header => {
+                    const value = row[header];
+                    // Trata valores nulos ou vírgulas
+                    return `"${String(value || '').replace(/"/g, '""').replace(/;/g, ',')}"`;
+                });
+                csvRows.push(values.join(';'));
+            }
+
+            return csvRows.join('\n');
+        }
+
+        function downloadCSV(data) {
+            const csv = convertToCSV(data);
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'relatorio_inscritos_congresso_safira.csv');
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert("Seu navegador não suporta download automático. Tente salvar o texto do relatório manualmente.");
+            }
+        }
+        
+        async function renderReportView() {
+            document.getElementById('registration-view').classList.add('hidden');
+            document.getElementById('report-view').classList.remove('hidden');
+            document.getElementById('admin-login-modal').classList.add('hidden'); // Fecha modal de login
+            
+            const loadingStatus = document.getElementById('report-loading-status');
+            const listContainer = document.getElementById('registrants-list');
+            const firstRegistrantDiv = document.getElementById('report-first-registrant');
+            const exportCsvBtn = document.getElementById('export-csv-btn');
+            
+            listContainer.innerHTML = '';
+            firstRegistrantDiv.classList.add('hidden');
+            loadingStatus.classList.remove('hidden');
+            exportCsvBtn.setAttribute('disabled', 'true');
+            exportCsvBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            try {
+                const collectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'carnival_congress_2026');
+                const q = query(collectionRef, orderBy('registrationDate', 'asc'));
+                const querySnapshot = await getDocs(q);
+
+                const registrants = [];
+                querySnapshot.forEach(doc => {
+                    registrants.push(doc.data());
+                });
+
+                if (registrants.length === 0) {
+                    listContainer.innerHTML = '<p class="text-center text-gray-500">Nenhuma inscrição encontrada.</p>';
+                } else {
+                    // Ativa o botão de exportação
+                    exportCsvBtn.removeAttribute('disabled');
+                    exportCsvBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    exportCsvBtn.onclick = () => downloadCSV(registrants);
+
+                    // Exibir o primeiro inscrito
+                    const first = registrants[0];
+                    firstRegistrantDiv.classList.remove('hidden');
+                    firstRegistrantDiv.innerHTML = `
+                        Primeiro Inscrito: <strong>${first.attendees[0].attendeeName}</strong>
+                        (ID Transação: ${first.registrationId.split('-').pop()})
+                        em ${formatBRLDate(first.registrationDate)}.
+                    `;
+                    
+                    // Exibir lista completa
+                    registrants.forEach((data, index) => {
+                        const registrantsHtml = data.attendees.map(a => 
+                            `<li>- ${a.attendeeName} (${a.attendeeAge} anos), Tel: ${a.attendeePhone}</li>`
+                        ).join('');
+                        
+                        const element = document.createElement('div');
+                        element.classList.add('p-4', 'bg-white', 'border', 'rounded-lg', 'shadow-sm');
+                        element.innerHTML = `
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-bold text-lg text-gray-800">${data.attendees.length} Congressista(s) Registrado(s)}</h3>
+                                <span class="text-xs text-gray-500">#${index + 1} | ID: ${data.registrationId.split('-').pop()}</span>
+                            </div>
+                            <ul class="list-none text-sm text-gray-700 space-y-1">
+                                ${registrantsHtml}
+                            </ul>
+                            <div class="mt-2 text-xs text-gray-600">
+                                <p>Registro: ${formatBRLDate(data.registrationDate)}</p>
+                                <p>Responsável: ${data.responsibleName || 'N/A'}</p>
+                                <p>Pagamento: ${data.payment.method.toUpperCase()} (Total: R$ ${data.payment.totalAmountPaid.toFixed(2)})</p>
+                                ${data.signatureTimestamp ? `<p class="text-green-600">Assinatura Digital: ${formatBRLDate(data.signatureTimestamp)}</p>` : ''}
+                            </div>
+                        `;
+                        listContainer.appendChild(element);
+                    });
+                }
+            } catch (error) {
+                console.error("Erro ao buscar relatório:", error);
+                listContainer.innerHTML = '<p class="text-center text-red-600">Erro ao carregar o relatório. Verifique a conexão ou regras de segurança do Firestore.</p>';
+            } finally {
+                loadingStatus.classList.add('hidden');
+            }
+        }
+        
+        function closeReportView() {
+            document.getElementById('report-view').classList.add('hidden');
+            document.getElementById('registration-view').classList.remove('hidden');
+        }
+        
+        // Função para controle de acesso Admin (5 clicks no título)
+        let clickCount = 0;
+        let lastClickTime = 0;
+        function handleAdminAccess() {
+            const currentTime = new Date().getTime();
+            const clickDelay = currentTime - lastClickTime;
+            lastClickTime = currentTime;
+
+            // Se o clique for muito lento (> 500ms), reinicia a contagem
+            if (clickDelay > 500) {
+                clickCount = 1;
+            } else {
+                clickCount++;
+            }
+
+            if (clickCount === 5) {
+                clickCount = 0;
+                document.getElementById('admin-key-input-modal').value = '';
+                document.getElementById('admin-error-message-modal').classList.add('hidden');
+                document.getElementById('admin-login-modal').classList.remove('hidden');
+            }
+        }
+
+        function checkAdminKeyModal() {
+            const keyInput = document.getElementById('admin-key-input-modal');
+            const errorMessage = document.getElementById('admin-error-message-modal');
+            
+            if (keyInput.value === ADMIN_KEY) {
+                errorMessage.classList.add('hidden');
+                renderReportView();
+            } else {
+                errorMessage.classList.remove('hidden');
+            }
+        }
+        
+        // --- Inicialização e Autenticação Firebase ---
+
+        async function initializeFirebase() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                userId = auth.currentUser?.uid || crypto.randomUUID();
+                console.log("Firebase e Auth inicializados. User ID:", userId);
+
+            } catch (error) {
+                console.error("Erro ao inicializar Firebase:", error);
+                document.getElementById('error-message').textContent = "Erro de inicialização. Tente recarregar a página.";
+                document.getElementById('error-message').classList.remove('hidden');
+            }
+        }
+
+
+        // --- Lógica de Submissão do Formulário ---
+
+        async function submitRegistration(event) {
+            event.preventDefault();
+            document.getElementById('loading-overlay').classList.remove('hidden');
+            document.getElementById('error-message').classList.add('hidden');
+
+            try {
+                // 1. Coleta de Dados dos Congressistas
+                const attendeeCards = document.querySelectorAll('.attendee-card');
+                const attendeesData = [];
+                let isAnyMinor = false;
+                
+                attendeeCards.forEach(card => {
+                    const id = card.id.split('-')[1];
+                    const attendeeBirthDate = card.querySelector(`#attendee-birthdate-${id}`).value;
+                    const today = new Date(CONGRESS_START_DATE);
+                    const birthDate = new Date(attendeeBirthDate);
+                    let age = today.getFullYear() - birthDate.getFullYear();
+                    const m = today.getMonth() - birthDate.getMonth();
+                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+                    
+                    if (age < 18) {
+                        isAnyMinor = true;
+                    }
+
+                    attendeesData.push({
+                        attendeeName: card.querySelector(`#attendee-name-${id}`).value,
+                        attendeeBirthDate: attendeeBirthDate,
+                        attendeeAge: age,
+                        attendeeEmail: card.querySelector(`#attendee-email-${id}`).value,
+                        attendeePhone: card.querySelector(`#attendee-phone-${id}`).value,
+                        isMinor: age < 18,
+                    });
+                });
+                
+                // 2. Coleta de Dados do Responsável/Termo
+                const signatureTimestamp = document.getElementById('signature-timestamp').value;
+                if (isAnyMinor && !signatureTimestamp) {
+                    throw new Error("É obrigatório assinar digitalmente o Termo de Autorização para menores de idade.");
+                }
+
+                const responsibleData = isAnyMinor ? {
+                    responsibleName: document.getElementById('responsible-name').value,
+                    responsiblePhone: document.getElementById('responsible-phone').value,
+                    responsibleCpf: document.getElementById('responsible-cpf').value,
+                } : {};
+                
+                // 3. Coleta de Dados de Pagamento e Validação de Comprovante (Obrigatório para Pix/Cartão)
+                const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+                const numRegistrants = attendeesData.length;
+                const totalFee = BASE_FEE * numRegistrants;
+                
+                let totalAmount = totalFee;
+                let installments = 1;
+                let proofFileName = null; // Nome do arquivo de comprovante
+
+                // Validação de comprovante (para PIX ou CARTÃO)
+                const proofInput = document.getElementById('proof-input');
+                if (proofInput && proofInput.value.trim() === '') {
+                    throw new Error(`Obrigatório anexar o Comprovante (arquivo) para finalizar a inscrição.`);
+                }
+                proofFileName = proofInput ? proofInput.value.trim() : null;
+
+                if (paymentMethod === 'card') {
+                    installments = parseInt(document.getElementById('installments').value);
+                    totalAmount = calculateInstallments(numRegistrants); // Recalcula o total exato
+                } 
+                // PIX já está coberto pela validação geral de comprovante acima.
+
+                // 4. Geração Final do Termo de Autorização (para salvar)
+                const registrantNames = attendeesData.map(a => a.attendeeName);
+                const authorizationTerm = isAnyMinor
+                    ? generateTerms(responsibleData, registrantNames)
+                    : "Maior de Idade - Termo de Responsabilidade Pessoal.";
+
+                // 5. Montagem Final do Objeto (Uma transação para todos os inscritos)
+                const registrationId = generateRegistrationId();
+                const registrationData = {
+                    registrationId: registrationId,
+                    attendees: attendeesData, // Array de congressistas
+                    isAnyMinor: isAnyMinor,
+                    ...responsibleData,
+                    payment: {
+                        method: paymentMethod,
+                        baseFeePerPerson: BASE_FEE,
+                        totalBaseFee: totalFee,
+                        totalAmountPaid: totalAmount,
+                        installments: installments,
+                        interestRate: paymentMethod === 'card' ? MONTHLY_INTEREST_RATE : 0,
+                        pixProof: proofFileName, // Comprovante Pix/Card (nome do arquivo)
+                        paymentLink: getPaymentLink(paymentMethod, totalAmount) // Simulação de link do Mercado Pago
+                    },
+                    authorizationTerm: authorizationTerm,
+                    signatureTimestamp: signatureTimestamp,
+                    registrationDate: new Date().toISOString(),
+                    registeredByUserId: userId,
+                };
+
+                // 6. Salvamento no Firestore (Coleção Pública)
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'carnival_congress_2026', registrationId);
+                await setDoc(docRef, registrationData);
+
+                // 7. Exibir Modal de Sucesso
+                document.getElementById('registration-id-display').textContent = registrationId;
+                document.getElementById('submitted-count').textContent = numRegistrants;
+                document.getElementById('success-modal').classList.remove('hidden');
+
+            } catch (error) {
+                console.error("Erro ao salvar a inscrição:", error);
+                document.getElementById('error-message').textContent = `Erro: ${error.message}`;
+                document.getElementById('error-message').classList.remove('hidden');
+            } finally {
+                document.getElementById('loading-overlay').classList.add('hidden');
+            }
+        }
+
+        // --- Inicialização e Listeners ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeFirebase();
+            
+            // 1. Adiciona o primeiro congressista
+            addAttendee();
+
+            const form = document.getElementById('registration-form');
+            form.addEventListener('submit', submitRegistration);
+            
+            // 2. Listeners de Múltiplos Congressistas
+            document.getElementById('add-attendee-btn').addEventListener('click', addAttendee);
+
+            // 3. Listeners de Pagamento e Cálculo
+            document.getElementById('pix-option').addEventListener('click', () => selectPayment('pix'));
+            document.getElementById('card-option').addEventListener('click', () => selectPayment('card'));
+            document.getElementById('installments').addEventListener('change', () => calculateInstallments(document.querySelectorAll('.attendee-card').length));
+            
+            // 4. Listeners de Máscara (Responsável)
+            document.getElementById('responsible-cpf').addEventListener('input', (e) => maskCPF(e.target));
+            document.getElementById('responsible-phone').addEventListener('input', (e) => maskPhone(e.target));
+            
+            // 5. Listeners de Termo e Assinatura
+            document.getElementById('sign-term-btn').addEventListener('click', signTerm);
+            document.querySelectorAll('#responsible-section input').forEach(input => {
+                input.addEventListener('input', updateTermsDisplay);
+            });
+            
+            // 6. Listeners de Comprovante (Arquivo)
+            const proofFile = document.getElementById('proof-file');
+            proofFile.addEventListener('change', (e) => {
+                const fileName = e.target.files.length > 0 ? e.target.files[0].name : 'Nenhum arquivo selecionado.';
+                document.getElementById('proof-status').textContent = fileName;
+                // Salva o nome do arquivo no campo hidden para validação e envio
+                document.getElementById('proof-input').value = e.target.files.length > 0 ? fileName : '';
+            });
+
+            // 7. Listeners do Modal e Admin
+            document.getElementById('copy-pix-btn').addEventListener('click', () => {
+                const pixKeyText = document.getElementById('pix-key-display').textContent.split(' (')[0].trim();
+                navigator.clipboard.writeText(pixKeyText).then(() => {
+                    // Opcional: feedback visual de cópia
+                }).catch(() => {
+                    const tempInput = document.createElement('textarea');
+                    tempInput.value = pixKeyText;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                });
+            });
+            
+            document.getElementById('modal-reload-button').addEventListener('click', () => window.location.reload());
+            document.getElementById('close-report-btn').addEventListener('click', closeReportView);
+
+            // 8. Listener de Acesso Admin (5 cliques no título)
+            document.getElementById('main-title').addEventListener('click', handleAdminAccess);
+            
+            // 9. Listeners do Modal de Login Admin
+            document.getElementById('admin-key-check-btn-modal').addEventListener('click', checkAdminKeyModal);
+            document.getElementById('admin-cancel-btn').addEventListener('click', () => {
+                document.getElementById('admin-login-modal').classList.add('hidden');
+            });
+
+
+            // Populando Dropdown de Parcelas
+            const selectInstallments = document.getElementById('installments');
+            for (let i = 1; i <= 12; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `${i}x`;
+                selectInstallments.appendChild(option);
+            }
+
+            // Inicializa valores de pagamento
+            selectPayment('pix'); // Começa com PIX selecionado
+        });
+    </script>
+</body>
+</html>
