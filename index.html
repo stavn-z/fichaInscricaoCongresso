@@ -3,1045 +3,1214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscrição Congresso Jovem 2026 - Safira</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Inscrição | JUBACZOMA 26</title>
+    <!-- Carregando Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f7fafc; }
-        .form-card {
-            background-color: #ffffff;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    <!-- Configuração de Cores (Black & Gray) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#1f2937', // Dark Gray/Black (Primary)
+                        'secondary': '#4b5563', // Medium Gray (Accent)
+                        'background': '#f9fafb', // Very Light Gray
+                        'accent-success': '#10b981', // Green for success
+                        'accent-error': '#ef4444', // Red for error
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
         }
-        .primary-color { background-color: #10B981; } /* Emerald Green - Cor de Igreja/Esperança */
-        .primary-color:hover { background-color: #059669; }
-        input:focus, textarea:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.5); }
-        .radio-checked:checked { background-color: #10B981; border-color: #10B981; }
-        /* Centralizando o modal de sucesso */
-        #success-modal { min-height: 100vh; }
-        /* Estilo para simular o botão de upload de arquivo */
-        .file-upload-label {
+    </script>
+    <style>
+        /* Estilos customizados para a estética jovem e moderna */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            background-color: #f3f4f6; /* Light gray background */
+            font-family: 'Inter', sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card-shadow:hover {
+            transform: translateY(-2px);
+        }
+        /* Estilo para ícones SVG */
+        .icon {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            stroke-width: 2;
+            stroke: currentColor;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Estilo para a interface do Admin */
+        #admin-modal {
+            max-height: 90vh;
+        }
+        .file-input-wrapper input[type=file] {
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: background-color 0.15s;
+            width: 100%;
+        }
+        .file-selected {
+            background-color: #d1fae5; /* Light green background when file is selected */
+            border-color: #10b981;
         }
     </style>
 </head>
-<body>
+<body class="p-4 sm:p-8">
 
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
-        <div class="text-white text-xl font-semibold flex items-center">
-            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Processando inscrição...
-        </div>
-    </div>
-
-    <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- Container Principal -->
+    <div class="max-w-4xl mx-auto">
+        <!-- Título Principal com Contador de Cliques para Admin -->
+        <h1 id="main-title" class="text-4xl font-extrabold text-center mb-2 text-primary cursor-pointer hover:text-secondary transition duration-150">
+            Inscrição | JUBACZOMA 26
+        </h1>
+        <p class="text-center text-secondary mb-1 text-lg">Tema: "Em Adoração". 14/02/2026 - 17/02/2026.</p>
         
-        <!-- Área vazia para manter o espaçamento do topo -->
-        <div class="text-right mb-4 h-6">
-        </div>
+        <!-- Contato do Líder -->
+        <p class="text-center text-sm text-gray-500 mb-10">
+            Dúvidas? Fale com o Líder do Congresso, José Marcos: 
+            <a href="https://wa.me/5532988243122" target="_blank" class="text-primary hover:underline font-medium flex items-center justify-center">
+                (32) 98824-3122 
+                <!-- Icone de WhatsApp (Telefone) -->
+                <svg class="icon ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3.06a2 2 0 0 1-2.2.82c-3.14-.94-7.25-3.83-10.43-7.01-3.18-3.18-6.07-7.29-7.01-10.43a2 2 0 0 1 .82-2.2H7.08a2 2 0 0 1 2 1.63c.27 1.34.8 2.58 1.55 3.72l-.78.78c-1.25 1.25-1.92 2.76-1.92 4.47s.67 3.22 1.92 4.47c1.25 1.25 2.76 1.92 4.47 1.92s3.22-.67 4.47-1.92l.78-.78c1.14.75 2.38 1.28 3.72 1.55a2 2 0 0 1 1.63 2z"/></svg>
+            </a>
+        </p>
 
-        <!-- Registration View -->
-        <div id="registration-view" class="form-card rounded-xl p-6 md:p-10 mb-10">
-            <header class="text-center mb-8">
-                <!-- Título - Clique 5x rapidamente para acesso Admin -->
-                <h1 id="main-title" class="text-4xl font-bold text-gray-800 select-none cursor-pointer">Inscrição | Congresso Jovem 2026</h1>
-                <p class="text-xl text-gray-600 mt-2">Igreja Batista do Parque Safira</p>
-                <p class="text-sm text-gray-500 mt-1">
-                    Fim de Semana do Carnaval | 28/Fev a 3/Mar de 2026
-                </p>
-                <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                    <p class="text-sm font-medium text-yellow-800">Taxa de Inscrição por pessoa: R$ <span id="base-fee">150,00</span></p>
-                    <p class="text-xs text-yellow-700">O valor inclui hospedagem, alimentação e material do congresso.</p>
-                </div>
-                <div id="total-registrants-summary" class="mt-2 text-md font-semibold text-gray-700">
-                    Total de Congressistas: 1 | Valor Total: R$ 150,00
-                </div>
-            </header>
+        <!-- Formulário de Inscrição -->
+        <form id="registration-form" class="space-y-8">
 
-            <form id="registration-form" class="space-y-8">
-                
-                <!-- Container para Múltiplos Congressistas -->
-                <div id="attendees-container" class="space-y-6 border-b pb-4">
-                    <!-- O primeiro congressista será adicionado via JS -->
-                </div>
+            <!-- Container para os Congressistas -->
+            <div id="congressistas-container" class="space-y-10">
+                <!-- Congressista Principal será inserido aqui pelo JS -->
+            </div>
 
-                <!-- Botão Adicionar Congressista -->
-                <button type="button" id="add-attendee-btn" class="w-full bg-gray-200 text-gray-700 py-2 rounded-xl font-semibold hover:bg-gray-300 transition duration-150 flex items-center justify-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Adicionar Outro Jovem/Adolescente
+            <!-- Botão Adicionar Congressista -->
+            <div class="flex justify-center mt-8">
+                <button type="button" id="add-congressista-btn" class="flex items-center px-6 py-3 bg-secondary text-white font-bold rounded-xl shadow-lg hover:bg-gray-700 transition duration-200">
+                    <!-- Icone de Usuário Plus (lucide-react icon: UserPlus) -->
+                    <svg class="icon mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                    Adicionar Outro Congressista
                 </button>
+            </div>
 
-                <!-- 2. Dados do Responsável (Condicional) -->
-                <section id="responsible-section" class="border-b pb-4 hidden">
-                    <h2 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
-                        <svg class="w-6 h-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        Dados do Pai/Responsável
-                    </h2>
-                    <div class="p-3 mb-4 bg-red-50 rounded-lg text-red-700 text-sm">
-                        <p id="age-message" class="font-medium">Pelo menos um dos inscritos é menor de 18 anos. Preencha os dados do responsável.</p>
+            <!-- Seção Universal do Responsável Legal (Aparece se houver menores) -->
+            <section id="universal-guardian-section" class="p-6 bg-white rounded-2xl card-shadow border-t-4 border-accent-error space-y-4 hidden">
+                <h2 class="text-2xl font-bold text-accent-error mb-4">Dados do Responsável Legal</h2>
+                <!-- Inputs do Responsável -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Name -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nome Completo do Responsável</label>
+                        <input type="text" id="guardianNameUniversal" data-field="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="responsible-name" class="block text-sm font-medium text-gray-700">Nome Completo do Responsável</label>
-                            <input type="text" id="responsible-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
-                        </div>
-                        <div>
-                            <label for="responsible-phone" class="block text-sm font-medium text-gray-700">Telefone do Responsável</label>
-                            <input type="tel" id="responsible-phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="(DDD) 9xxxx-xxxx" maxlength="15">
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="responsible-cpf" class="block text-sm font-medium text-gray-700">CPF do Responsável (Para Termo)</label>
-                            <input type="text" id="responsible-cpf" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="xxx.xxx.xxx-xx" maxlength="14">
-                        </div>
+                    <!-- CPF -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">CPF do Responsável</label>
+                        <input type="text" id="guardianCpfUniversal" data-field="cpf" required maxlength="14" class="cpf-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
                     </div>
-                </section>
+                    <!-- Phone -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Telefone do Responsável</label>
+                        <input type="tel" id="guardianPhoneUniversal" data-field="phone" required maxlength="15" class="phone-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                    </div>
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">E-mail do Responsável</label>
+                        <input type="email" id="guardianEmailUniversal" data-field="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                    </div>
+                </div>
 
-                <!-- 4. Termo de Autorização e Assinatura Digital (Apenas para Menores) -->
-                <section id="terms-section" class="pb-4 hidden">
-                    <h2 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
-                        <svg class="w-6 h-6 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        Termo de Autorização e Assinatura
-                    </h2>
-                    <div id="term-box" class="p-4 bg-gray-50 border border-gray-200 rounded-lg text-sm max-h-96 overflow-y-auto">
-                        <p class="text-gray-500 text-center italic">Preencha os dados do responsável acima para gerar o termo.</p>
+                <!-- Termo de Autorização Dinâmico e ÚNICO -->
+                <div class="mt-6 p-4 bg-white border border-secondary rounded-lg">
+                    <h3 class="font-bold text-lg mb-3 text-primary">Termo de Autorização e Responsabilidade</h3>
+                    <div class="text-sm text-gray-600 space-y-2">
+                        <p id="universal-term-text">Eu, <span class="font-bold text-secondary">[NOME DO RESPONSÁVEL]</span>, portador do CPF <span class="font-bold text-secondary">[CPF DO RESPONSÁVEL]</span>, autorizo o(a) menor(es): <span class="font-bold text-primary" id="minors-list">[NOME(S) DO(S) CONGRESSISTA(S) MENOR(ES)]</span> a participar do Congresso JUBACZOMA 26, nos dias 14/02/2026 a 17/02/2026. Declaro estar ciente de todas as regras e assumo total responsabilidade civil e legal pelos(as) menores durante o período do evento. </p>
+                        <p class="font-semibold text-xs text-gray-400">Status: <span id="universal-term-status" class="term-status text-accent-error">PENDENTE</span></p>
                     </div>
-
-                    <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg flex flex-col sm:flex-row justify-between items-center">
-                        <div class="flex items-center space-x-3 mb-3 sm:mb-0">
-                            <input type="checkbox" id="terms-agreement" class="form-checkbox h-4 w-4 text-blue-600 radio-checked" required>
-                            <span class="text-sm text-gray-700 font-semibold">Li e concordo com o Termo.</span>
-                        </div>
-                        <input type="hidden" id="signature-timestamp" value="">
-                        <button type="button" id="sign-term-btn" class="primary-color text-white py-2 px-4 rounded-lg font-semibold text-sm transition duration-150">
+                    <div class="mt-4 flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
+                        <button type="button" id="sign-term-btn-universal" class="px-4 py-2 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition disabled:bg-gray-400" disabled>
                             Assinar Termo Digitalmente
                         </button>
+                        <p id="universal-signature-date" class="signature-date text-xs text-accent-success italic"></p>
                     </div>
-                    <p id="signature-status" class="text-center text-xs text-green-700 mt-2 font-medium hidden">
-                        Termo assinado digitalmente em: --
+                </div>
+            </section>
+
+            <!-- Seção de Pagamento -->
+            <section class="p-6 bg-white rounded-2xl card-shadow border-t-4 border-primary">
+                <h2 class="text-2xl font-bold text-primary mb-6">
+                    Detalhes de Pagamento
+                </h2>
+
+                <div class="mb-4 text-xl font-semibold text-gray-800">
+                    Total: <span id="payment-total" class="text-primary">R$ 200,00</span>
+                </div>
+                
+                <!-- Aviso de Fluxo de Pagamento ATUALIZADO (Removido negrito extra) -->
+                <div id="payment-warning" class="p-3 mb-4 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-lg">
+                    ⚠️ Fluxo Obrigatório: Primeiro, <strong>realize o pagamento</strong> clicando no botão abaixo. Em seguida, envie o comprovante por WhatsApp para o Líder José Marcos (32) 98824-3122. Por fim, anexe o(s) comprovante(s) abaixo e clique em "Finalizar Inscrição".
+                </div>
+
+
+                <!-- Escolha de Método de Pagamento -->
+                <div class="space-y-4">
+                    <label class="flex items-center space-x-3 cursor-pointer p-4 bg-gray-50 rounded-xl border border-gray-200 hover:bg-gray-100 transition">
+                        <input type="radio" name="payment-method" value="PIX" class="h-5 w-5 text-primary focus:ring-primary" checked>
+                        <!-- ID para atualização dinâmica -->
+                        <span id="pix-option-text" class="text-lg font-medium text-gray-700">PIX (R$ 200,00 à vista)</span>
+                    </label>
+
+                    <label class="flex items-center space-x-3 cursor-pointer p-4 bg-gray-50 rounded-xl border border-gray-200 hover:bg-gray-100 transition">
+                        <input type="radio" name="payment-method" value="CARD" class="h-5 w-5 text-primary focus:ring-primary">
+                        <span class="text-lg font-medium text-gray-700">Cartão de Crédito (Ver parcelamento)</span>
+                    </label>
+                </div>
+
+                <!-- Simulação de Parcelamento (Aparece se CARD for selecionado) -->
+                <div id="card-options" class="mt-4 p-4 bg-white border border-gray-200 rounded-lg hidden">
+                    <h3 class="font-semibold text-gray-700 mb-3">Simulação de Parcelamento (Juros de 2.99% a.m.):</h3>
+                    <select id="installments-select" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
+                        <!-- Opções serão preenchidas via JS -->
+                    </select>
+                    <p class="mt-2 text-sm text-gray-500">Valor da parcela: <span id="installment-value" class="font-bold">R$ 200,00</span></p>
+                </div>
+
+                <!-- Botão de Iniciar Pagamento - Removido "(Abrir Mercado Pago)" -->
+                <div class="mt-6">
+                    <button type="button" id="initiate-payment-btn" class="w-full flex items-center justify-center px-6 py-3 bg-primary text-white text-lg font-bold rounded-xl shadow-md hover:bg-secondary transition duration-200">
+                        <!-- Icone de PIX/Transferência (lucide-react icon: Send) -->
+                        <svg class="icon mr-2 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        Realizar Pagamento
+                    </button>
+                </div>
+
+                <!-- NOVO: Anexo de Comprovante Individual -->
+                <div class="mt-6">
+                    <label id="proof-label-general" class="block text-sm font-medium text-gray-700 mb-2">
+                        Anexar Comprovante(s) de Pagamento (0/0)
+                    </label>
+                    <p class="mt-2 text-sm text-gray-500 mb-4" id="proof-instruction">
+                        Anexe um comprovante de pagamento individual para cada congressista listado (Lembre-se de enviar também por WhatsApp!).
                     </p>
-                </section>
-
-                <!-- 3. Opções de Pagamento -->
-                <section class="border-b pb-4">
-                    <h2 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
-                        <svg class="w-6 h-6 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2-5a2 2 0 002 2h2a2 2 0 002-2V9a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 01-2 2h4m-4-2h12a2 2 0 002-2V9a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 01-2 2z"></path></svg>
-                        Opções de Pagamento
-                    </h2>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <!-- Pix Option -->
-                        <div class="p-4 border rounded-lg cursor-pointer" id="pix-option">
-                            <input type="radio" name="payment-method" value="pix" id="radio-pix" class="radio-checked text-green-500 hidden" required>
-                            <label for="radio-pix" class="font-semibold flex justify-between items-center">
-                                Pagamento via PIX (À Vista)
-                                <span class="text-sm font-normal text-green-600">R$ <span id="pix-total-amount">0,00</span></span>
-                            </label>
-                            <p class="text-xs text-gray-500 mt-1">Confirmação imediata. Sem juros.</p>
-                        </div>
-                        <!-- Card Option -->
-                        <div class="p-4 border rounded-lg cursor-pointer" id="card-option">
-                            <input type="radio" name="payment-method" value="card" id="radio-card" class="radio-checked text-green-500 hidden">
-                            <label for="radio-card" class="font-semibold flex justify-between items-center">
-                                Cartão de Crédito
-                                <span class="text-xs text-red-500">Até 12x com juros</span>
-                            </label>
-                            <p class="text-xs text-gray-500 mt-1">Parcelamento com taxa de juros de 2.99% a.m.</p>
-                        </div>
-                    </div>
-
-                    <!-- Payment Details Area -->
-                    <div id="payment-details" class="mt-4 p-4 rounded-lg border border-dashed hidden">
-                        <h3 class="text-lg font-medium text-gray-700 mb-3">Detalhes Finais do Pagamento</h3>
-
-                        <div id="pix-instructions" class="hidden space-y-2">
-                            <p class="font-bold text-green-600">Valor a Pagar: R$ <span id="pix-final-amount">0,00</span></p>
-                            <p class="text-sm">Por favor, envie o PIX para a chave:</p>
-                            <div class="p-2 bg-gray-100 rounded-md font-mono text-center text-sm break-all">
-                                <span id="pix-key-display">21.999.888/0001-00 (CNPJ)</span>
-                                <button type="button" id="copy-pix-btn" class="ml-2 text-blue-500 hover:text-blue-700 text-xs font-semibold">Copiar</button>
-                            </div>
-                        </div>
-
-                        <div id="card-fields" class="hidden">
-                            <p class="font-bold text-purple-600 mb-2">Valor Total: R$ <span id="card-total-amount">0,00</span></p>
-                            <label for="installments" class="block text-sm font-medium text-gray-700">Parcelas</label>
-                            <select id="installments" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
-                                <!-- Options will be generated by JS -->
-                            </select>
-                            <p class="mt-2 text-sm text-gray-600" id="installment-summary"></p>
-                            <!-- Texto ajustado para remover menção a envio de e-mail -->
-                            <p class="text-xs text-blue-600 mt-1 font-semibold">
-                                O envio desta ficha <strong>registra sua intenção</strong> e <strong>gera o link de pagamento</strong> (via Mercado Pago ou similar). A vaga só é garantida após a conclusão do pagamento no link.
-                            </p>
-                        </div>
-                        
-                        <!-- COMMON Proof Section for PIX and CARD -->
-                        <div id="proof-section" class="mt-4 pt-4 border-t border-gray-200 hidden">
-                            <label for="proof-file" class="block text-sm font-medium text-gray-700 mb-1">
-                                Anexar Comprovante (Imagem/Documento) <span id="proof-requirement-text" class="text-red-600">(Obrigatório)</span>
-                            </label>
-                            <div class="flex items-center space-x-3">
-                                <input type="file" id="proof-file" accept="image/*,.pdf" class="hidden" required>
-                                <label for="proof-file" id="proof-label" class="file-upload-label bg-gray-200 text-gray-700 hover:bg-gray-300">
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                                    Escolher Arquivo
-                                </label>
-                                <span id="proof-status" class="text-sm text-gray-500 truncate max-w-xs">Nenhum arquivo selecionado.</span>
-                            </div>
-                            <!-- Campo de texto oculto que será preenchido com o nome do arquivo para validação -->
-                            <input type="hidden" id="proof-input" required>
-                            
-                            <p class="text-xs text-red-600 mt-1">
-                                <span class="font-bold">Atenção:</span> O comprovante é <strong>obrigatório</strong> para a submissão da ficha.
-                            </p>
-                        </div>
-
-                    </div>
-                </section>
-
-                <!-- Submit Button -->
-                <button type="submit" id="submit-button" class="w-full primary-color text-white py-3 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition duration-200">
-                    Finalizar Inscrição e Enviar Dados
-                </button>
-                <div id="error-message" class="text-red-600 text-center font-medium hidden"></div>
-
-            </form>
-        </div>
-
-        <!-- Report/Admin View -->
-        <div id="report-view" class="form-card rounded-xl p-6 md:p-10 mb-10 hidden">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
-                <svg class="w-7 h-7 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V17a2 2 0 01-2 2z"></path></svg>
-                Relatório de Inscritos (Admin)
-            </h1>
-            <p class="text-gray-600 mb-4">Visualização de todas as inscrições salvas no Firestore, ordenadas por data de registro.</p>
-            
-            <div id="report-loading-status" class="text-center text-gray-500 p-8">Carregando dados...</div>
-            <div id="report-first-registrant" class="p-3 bg-green-50 rounded-lg border border-green-200 text-green-800 font-semibold mb-4 hidden"></div>
-
-            <div id="registrants-list" class="space-y-4">
-                <!-- Lista de inscritos será preenchida aqui -->
-            </div>
-             <div class="mt-8 text-center flex justify-center space-x-4">
-                <button id="export-csv-btn" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-semibold flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    Exportar para CSV
-                </button>
-                <button id="close-report-btn" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-6 rounded-lg font-semibold">Fechar Relatório</button>
-            </div>
-            
-        </div>
-    </div>
-
-    <!-- Modal de Sucesso -->
-    <div id="success-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 hidden flex items-center justify-center min-h-screen">
-        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-lg w-full text-center">
-            <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <h3 class="text-2xl font-bold text-gray-800 mb-3">Inscrição Concluída com Sucesso!</h3>
-            <p class="text-gray-600 mb-4">Seus <strong><span id="submitted-count">X</span></strong> registro(s) foram salvos. ID da Transação:</p>
-            <div class="p-3 bg-green-50 rounded-lg font-mono text-lg font-semibold text-green-800 break-all mb-4" id="registration-id-display"></div>
-            <p class="text-sm text-gray-700 mb-6">
-                Todos os dados, termos e comprovantes foram armazenados. Você pode iniciar uma nova inscrição abaixo.
-            </p>
-            <button id="modal-reload-button" class="primary-color text-white py-2 px-6 rounded-lg font-semibold">Fazer Nova Inscrição</button>
-        </div>
-    </div>
-
-    <!-- Modal de Acesso Admin -->
-    <div id="admin-login-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 hidden flex items-center justify-center">
-        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Acesso Administrativo</h3>
-            <p class="text-sm text-gray-600 mb-4">Insira a chave de acesso para visualizar o relatório de inscritos.</p>
-            <input type="password" id="admin-key-input-modal" class="w-full rounded-md border-gray-300 shadow-sm p-2 border text-sm" placeholder="Chave de Acesso">
-            <p id="admin-error-message-modal" class="text-red-600 text-xs mt-2 hidden">Chave incorreta. Tente novamente.</p>
-            <div class="mt-5 flex justify-end space-x-3">
-                <button type="button" id="admin-cancel-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-lg font-semibold text-sm">Cancelar</button>
-                <button type="button" id="admin-key-check-btn-modal" class="primary-color text-white py-2 px-4 rounded-lg font-semibold text-sm">Acessar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Firebase SDKs -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Variáveis globais obrigatórias no ambiente Canvas
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        let db, auth, userId;
-        let attendeeCounter = 0; // Mantido para IDs únicos
-
-        // --- Variáveis de Configuração ---
-        const ADMIN_KEY = 'safira2026'; // Chave de acesso administrativo
-        const BASE_FEE = 150.00;
-        const MONTHLY_INTEREST_RATE = 0.0299; // 2.99% a.m.
-        const CONGRESS_START_DATE = '2026-02-28';
-
-        // --- Funções Auxiliares de UI/Lógica ---
-        
-        /**
-         * Aplica máscara de CPF no input (XXX.XXX.XXX-XX).
-         */
-        function maskCPF(input) {
-            let value = input.value.replace(/\D/g, "");
-            value = value.replace(/(\d{3})(\d)/, "$1.$2");
-            value = value.replace(/(\d{3})(\d)/, "$1.$2");
-            value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-            input.value = value.slice(0, 14);
-        }
-
-        /**
-         * Aplica máscara de telefone no input (XX) XXXXX-XXXX.
-         */
-        function maskPhone(input) {
-            let value = input.value.replace(/\D/g, "");
-            value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
-            value = value.replace(/(\d)(\d{4})$/, "$1-$2");
-            input.value = value.slice(0, 15);
-        }
-
-        function getPaymentLink(method, amount) {
-            // Simulação de link de pagamento Mercado Pago ou similar
-            return `https://mercadopago.com/safira-congresso?metodo=${method}&valor=${amount.toFixed(2)}`;
-        }
-
-        function generateRegistrationId() {
-            const date = new Date();
-            const year = date.getFullYear().toString().slice(-2);
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const day = date.getDate().toString().padStart(2, '0');
-            const uuid = crypto.randomUUID().split('-')[0].toUpperCase();
-            return `SAFIRA-${year}${month}${day}-${uuid}`;
-        }
-
-        function calculateInstallmentValue(P, i, n) {
-            if (n === 1) return P;
-            const installmentValue = (P * i) / (1 - Math.pow(1 + i, -n));
-            return installmentValue;
-        }
-
-        function calculateInstallments(numRegistrants) {
-            const select = document.getElementById('installments');
-            const summary = document.getElementById('installment-summary');
-            const totalFee = BASE_FEE * numRegistrants;
-            
-            // Atualiza o valor base do cartão
-            document.getElementById('card-total-amount').textContent = totalFee.toFixed(2);
-            
-            const installments = parseInt(select.value);
-            let totalAmount = totalFee;
-
-            if (installments > 1) {
-                const installmentValue = calculateInstallmentValue(totalFee, MONTHLY_INTEREST_RATE, installments);
-                totalAmount = installmentValue * installments;
-                summary.innerHTML = `<span class="font-bold text-blue-700">${installments}x de R$ ${installmentValue.toFixed(2)}</span> - Total a prazo: R$ ${totalAmount.toFixed(2)}`;
-            } else {
-                summary.innerHTML = `<span class="font-bold text-green-700">1x de R$ ${totalFee.toFixed(2)}</span> - Sem juros.`;
-            }
-            return totalAmount;
-        }
-
-        function selectPayment(method) {
-            const details = document.getElementById('payment-details');
-            const pix = document.getElementById('pix-instructions');
-            const card = document.getElementById('card-fields');
-            const pixOption = document.getElementById('pix-option');
-            const cardOption = document.getElementById('card-option');
-            const radioPix = document.getElementById('radio-pix');
-            const radioCard = document.getElementById('radio-card');
-            
-            const proofSection = document.getElementById('proof-section');
-            const proofInput = document.getElementById('proof-input'); 
-            const proofRequirementText = document.getElementById('proof-requirement-text');
-
-            details.classList.remove('hidden');
-            pixOption.classList.remove('border-green-500');
-            cardOption.classList.remove('border-green-500');
-
-            // Atualiza valores PIX/Cartão com o total de inscritos
-            const numRegistrants = document.querySelectorAll('.attendee-card').length;
-            const totalFee = BASE_FEE * numRegistrants;
-            
-            // Sempre mostra a seção de comprovante e a torna obrigatória
-            proofSection.classList.remove('hidden');
-            proofInput.setAttribute('required', 'true');
-
-            if (method === 'pix') {
-                pix.classList.remove('hidden');
-                card.classList.add('hidden');
-                pixOption.classList.add('border-green-500');
-                radioPix.checked = true;
-
-                document.getElementById('pix-total-amount').textContent = totalFee.toFixed(2);
-                document.getElementById('pix-final-amount').textContent = totalFee.toFixed(2);
-                document.getElementById('installment-summary').innerHTML = '';
-                proofRequirementText.textContent = '(Obrigatório)';
-            } else if (method === 'card') {
-                pix.classList.add('hidden');
-                card.classList.remove('hidden');
-                cardOption.classList.add('border-green-500');
-                radioCard.checked = true;
-
-                // Garante que o cálculo de parcelas é feito para o total correto
-                calculateInstallments(numRegistrants);
-                proofRequirementText.textContent = '(Obrigatório - Comprovante de Intenção)';
-            }
-        }
-
-        function formatBRLDate(dateString) {
-            if (!dateString) return '--';
-            const date = new Date(dateString);
-            return date.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
-        }
-
-        function generateTerms(responsavel, registrantNames) {
-            const eventDate = new Date(CONGRESS_START_DATE);
-            const formattedDate = eventDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
-            
-            if (!responsavel.name || !responsavel.cpf) {
-                return '<p class="text-gray-500 text-center italic">Por favor, preencha o Nome e CPF do Responsável para gerar o Termo de Autorização.</p>';
-            }
-            
-            const registrantList = registrantNames.map(name => `<li>- ${name}</li>`).join('');
-
-            return `
-                <div class="space-y-3">
-                    <p class="font-bold text-center text-gray-800">TERMO DE AUTORIZAÇÃO E RESPONSABILIDADE</p>
-                    <p class="text-xs">
-                        Eu, <strong>${responsavel.name}</strong>, portador do CPF <strong>${responsavel.cpf}</strong>, e telefone <strong>${responsavel.phone}</strong>,
-                        na qualidade de Pai/Responsável legal pelos congressistas listados abaixo, autorizo a participação integral de:
-                    </p>
-                    <ul class="list-disc ml-6 text-xs font-semibold">${registrantList}</ul>
                     
-                    <p class="text-xs">
-                        no <strong>Congresso de Jovens e Adolescentes 2026 da Igreja Batista do Parque Safira</strong>,
-                        a ser realizado no período do Carnaval, com início em <strong>${formattedDate}</strong>.
-                    </p>
-                    <p class="text-xs">
-                        Declaro estar ciente e concordar com as normas e regras do evento. Assumo total responsabilidade
-                        por despesas médicas e hospitalares.
-                    </p>
-                    <p id="term-signature-info" class="text-xs mt-4 text-right italic">
-                        Assinatura digital pendente. Clique em "Assinar Termo Digitalmente".
-                    </p>
-                    <div class="h-px w-full bg-gray-300"></div>
+                    <!-- BOTÃO WHATSAPP AO LADO DOS ANEXOS -->
+                    <div class="mb-4 flex justify-center">
+                        <a href="https://wa.me/5532988243122" target="_blank" 
+                           class="flex items-center px-6 py-3 bg-accent-success text-white font-bold rounded-xl shadow-lg hover:bg-green-700 transition duration-200">
+                            <!-- Ícone do WhatsApp -->
+                            <svg class="icon mr-2 h-5 w-5 fill-white stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3.06a2 2 0 0 1-2.2.82c-3.14-.94-7.25-3.83-10.43-7.01-3.18-3.18-6.07-7.29-7.01-10.43a2 2 0 0 1 .82-2.2H7.08a2 2 0 0 1 2 1.63c.27 1.34.8 2.58 1.55 3.72l-.78.78c-1.25 1.25-1.92 2.76-1.92 4.47s.67 3.22 1.92 4.47c1.25 1.25 2.76 1.92 4.47 1.92s3.22-.67 4.47-1.92l.78-.78c1.14.75 2.38 1.28 3.72 1.55a2 2 0 0 1 1.63 2z"/></svg>
+                            Enviar Comprovante por WhatsApp
+                        </a>
+                    </div>
+                    
+                    <div id="individual-proofs-container" class="space-y-4">
+                        <!-- Inputs de comprovante individuais serão injetados aqui -->
+                    </div>
+                    <p class="mt-2 text-sm font-semibold text-gray-700" id="proof-status-display">Status: 0/0 Anexado(s)</p>
                 </div>
-            `;
-        }
+
+            </section>
+
+            <!-- Botão de Submissão Final -->
+            <div class="flex justify-center pt-4">
+                <button type="submit" id="submit-btn" class="w-full sm:w-2/3 flex items-center justify-center px-8 py-4 bg-accent-success text-white text-xl font-bold rounded-xl shadow-2xl hover:bg-green-700 transition duration-300 transform hover:scale-[1.01]" disabled>
+                    <!-- Icone de Checagem (lucide-react icon: CheckSquare) -->
+                    <svg class="icon mr-3 h-7 w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m9 12 2 2 4-4"/></svg>
+                    Finalizar Inscrição
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal de Mensagem (Submissão, Erros, etc.) -->
+    <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full text-center">
+            <h3 id="modal-title" class="text-xl font-bold mb-3 text-primary">Sucesso!</h3>
+            <p id="modal-content" class="text-gray-700 mb-5">Sua inscrição foi salva localmente.</p>
+            <button id="modal-close-btn" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Login Admin -->
+    <div id="admin-login-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full">
+            <div class="flex justify-between items-start">
+                <h3 class="text-xl font-bold mb-4 text-primary">Acesso Administrativo</h3>
+                <button type="button" id="admin-login-close-btn" class="text-gray-400 hover:text-gray-600 transition">
+                    <!-- Icone de Fechar (X) -->
+                    <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+            <input type="password" id="admin-password" placeholder="Chave Secreta" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary mb-4">
+            <button id="admin-login-btn" class="w-full p-3 bg-primary text-white rounded-lg hover:bg-secondary transition">Entrar</button>
+        </div>
+    </div>
+
+    <!-- Modal do Painel Admin -->
+    <div id="admin-modal" class="fixed inset-0 bg-white hidden flex-col p-4 sm:p-8 z-50">
+        <div class="flex justify-between items-center mb-6 border-b pb-4">
+            <h2 class="text-3xl font-bold text-primary">Relatório de Inscritos (Admin)</h2>
+            <div class="flex space-x-3">
+                 <button id="export-csv-btn" class="px-4 py-2 bg-accent-success text-white rounded-lg hover:bg-green-700 transition flex items-center">
+                    <!-- Icone de Download (lucide-react icon: Download) -->
+                    <svg class="icon mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    Exportar CSV
+                </button>
+                <button id="admin-close-btn" class="px-4 py-2 bg-accent-error text-white rounded-lg hover:bg-red-600 transition">Fechar</button>
+            </div>
+        </div>
         
-        // --- Funções de Múltiplos Congressistas e Dinâmica de UI ---
-        
-        /**
-         * Reajusta dinamicamente o título e o botão de remover para cada congressista.
-         */
-        function updateAttendeeTitles() {
-            const attendeeCards = document.querySelectorAll('.attendee-card');
-            attendeeCards.forEach((card, index) => {
-                const titleContainer = card.querySelector('.attendee-title');
-                
-                let titleText = (index === 0) ? "Congressista Principal" : `Congressista #${index + 1}`;
-                
-                // Remove todos os filhos para reconstruir
-                titleContainer.innerHTML = '';
-                
-                // Adiciona o texto do título
-                const titleSpan = document.createElement('span');
-                titleSpan.textContent = titleText;
-                titleContainer.appendChild(titleSpan);
+        <!-- O Aviso sobre Comprovantes foi removido daqui para despoluir a UI. -->
 
-                // Adiciona botão de remover para não-principais
-                if (index > 0) {
-                    const removeBtn = document.createElement('button');
-                    removeBtn.type = 'button';
-                    removeBtn.classList.add('remove-attendee-btn', 'text-red-500', 'hover:text-red-700', 'text-sm', 'font-normal');
-                    removeBtn.textContent = 'Remover';
-                    removeBtn.addEventListener('click', () => {
-                        card.remove();
-                        updateResponsibleSection(); // Chama a atualização de títulos e tudo mais
-                    });
-                    titleContainer.appendChild(removeBtn);
-                }
-            });
+        <div class="overflow-y-auto flex-grow rounded-lg border border-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50 sticky top-0">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Menor</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Resp.</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assinatura Termo</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comprovantes</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Inscrito em</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-table-body" class="bg-white divide-y divide-gray-200">
+                    <!-- Dados serão inseridos aqui -->
+                </tbody>
+            </table>
+        </div>
+        <p class="mt-4 text-sm text-gray-500">
+            Total de Inscritos: <span id="admin-count" class="font-bold text-primary">0</span>. 
+            (O CSV incluirá os nomes dos arquivos anexados para referência.)
+        </p>
+    </div>
+
+
+    <script>
+        // --- VARIÁVEIS GLOBAIS E CONFIGURAÇÕES ---
+        const EVENT_DATE_STR = '2026-02-14';
+        const EVENT_DATE = new Date(EVENT_DATE_STR + 'T00:00:00'); // Evento começa em 14/02/2026
+        const REGISTRATION_VALUE = 200.00;
+        const INTEREST_RATE = 0.0299; // 2.99% ao mês
+        const MAX_INSTALLMENTS = 12;
+        const STORAGE_KEY = 'safira2026_inscricoes';
+        const MERCADO_PAGO_PLACEHOLDER_LINK = 'https://link.mercadopago.com.br/placeholder_pagamento?total=';
+        const ADMIN_PASSWORD = 'safira2026';
+
+        // Array que armazena o estado dos congressistas
+        let congressistas = [];
+
+        // Estado do Comprovante Individual
+        let individualProofsState = {}; // { congressistaId: {file: File, fileName: 'nome.pdf'}, ... }
+        let proofsAttachedCount = 0; // Contador numérico
+
+        // Estado universal do responsável legal e do termo
+        let universalGuardian = {
+            name: '',
+            cpf: '',
+            phone: '',
+            email: '',
+            termSigned: null, // Data e hora da assinatura única
+        };
+
+
+        // --- FUNÇÕES DE UTILIDADE ---
+
+        /**
+         * Gera um ID único simples.
+         * @returns {string} O ID gerado.
+         */
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substring(2);
         }
 
         /**
-         * Verifica a idade de todos os congressistas e atualiza a seção do responsável,
-         * o resumo de inscritos e os títulos.
+         * Calcula se o congressista será menor de 18 anos na data do evento.
+         * @param {string} dobString - Data de Nascimento (formato YYYY-MM-DD).
+         * @returns {boolean} True se for menor de 18 anos.
          */
-        function updateResponsibleSection() {
-            const birthdateInputs = document.querySelectorAll('.attendee-birthdate');
-            const responsibleSection = document.getElementById('responsible-section');
-            const termsSection = document.getElementById('terms-section');
-            const ageMessage = document.getElementById('age-message');
-            
-            let needsResponsible = false;
-            let minorCount = 0;
+        function isMinor(dobString) {
+            const dob = new Date(dobString + 'T00:00:00'); // Garante que a hora não afete
+            if (isNaN(dob.getTime())) return false;
 
-            const today = new Date(CONGRESS_START_DATE);
+            let age = EVENT_DATE.getFullYear() - dob.getFullYear();
+            const monthDiff = EVENT_DATE.getMonth() - dob.getMonth();
 
-            birthdateInputs.forEach(input => {
-                if (input.value) {
-                    const birthDate = new Date(input.value);
-                    let age = today.getFullYear() - birthDate.getFullYear();
-                    const m = today.getMonth() - birthDate.getMonth();
-                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                        age--;
-                    }
-                    if (age < 18) {
-                        needsResponsible = true;
-                        minorCount++;
+            if (monthDiff < 0 || (monthDiff === 0 && EVENT_DATE.getDate() < dob.getDate())) {
+                age--;
+            }
+            return age < 18;
+        }
+
+        /**
+         * Aplica a máscara no input.
+         * @param {HTMLInputElement} input - O elemento input.
+         * @param {string} mask - A string da máscara ('(99) 99999-9999', '999.999.999-99').
+         */
+        function applyMask(input, mask) {
+            function format(value) {
+                let i = 0;
+                const v = value.replace(/\D/g, '');
+                let formattedValue = '';
+
+                for (let j = 0; j < mask.length; j++) {
+                    if (i >= v.length) break;
+                    if (mask[j] === '9') {
+                        formattedValue += v[i];
+                        i++;
+                    } else {
+                        formattedValue += mask[j];
                     }
                 }
-            });
+                return formattedValue;
+            }
 
-            const responsibleInputs = document.querySelectorAll('#responsible-section input');
-            const signTermBtn = document.getElementById('sign-term-btn');
-
-            if (needsResponsible) {
-                responsibleSection.classList.remove('hidden');
-                termsSection.classList.remove('hidden');
-                ageMessage.textContent = `${minorCount} congressista(s) terão menos de 18 anos. É obrigatório preencher os dados do responsável e assinar o Termo.`;
-                responsibleInputs.forEach(input => input.setAttribute('required', 'true'));
-                signTermBtn.removeAttribute('disabled');
-            } else {
-                responsibleSection.classList.add('hidden');
-                termsSection.classList.add('hidden');
-                responsibleInputs.forEach(input => {
-                    input.removeAttribute('required');
+            // Garante que o input handler seja aplicado apenas uma vez
+            if (!input.classList.contains('mask-applied')) {
+                 input.addEventListener('input', (e) => {
+                    e.target.value = format(e.target.value);
                 });
-                // Limpa assinatura se não for mais necessária
-                document.getElementById('signature-timestamp').value = '';
-                document.getElementById('signature-status').classList.add('hidden');
+                input.classList.add('mask-applied');
             }
-
-            // --- Atualização de UI ---
             
-            // 1. Numeração Dinâmica
-            updateAttendeeTitles();
-
-            // 2. Atualiza resumo de inscritos e valor total
-            const numRegistrants = document.querySelectorAll('.attendee-card').length;
-            const totalFee = BASE_FEE * numRegistrants;
-            document.getElementById('total-registrants-summary').textContent = 
-                `Total de Congressistas: ${numRegistrants} | Valor Total: R$ ${totalFee.toFixed(2)}`;
-            
-            // 3. Recalcula pagamento se já selecionado
-            const selectedMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
-            if (selectedMethod) {
-                selectPayment(selectedMethod);
-            } else {
-                // Atualiza valores do PIX para o caso de não ter selecionado nada
-                document.getElementById('pix-total-amount').textContent = totalFee.toFixed(2);
-            }
-
-            updateTermsDisplay();
+            // Aplica a formatação inicial se houver valor
+            input.value = format(input.value);
         }
 
-        function updateTermsDisplay() {
-            const responsavel = {
-                name: document.getElementById('responsible-name').value,
-                cpf: document.getElementById('responsible-cpf').value,
-                phone: document.getElementById('responsible-phone').value,
-            };
-
-            const registrantNames = Array.from(document.querySelectorAll('.attendee-name')).map(input => input.value || '(Não preenchido)');
-
-            // Se for maior de idade, o termo é invisível, então a atualização não importa
-            if (!document.getElementById('terms-section').classList.contains('hidden')) {
-                document.getElementById('term-box').innerHTML = generateTerms(responsavel, registrantNames);
-            }
-        }
-        
-        function signTerm() {
-            const timestamp = new Date().toISOString();
-            document.getElementById('signature-timestamp').value = timestamp;
-            
-            const formattedDate = formatBRLDate(timestamp);
-            const statusElement = document.getElementById('signature-status');
-            const signBtn = document.getElementById('sign-term-btn');
-
-            statusElement.textContent = `Termo assinado digitalmente em: ${formattedDate}`;
-            statusElement.classList.remove('hidden');
-            signBtn.textContent = 'Assinatura Registrada!';
-            signBtn.classList.add('bg-green-600', 'hover:bg-green-700');
-            signBtn.classList.remove('primary-color', 'hover:bg-059669');
-            signBtn.setAttribute('disabled', 'true');
-            document.getElementById('terms-agreement').checked = true; // Marca o acordo
-
-            document.getElementById('term-signature-info').innerHTML = `
-                <strong class="text-green-600">Termo Assinado Digitalmente</strong> em ${formattedDate}.
-            `;
-        }
-
-        function createAttendeeCard(id) {
-            const card = document.createElement('div');
-            card.id = `attendee-${id}`;
-            card.classList.add('attendee-card', 'p-6', 'border', 'rounded-xl', 'shadow-md', 'space-y-4');
-            
-            // Título é genérico e será preenchido dinamicamente por updateAttendeeTitles
-            card.innerHTML = `
-                <h3 class="attendee-title text-xl font-semibold text-gray-800 flex justify-between items-center">
-                    <!-- Título e botão de remover serão adicionados/atualizados aqui -->
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="attendee-name-${id}" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                        <input type="text" id="attendee-name-${id}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border attendee-name" required>
-                    </div>
-                    <div>
-                        <label for="attendee-birthdate-${id}" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
-                        <input type="date" id="attendee-birthdate-${id}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border attendee-birthdate" required>
-                    </div>
-                    <div>
-                        <label for="attendee-email-${id}" class="block text-sm font-medium text-gray-700">E-mail</label>
-                        <input type="email" id="attendee-email-${id}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border attendee-email" required>
-                    </div>
-                    <div>
-                        <label for="attendee-phone-${id}" class="block text-sm font-medium text-gray-700">Telefone (WhatsApp)</label>
-                        <input type="tel" id="attendee-phone-${id}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border attendee-phone" placeholder="(DDD) 9xxxx-xxxx" maxlength="15" required>
-                    </div>
-                </div>
-            `;
-            
-            // Adiciona listeners para máscaras e validação
-            card.querySelector(`.attendee-birthdate`).addEventListener('change', updateResponsibleSection);
-            card.querySelector(`.attendee-name`).addEventListener('input', updateTermsDisplay);
-            card.querySelector(`.attendee-phone`).addEventListener('input', (e) => maskPhone(e.target));
-            
-            return card;
-        }
-
-        function addAttendee() {
-            attendeeCounter++; // Apenas para garantir ID único no DOM e no Firebase
-            const container = document.getElementById('attendees-container');
-            const newCard = createAttendeeCard(attendeeCounter);
-            container.appendChild(newCard);
-            updateResponsibleSection(); // Atualiza contagem e títulos
-        }
-        
-        // --- Funções de Relatório (Admin) ---
-        
+        /**
+         * Converte uma array de objetos para formato CSV.
+         * @param {Array<Object>} data - Os dados a serem exportados.
+         * @returns {string} A string formatada em CSV.
+         */
         function convertToCSV(data) {
-            if (data.length === 0) return '';
-            
+            // Cabeçalhos (adaptado para a estrutura do JSON)
             const headers = [
-                'ID_Registro', 'Data_Registro', 'Num_Inscritos', 'Nome_Congressista', 'Idade', 'Email', 'Telefone',
-                'Menor_Idade', 'Nome_Responsavel', 'CPF_Responsavel', 'Telefone_Responsavel', 
-                'Pagamento_Metodo', 'Pagamento_Total', 'Comprovante_Anexado', 'Assinatura_Data'
+                'ID', 'Nome Completo', 'Data Nasc.', 'Menor', 'Telefone', 'Email',
+                'Nome Responsável', 'CPF Responsável', 'Telefone Responsável', 'Email Responsável',
+                'Termo Assinado Em', 'Método Pagamento', 'Comprovantes Anexados (Count)', 'Nomes dos Comprovantes', 'Total Pago', 'Data Inscrição'
             ];
-            
-            const rows = data.flatMap(record => {
-                const base = {
-                    'ID_Registro': record.registrationId,
-                    'Data_Registro': formatBRLDate(record.registrationDate),
-                    'Num_Inscritos': record.attendees.length,
-                    'Nome_Responsavel': record.responsibleName || 'N/A',
-                    'CPF_Responsavel': record.responsibleCpf || 'N/A',
-                    'Telefone_Responsavel': record.responsiblePhone || 'N/A',
-                    'Pagamento_Metodo': record.payment.method.toUpperCase(),
-                    'Pagamento_Total': record.payment.totalAmountPaid.toFixed(2),
-                    // Usando o campo pixProof para o nome do comprovante genérico
-                    'Comprovante_Anexado': record.payment.pixProof ? 'Sim' : 'Não', 
-                    'Assinatura_Data': record.signatureTimestamp ? formatBRLDate(record.signatureTimestamp) : 'N/A'
-                };
 
-                return record.attendees.map(attendee => {
-                    return {
-                        ...base,
-                        'Nome_Congressista': attendee.attendeeName,
-                        'Idade': attendee.attendeeAge,
-                        'Email': attendee.attendeeEmail,
-                        'Telefone': attendee.attendeePhone,
-                        'Menor_Idade': attendee.isMinor ? 'Sim' : 'Não'
-                    };
-                });
-            });
+            const csvRows = [headers.join(';')]; // Primeira linha é o cabeçalho
 
-            const csvRows = [];
-            csvRows.push(headers.join(';')); 
+            for (const item of data) {
+                const termSignedStr = item.termSigned ? new Date(item.termSigned).toLocaleString('pt-BR') : 'Não Assinado';
+                const submissionDateStr = item.submissionDate ? new Date(item.submissionDate).toLocaleString('pt-BR') : 'N/A';
+                const totalPaid = item.totalPaid ? item.totalPaid.toFixed(2).replace('.', ',') : REGISTRATION_VALUE.toFixed(2).replace('.', ',');
 
-            for (const row of rows) {
-                const values = headers.map(header => {
-                    const value = row[header];
-                    // Trata valores nulos ou vírgulas
-                    return `"${String(value || '').replace(/"/g, '""').replace(/;/g, ',')}"`;
-                });
-                csvRows.push(values.join(';'));
+                const row = [
+                    item.id,
+                    `"${item.name.replace(/"/g, '""')}"`,
+                    item.dob,
+                    item.isMinor ? 'Sim' : 'Não',
+                    item.phone,
+                    item.email,
+                    // Garante que os dados do responsável sejam puxados do objeto do congressista (onde foram salvos na submissão)
+                    `"${item.guardian.name.replace(/"/g, '""')}"`,
+                    item.guardian.cpf,
+                    item.guardian.phone,
+                    item.guardian.email,
+                    termSignedStr,
+                    item.paymentMethod,
+                    item.proofAttachedCount || 0, // Contagem
+                    `"${item.proofFileName.replace(/"/g, '""')}"`, // Nomes dos arquivos
+                    `R$ ${totalPaid}`,
+                    submissionDateStr
+                ].map(field => field.toString().replace(/;/g, ',')); // Substitui ; por , para evitar quebra de coluna
+                csvRows.push(row.join(';'));
             }
 
             return csvRows.join('\n');
         }
 
-        function downloadCSV(data) {
-            const csv = convertToCSV(data);
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
+
+        // --- FUNÇÕES DE ESTADO E ARMAZENAMENTO ---
+
+        /**
+         * Carrega os dados de inscrição do localStorage.
+         * @returns {Array} Array de congressistas salvos.
+         */
+        function loadRegistrations() {
+            const data = localStorage.getItem(STORAGE_KEY);
+            return data ? JSON.parse(data) : [];
+        }
+
+        // --- FUNÇÕES DE RENDERIZAÇÃO E LÓGICA DE UI ---
+
+        /**
+         * Renderiza o HTML de um novo congressista.
+         * @param {string} id - ID único do congressista.
+         * @param {number} index - Índice (0-based) na array global.
+         * @returns {string} HTML para o congressista.
+         */
+        function createCongressistaHtml(id, index) {
+            // Títulos sem numeração de passo e sem o '#'
+            const title = index === 0 ? "Dados do Congressista Principal" : `Congressista ${index + 1}`;
+            const isRemovable = index !== 0;
+
+            return `
+                <section id="congressista-${id}" data-id="${id}" class="congressista-card p-6 bg-white rounded-2xl card-shadow border-t-4 border-secondary">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-primary">${title}</h2>
+                        ${isRemovable ? `
+                            <button type="button" data-id="${id}" class="remove-congressista-btn p-2 text-accent-error hover:text-red-700 transition rounded-full hover:bg-red-50">
+                                <!-- Icone de Lixo (lucide-react icon: Trash2) -->
+                                <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M14 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                            </button>
+                        ` : ''}
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="col-span-full">
+                            <label class="block text-sm font-medium text-gray-700">Nome Completo</label>
+                            <input type="text" data-field="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
+                            <input type="date" data-field="dob" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Telefone</label>
+                            <input type="tel" data-field="phone" required maxlength="15" class="phone-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                        </div>
+                        <div class="col-span-full">
+                            <label class="block text-sm font-medium text-gray-700">E-mail</label>
+                            <input type="email" data-field="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        /**
+         * Adiciona um novo congressista (ou o primeiro).
+         */
+        function addCongressista() {
+            const id = generateId();
+            const index = congressistas.length;
+
+            const newCongressista = {
+                id: id,
+                name: '',
+                dob: '',
+                phone: '',
+                email: '',
+                isMinor: false,
+                guardian: { name: '', cpf: '', phone: '', email: '' }, 
+                termSigned: null,
+            };
+            congressistas.push(newCongressista);
+            // Inicializa o estado do comprovante para este novo congressista
+            individualProofsState[id] = null; 
+
+            const container = document.getElementById('congressistas-container');
+            container.insertAdjacentHTML('beforeend', createCongressistaHtml(id, index));
+
+            const card = container.lastElementChild;
+            setupCardListeners(card, id, index);
             
-            if (link.download !== undefined) {
-                const url = URL.createObjectURL(blob);
-                link.setAttribute('href', url);
-                link.setAttribute('download', 'relatorio_inscritos_congresso_safira.csv');
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            } else {
-                alert("Seu navegador não suporta download automático. Tente salvar o texto do relatório manualmente.");
-            }
-        }
-        
-        async function renderReportView() {
-            document.getElementById('registration-view').classList.add('hidden');
-            document.getElementById('report-view').classList.remove('hidden');
-            document.getElementById('admin-login-modal').classList.add('hidden'); // Fecha modal de login
-            
-            const loadingStatus = document.getElementById('report-loading-status');
-            const listContainer = document.getElementById('registrants-list');
-            const firstRegistrantDiv = document.getElementById('report-first-registrant');
-            const exportCsvBtn = document.getElementById('export-csv-btn');
-            
-            listContainer.innerHTML = '';
-            firstRegistrantDiv.classList.add('hidden');
-            loadingStatus.classList.remove('hidden');
-            exportCsvBtn.setAttribute('disabled', 'true');
-            exportCsvBtn.classList.add('opacity-50', 'cursor-not-allowed');
-
-            try {
-                const collectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'carnival_congress_2026');
-                const q = query(collectionRef, orderBy('registrationDate', 'asc'));
-                const querySnapshot = await getDocs(q);
-
-                const registrants = [];
-                querySnapshot.forEach(doc => {
-                    registrants.push(doc.data());
-                });
-
-                if (registrants.length === 0) {
-                    listContainer.innerHTML = '<p class="text-center text-gray-500">Nenhuma inscrição encontrada.</p>';
-                } else {
-                    // Ativa o botão de exportação
-                    exportCsvBtn.removeAttribute('disabled');
-                    exportCsvBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                    exportCsvBtn.onclick = () => downloadCSV(registrants);
-
-                    // Exibir o primeiro inscrito
-                    const first = registrants[0];
-                    firstRegistrantDiv.classList.remove('hidden');
-                    firstRegistrantDiv.innerHTML = `
-                        Primeiro Inscrito: <strong>${first.attendees[0].attendeeName}</strong>
-                        (ID Transação: ${first.registrationId.split('-').pop()})
-                        em ${formatBRLDate(first.registrationDate)}.
-                    `;
-                    
-                    // Exibir lista completa
-                    registrants.forEach((data, index) => {
-                        const registrantsHtml = data.attendees.map(a => 
-                            `<li>- ${a.attendeeName} (${a.attendeeAge} anos), Tel: ${a.attendeePhone}</li>`
-                        ).join('');
-                        
-                        const element = document.createElement('div');
-                        element.classList.add('p-4', 'bg-white', 'border', 'rounded-lg', 'shadow-sm');
-                        element.innerHTML = `
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-bold text-lg text-gray-800">${data.attendees.length} Congressista(s) Registrado(s)}</h3>
-                                <span class="text-xs text-gray-500">#${index + 1} | ID: ${data.registrationId.split('-').pop()}</span>
-                            </div>
-                            <ul class="list-none text-sm text-gray-700 space-y-1">
-                                ${registrantsHtml}
-                            </ul>
-                            <div class="mt-2 text-xs text-gray-600">
-                                <p>Registro: ${formatBRLDate(data.registrationDate)}</p>
-                                <p>Responsável: ${data.responsibleName || 'N/A'}</p>
-                                <p>Pagamento: ${data.payment.method.toUpperCase()} (Total: R$ ${data.payment.totalAmountPaid.toFixed(2)})</p>
-                                ${data.signatureTimestamp ? `<p class="text-green-600">Assinatura Digital: ${formatBRLDate(data.signatureTimestamp)}</p>` : ''}
-                            </div>
-                        `;
-                        listContainer.appendChild(element);
-                    });
-                }
-            } catch (error) {
-                console.error("Erro ao buscar relatório:", error);
-                listContainer.innerHTML = '<p class="text-center text-red-600">Erro ao carregar o relatório. Verifique a conexão ou regras de segurança do Firestore.</p>';
-            } finally {
-                loadingStatus.classList.add('hidden');
-            }
-        }
-        
-        function closeReportView() {
-            document.getElementById('report-view').classList.add('hidden');
-            document.getElementById('registration-view').classList.remove('hidden');
-        }
-        
-        // Função para controle de acesso Admin (5 clicks no título)
-        let clickCount = 0;
-        let lastClickTime = 0;
-        function handleAdminAccess() {
-            const currentTime = new Date().getTime();
-            const clickDelay = currentTime - lastClickTime;
-            lastClickTime = currentTime;
-
-            // Se o clique for muito lento (> 500ms), reinicia a contagem
-            if (clickDelay > 500) {
-                clickCount = 1;
-            } else {
-                clickCount++;
-            }
-
-            if (clickCount === 5) {
-                clickCount = 0;
-                document.getElementById('admin-key-input-modal').value = '';
-                document.getElementById('admin-error-message-modal').classList.add('hidden');
-                document.getElementById('admin-login-modal').classList.remove('hidden');
-            }
+            updateUniversalGuardianVisibility();
+            updatePaymentDetails();
+            renderIndividualProofs(); // Rerenderiza a seção de comprovantes
         }
 
-        function checkAdminKeyModal() {
-            const keyInput = document.getElementById('admin-key-input-modal');
-            const errorMessage = document.getElementById('admin-error-message-modal');
-            
-            if (keyInput.value === ADMIN_KEY) {
-                errorMessage.classList.add('hidden');
-                renderReportView();
-            } else {
-                errorMessage.classList.remove('hidden');
-            }
-        }
-        
-        // --- Inicialização e Autenticação Firebase ---
-
-        async function initializeFirebase() {
-            try {
-                const app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-                userId = auth.currentUser?.uid || crypto.randomUUID();
-                console.log("Firebase e Auth inicializados. User ID:", userId);
-
-            } catch (error) {
-                console.error("Erro ao inicializar Firebase:", error);
-                document.getElementById('error-message').textContent = "Erro de inicialização. Tente recarregar a página.";
-                document.getElementById('error-message').classList.remove('hidden');
-            }
-        }
-
-
-        // --- Lógica de Submissão do Formulário ---
-
-        async function submitRegistration(event) {
-            event.preventDefault();
-            document.getElementById('loading-overlay').classList.remove('hidden');
-            document.getElementById('error-message').classList.add('hidden');
-
-            try {
-                // 1. Coleta de Dados dos Congressistas
-                const attendeeCards = document.querySelectorAll('.attendee-card');
-                const attendeesData = [];
-                let isAnyMinor = false;
+        /**
+         * Remove um congressista.
+         * @param {string} id - ID do congressista a ser removido.
+         */
+        function removeCongressista(id) {
+            const indexToRemove = congressistas.findIndex(c => c.id === id);
+            if (indexToRemove > -1 && indexToRemove !== 0) {
+                congressistas.splice(indexToRemove, 1);
+                document.getElementById(`congressista-${id}`).remove();
                 
-                attendeeCards.forEach(card => {
-                    const id = card.id.split('-')[1];
-                    const attendeeBirthDate = card.querySelector(`#attendee-birthdate-${id}`).value;
-                    const today = new Date(CONGRESS_START_DATE);
-                    const birthDate = new Date(attendeeBirthDate);
-                    let age = today.getFullYear() - birthDate.getFullYear();
-                    const m = today.getMonth() - birthDate.getMonth();
-                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                        age--;
+                // Limpa o estado do comprovante e recalcula
+                if(individualProofsState[id]) {
+                    if (individualProofsState[id].file) {
+                        proofsAttachedCount--;
                     }
-                    
-                    if (age < 18) {
-                        isAnyMinor = true;
-                    }
-
-                    attendeesData.push({
-                        attendeeName: card.querySelector(`#attendee-name-${id}`).value,
-                        attendeeBirthDate: attendeeBirthDate,
-                        attendeeAge: age,
-                        attendeeEmail: card.querySelector(`#attendee-email-${id}`).value,
-                        attendeePhone: card.querySelector(`#attendee-phone-${id}`).value,
-                        isMinor: age < 18,
-                    });
-                });
-                
-                // 2. Coleta de Dados do Responsável/Termo
-                const signatureTimestamp = document.getElementById('signature-timestamp').value;
-                if (isAnyMinor && !signatureTimestamp) {
-                    throw new Error("É obrigatório assinar digitalmente o Termo de Autorização para menores de idade.");
+                    delete individualProofsState[id];
                 }
 
-                const responsibleData = isAnyMinor ? {
-                    responsibleName: document.getElementById('responsible-name').value,
-                    responsiblePhone: document.getElementById('responsible-phone').value,
-                    responsibleCpf: document.getElementById('responsible-cpf').value,
-                } : {};
-                
-                // 3. Coleta de Dados de Pagamento e Validação de Comprovante (Obrigatório para Pix/Cartão)
-                const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
-                const numRegistrants = attendeesData.length;
-                const totalFee = BASE_FEE * numRegistrants;
-                
-                let totalAmount = totalFee;
-                let installments = 1;
-                let proofFileName = null; // Nome do arquivo de comprovante
-
-                // Validação de comprovante (para PIX ou CARTÃO)
-                const proofInput = document.getElementById('proof-input');
-                if (proofInput && proofInput.value.trim() === '') {
-                    throw new Error(`Obrigatório anexar o Comprovante (arquivo) para finalizar a inscrição.`);
-                }
-                proofFileName = proofInput ? proofInput.value.trim() : null;
-
-                if (paymentMethod === 'card') {
-                    installments = parseInt(document.getElementById('installments').value);
-                    totalAmount = calculateInstallments(numRegistrants); // Recalcula o total exato
-                } 
-                // PIX já está coberto pela validação geral de comprovante acima.
-
-                // 4. Geração Final do Termo de Autorização (para salvar)
-                const registrantNames = attendeesData.map(a => a.attendeeName);
-                const authorizationTerm = isAnyMinor
-                    ? generateTerms(responsibleData, registrantNames)
-                    : "Maior de Idade - Termo de Responsabilidade Pessoal.";
-
-                // 5. Montagem Final do Objeto (Uma transação para todos os inscritos)
-                const registrationId = generateRegistrationId();
-                const registrationData = {
-                    registrationId: registrationId,
-                    attendees: attendeesData, // Array de congressistas
-                    isAnyMinor: isAnyMinor,
-                    ...responsibleData,
-                    payment: {
-                        method: paymentMethod,
-                        baseFeePerPerson: BASE_FEE,
-                        totalBaseFee: totalFee,
-                        totalAmountPaid: totalAmount,
-                        installments: installments,
-                        interestRate: paymentMethod === 'card' ? MONTHLY_INTEREST_RATE : 0,
-                        pixProof: proofFileName, // Comprovante Pix/Card (nome do arquivo)
-                        paymentLink: getPaymentLink(paymentMethod, totalAmount) // Simulação de link do Mercado Pago
-                    },
-                    authorizationTerm: authorizationTerm,
-                    signatureTimestamp: signatureTimestamp,
-                    registrationDate: new Date().toISOString(),
-                    registeredByUserId: userId,
-                };
-
-                // 6. Salvamento no Firestore (Coleção Pública)
-                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'carnival_congress_2026', registrationId);
-                await setDoc(docRef, registrationData);
-
-                // 7. Exibir Modal de Sucesso
-                document.getElementById('registration-id-display').textContent = registrationId;
-                document.getElementById('submitted-count').textContent = numRegistrants;
-                document.getElementById('success-modal').classList.remove('hidden');
-
-            } catch (error) {
-                console.error("Erro ao salvar a inscrição:", error);
-                document.getElementById('error-message').textContent = `Erro: ${error.message}`;
-                document.getElementById('error-message').classList.remove('hidden');
-            } finally {
-                document.getElementById('loading-overlay').classList.add('hidden');
+                renumberCongressistas();
+                updateUniversalGuardianVisibility();
+                updatePaymentDetails();
+                renderIndividualProofs(); // Rerenderiza a seção de comprovantes
+                showMessageModal('Removido', `Congressista ${indexToRemove + 1} removido com sucesso.`, 'primary');
             }
         }
 
-        // --- Inicialização e Listeners ---
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeFirebase();
-            
-            // 1. Adiciona o primeiro congressista
-            addAttendee();
-
-            const form = document.getElementById('registration-form');
-            form.addEventListener('submit', submitRegistration);
-            
-            // 2. Listeners de Múltiplos Congressistas
-            document.getElementById('add-attendee-btn').addEventListener('click', addAttendee);
-
-            // 3. Listeners de Pagamento e Cálculo
-            document.getElementById('pix-option').addEventListener('click', () => selectPayment('pix'));
-            document.getElementById('card-option').addEventListener('click', () => selectPayment('card'));
-            document.getElementById('installments').addEventListener('change', () => calculateInstallments(document.querySelectorAll('.attendee-card').length));
-            
-            // 4. Listeners de Máscara (Responsável)
-            document.getElementById('responsible-cpf').addEventListener('input', (e) => maskCPF(e.target));
-            document.getElementById('responsible-phone').addEventListener('input', (e) => maskPhone(e.target));
-            
-            // 5. Listeners de Termo e Assinatura
-            document.getElementById('sign-term-btn').addEventListener('click', signTerm);
-            document.querySelectorAll('#responsible-section input').forEach(input => {
-                input.addEventListener('input', updateTermsDisplay);
+        /**
+         * Atualiza a numeração e títulos dos congressistas após adição/remoção.
+         */
+        function renumberCongressistas() {
+            const cards = document.querySelectorAll('.congressista-card');
+            cards.forEach((card, index) => {
+                const id = card.getAttribute('data-id');
+                const titleElement = card.querySelector('h2');
+                // Títulos sem numeração de passo e sem o '#'
+                const title = index === 0 ? "Dados do Congressista Principal" : `Congressista ${index + 1}`;
+                titleElement.textContent = title;
             });
-            
-            // 6. Listeners de Comprovante (Arquivo)
-            const proofFile = document.getElementById('proof-file');
-            proofFile.addEventListener('change', (e) => {
-                const fileName = e.target.files.length > 0 ? e.target.files[0].name : 'Nenhum arquivo selecionado.';
-                document.getElementById('proof-status').textContent = fileName;
-                // Salva o nome do arquivo no campo hidden para validação e envio
-                document.getElementById('proof-input').value = e.target.files.length > 0 ? fileName : '';
+        }
+
+        /**
+         * Configura ouvintes de eventos e máscaras para um novo cartão de congressista.
+         */
+        function setupCardListeners(card, id, index) {
+            const congressista = congressistas.find(c => c.id === id);
+
+            // Aplica máscaras
+            card.querySelectorAll('.phone-mask').forEach(input => applyMask(input, '(99) 99999-9999'));
+
+            // OUVINTES DE INPUT
+            card.querySelectorAll('input, select').forEach(input => {
+                input.addEventListener('input', (e) => handleInputChange(e, id));
             });
 
-            // 7. Listeners do Modal e Admin
-            document.getElementById('copy-pix-btn').addEventListener('click', () => {
-                const pixKeyText = document.getElementById('pix-key-display').textContent.split(' (')[0].trim();
-                navigator.clipboard.writeText(pixKeyText).then(() => {
-                    // Opcional: feedback visual de cópia
-                }).catch(() => {
-                    const tempInput = document.createElement('textarea');
-                    tempInput.value = pixKeyText;
-                    document.body.appendChild(tempInput);
-                    tempInput.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(tempInput);
+            // OUVINTE DOB (Data de Nascimento) para lógica de idade
+            const dobInput = card.querySelector('[data-field="dob"]');
+            dobInput.addEventListener('change', () => {
+                const isMinorResult = isMinor(dobInput.value);
+                congressista.isMinor = isMinorResult;
+                updateUniversalGuardianVisibility(); 
+                updateUniversalTermFields(); // CHAMADA CORRIGIDA
+                updateSubmitButtonState();
+            });
+
+            // OUVINTE DE REMOÇÃO
+            card.querySelector('.remove-congressista-btn')?.addEventListener('click', () => removeCongressista(id));
+        }
+
+        /**
+         * Lida com a mudança de valor em qualquer input do congressista e atualiza o estado.
+         */
+        function handleInputChange(e, id) {
+            const input = e.target;
+            const field = input.getAttribute('data-field');
+            const value = input.value;
+            const congressista = congressistas.find(c => c.id === id);
+
+            if (!congressista) return;
+
+            congressista[field] = value;
+
+            if (field === 'name') {
+                renderIndividualProofs(); // Atualiza o nome no input de comprovante
+                updateUniversalTermFields(); // Atualiza lista de nomes no termo
+            }
+            updateSubmitButtonState();
+        }
+
+        /**
+         * Renderiza os inputs de comprovante individuais.
+         */
+        function renderIndividualProofs() {
+            const container = document.getElementById('individual-proofs-container');
+            container.innerHTML = '';
+            
+            let attachedCount = 0;
+
+            congressistas.forEach((c, index) => {
+                const name = c.name.trim() || `Congressista ${index + 1}`;
+                const proofId = `proof-${c.id}`;
+                const isAttached = individualProofsState[c.id]?.file ? true : false;
+                
+                if (isAttached) attachedCount++;
+
+                const statusClass = isAttached ? 'text-accent-success' : 'text-accent-error';
+                const statusText = isAttached ? 'ANEXADO' : 'PENDENTE';
+                const fileName = individualProofsState[c.id]?.fileName || '';
+
+                // HTML para input individual
+                const html = `
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                        <span class="text-sm font-medium text-gray-700 w-full sm:w-1/3">${name}</span>
+                        <div class="flex-grow w-full">
+                            <input type="file" id="${proofId}" required data-congressista-id="${c.id}"
+                                   class="individual-proof-input block w-full text-sm text-gray-500 
+                                          file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 
+                                          file:text-sm file:font-semibold file:bg-secondary file:text-white 
+                                          hover:file:bg-gray-700 transition" 
+                                   accept="image/*,application/pdf">
+                            <span class="text-xs text-gray-400 block mt-1 overflow-hidden whitespace-nowrap overflow-ellipsis">${fileName}</span>
+                        </div>
+                        <span id="status-${proofId}" class="text-xs font-semibold whitespace-nowrap ${statusClass}">
+                            ${statusText}
+                        </span>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+            
+            // Atualiza o contador global
+            proofsAttachedCount = attachedCount;
+
+            // Re-anexa listeners aos novos inputs
+            document.querySelectorAll('.individual-proof-input').forEach(input => {
+                input.addEventListener('change', handleIndividualProofChange);
+            });
+
+            updateProofStatusDisplay();
+        }
+
+        /**
+         * Lida com a mudança de arquivo em um input individual.
+         */
+        function handleIndividualProofChange(e) {
+            const input = e.target;
+            const id = input.getAttribute('data-congressista-id');
+            const statusEl = document.getElementById(`status-${input.id}`);
+            const fileNameEl = input.nextElementSibling; // O span que mostra o nome do arquivo
+            const file = input.files[0];
+
+            if (file) {
+                if (!individualProofsState[id] || !individualProofsState[id].file) {
+                    proofsAttachedCount++; // Incrementa se estava pendente
+                }
+                individualProofsState[id] = { file: file, fileName: file.name };
+                
+                // Atualiza UI
+                statusEl.textContent = 'ANEXADO';
+                statusEl.classList.remove('text-accent-error');
+                statusEl.classList.add('text-accent-success');
+                fileNameEl.textContent = file.name;
+            } else {
+                if (individualProofsState[id] && individualProofsState[id].file) {
+                    proofsAttachedCount--; // Decrementa se tinha arquivo
+                }
+                individualProofsState[id] = null;
+
+                // Atualiza UI
+                statusEl.textContent = 'PENDENTE';
+                statusEl.classList.add('text-accent-error');
+                statusEl.classList.remove('text-accent-success');
+                fileNameEl.textContent = '';
+            }
+
+            updateProofStatusDisplay();
+            updateSubmitButtonState();
+        }
+
+        /**
+         * Atualiza o display de status dos comprovantes.
+         */
+        function updateProofStatusDisplay() {
+            const total = congressistas.length;
+            document.getElementById('proof-status-display').textContent = 
+                `Status: ${proofsAttachedCount}/${total} Comprovante(s) Anexado(s)`;
+            
+            document.getElementById('proof-label-general').textContent = 
+                `Anexar Comprovante(s) de Pagamento (${proofsAttachedCount}/${total})`;
+            
+            updateSubmitButtonState();
+        }
+        
+        /**
+         * Atualiza o texto dinâmico do Termo de Autorização.
+         */
+        function updateUniversalTermFields() {
+            const minors = congressistas.filter(c => c.isMinor);
+            
+            // Seletores que buscam os spans dentro do P#universal-term-text
+            const respNameEl = document.querySelector('#universal-term-text span:nth-child(1)');
+            const respCpfEl = document.querySelector('#universal-term-text span:nth-child(2)');
+            const minorsListEl = document.getElementById('minors-list');
+
+            // 1. Atualiza Nome e CPF do Responsável
+            if (respNameEl) respNameEl.textContent = universalGuardian.name || '[NOME DO RESPONSÁVEL]';
+            if (respCpfEl) respCpfEl.textContent = universalGuardian.cpf || '[CPF DO RESPONSÁVEL]';
+
+            // 2. Atualiza Lista de Menores
+            if (minorsListEl) {
+                minorsListEl.innerHTML = '';
+                if (minors.length > 0) {
+                    const minorNames = minors.map(m => m.name.trim() || `Congressista ${congressistas.findIndex(c => c.id === m.id) + 1}`).join(', ');
+                    minorsListEl.textContent = minorNames;
+                } else {
+                    minorsListEl.textContent = '[NENHUM MENOR NA FICHA]';
+                }
+            }
+        }
+
+        /**
+         * Verifica se há menores e controla a visibilidade e obrigatoriedade da Seção Universal do Responsável.
+         */
+        function updateUniversalGuardianVisibility() {
+            const minorsExist = congressistas.some(c => c.isMinor);
+            const section = document.getElementById('universal-guardian-section');
+            const requiredInputs = section.querySelectorAll('input[required]');
+
+            if (minorsExist) {
+                section.classList.remove('hidden');
+                requiredInputs.forEach(input => input.setAttribute('required', 'required'));
+            } else {
+                section.classList.add('hidden');
+                requiredInputs.forEach(input => input.removeAttribute('required'));
+            }
+
+            updateUniversalTermFields(); // CHAMADA CORRIGIDA
+            updateSignButtonState();
+        }
+        
+        /**
+         * Configura os ouvintes de input para a seção do Responsável Legal (universal).
+         */
+        function initUniversalGuardianListeners() {
+            const section = document.getElementById('universal-guardian-section');
+            
+            // Aplica máscaras
+            section.querySelectorAll('.phone-mask').forEach(input => applyMask(input, '(99) 99999-9999'));
+            section.querySelectorAll('.cpf-mask').forEach(input => applyMask(input, '999.999.999-99'));
+
+            section.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    // Após a correção do HTML, field agora será 'name', 'cpf', 'phone' ou 'email'
+                    const field = e.target.getAttribute('data-field'); 
+                    universalGuardian[field] = e.target.value;
+
+                    // Atualiza campos que dependem do nome/cpf do responsável no termo
+                    if (field === 'name' || field === 'cpf') {
+                        updateUniversalTermFields();
+                    }
+
+                    // Atualiza estado do botão de assinatura
+                    updateSignButtonState();
+                    updateSubmitButtonState();
                 });
             });
-            
-            document.getElementById('modal-reload-button').addEventListener('click', () => window.location.reload());
-            document.getElementById('close-report-btn').addEventListener('click', closeReportView);
 
-            // 8. Listener de Acesso Admin (5 cliques no título)
-            document.getElementById('main-title').addEventListener('click', handleAdminAccess);
-            
-            // 9. Listeners do Modal de Login Admin
-            document.getElementById('admin-key-check-btn-modal').addEventListener('click', checkAdminKeyModal);
-            document.getElementById('admin-cancel-btn').addEventListener('click', () => {
-                document.getElementById('admin-login-modal').classList.add('hidden');
+            // Listener para Assinatura do Termo
+            document.getElementById('sign-term-btn-universal').addEventListener('click', () => {
+                if (!document.getElementById('sign-term-btn-universal').disabled) {
+                    universalGuardian.termSigned = new Date().toISOString();
+                    document.getElementById('universal-term-status').textContent = 'ASSINADO';
+                    document.getElementById('universal-term-status').classList.remove('text-accent-error');
+                    document.getElementById('universal-term-status').classList.add('text-accent-success');
+                    document.getElementById('universal-signature-date').textContent = `Assinado em: ${new Date().toLocaleString('pt-BR')}`;
+                    updateSignButtonState();
+                }
             });
+        }
 
 
-            // Populando Dropdown de Parcelas
-            const selectInstallments = document.getElementById('installments');
-            for (let i = 1; i <= 12; i++) {
+        /**
+         * Atualiza o estado do botão de assinatura universal e do botão final.
+         */
+        function updateSignButtonState() {
+            const minorsExist = congressistas.some(c => c.isMinor);
+            const signBtn = document.getElementById('sign-term-btn-universal');
+            // Verifica se o CPF tem 14 caracteres (máscara completa)
+            const requiredFieldsFilled = universalGuardian.name.trim() && universalGuardian.cpf.length === 14;
+
+            if (universalGuardian.termSigned) {
+                signBtn.disabled = true;
+                signBtn.textContent = 'Termo Assinado';
+                signBtn.classList.remove('bg-primary', 'hover:bg-secondary', 'disabled:bg-gray-400');
+                signBtn.classList.add('bg-accent-success', 'disabled:bg-accent-success/80');
+            } else if (minorsExist && requiredFieldsFilled) {
+                signBtn.disabled = false;
+                signBtn.textContent = 'Assinar Termo Digitalmente';
+                signBtn.classList.add('bg-primary', 'hover:bg-secondary');
+                signBtn.classList.remove('bg-accent-success', 'disabled:bg-gray-400');
+            } else if (minorsExist && !requiredFieldsFilled) { 
+                signBtn.disabled = true;
+                signBtn.textContent = 'Preencha Nome e CPF p/ Assinar'; // Mensagem mais clara
+                signBtn.classList.add('disabled:bg-gray-400');
+                signBtn.classList.remove('bg-primary', 'hover:bg-secondary');
+            } else {
+                // Estado padrão ou sem menores
+                signBtn.disabled = true;
+                signBtn.textContent = 'Assinar Termo Digitalmente';
+                signBtn.classList.add('disabled:bg-gray-400');
+                signBtn.classList.remove('bg-primary', 'hover:bg-secondary', 'bg-accent-success');
+            }
+            
+            updateSubmitButtonState();
+        }
+        
+        /**
+         * Atualiza o estado do botão de submissão final.
+         */
+        function updateSubmitButtonState() {
+            const submitBtn = document.getElementById('submit-btn');
+            const minorsExist = congressistas.some(c => c.isMinor);
+            
+            // Validações
+            const isAllCongressistasFilled = congressistas.every(c => 
+                c.name.trim() && c.dob.trim() && c.phone.replace(/\D/g, '').length === 11 && c.email.trim().includes('@')
+            );
+            
+            const isProofCountValid = proofsAttachedCount === congressistas.length && congressistas.length > 0;
+            
+            // Verifica se o responsável precisa assinar E se os campos obrigatórios estão preenchidos
+            const isGuardianDataValid = !minorsExist || (universalGuardian.name.trim() && universalGuardian.cpf.length === 14);
+            // Verifica se o termo precisa ser assinado E se foi assinado
+            const isTermSignedValid = !minorsExist || universalGuardian.termSigned;
+            
+            let reason = "";
+
+            if (!isAllCongressistasFilled) {
+                reason = "Preencha todos os campos dos Congressistas.";
+            } else if (!isProofCountValid) {
+                reason = `Anexe os ${congressistas.length} Comprovante(s).`;
+            } else if (minorsExist && !isGuardianDataValid) {
+                 reason = "Preencha todos os dados do Responsável Legal.";
+            } else if (minorsExist && !isTermSignedValid) {
+                reason = "Assine o Termo de Autorização.";
+            }
+            
+            // Atualiza Botão
+            if (isAllCongressistasFilled && isProofCountValid && isGuardianDataValid && isTermSignedValid) {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50');
+                submitBtn.textContent = 'Finalizar Inscrição';
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-50');
+                submitBtn.textContent = reason || 'Preencha todos os campos';
+            }
+            return submitBtn.disabled;
+        }
+
+        // --- FUNÇÕES DE PAGAMENTO E FLUXO ---
+        
+        /**
+         * Lida com o clique no botão de realizar pagamento (inicia a transação).
+         */
+        function handleInitiatePayment() {
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
+            const totalValue = congressistas.length * REGISTRATION_VALUE;
+            const numInstallments = paymentMethod === 'CARD' ? parseInt(document.getElementById('installments-select').value, 10) : 1;
+            
+            const finalAmount = (numInstallments > 1) 
+                ? calculateInstallment(totalValue, numInstallments) * numInstallments 
+                : totalValue;
+            
+            const finalRedirectLink = MERCADO_PAGO_PLACEHOLDER_LINK + finalAmount.toFixed(2);
+            
+            showMessageModal(
+                'Aguardando Pagamento',
+                `Redirecionando para o Mercado Pago com o valor total de R$ ${finalAmount.toFixed(2).replace('.', ',')}. Lembre-se de enviar o comprovante por WhatsApp para o Líder José Marcos (32) 98824-3122, além de anexar aqui!`,
+                'primary'
+            );
+            
+            setTimeout(() => {
+                 window.open(finalRedirectLink, '_blank');
+            }, 2000);
+        }
+
+        function calculateInstallment(principal, periods) {
+            if (periods === 1) return principal;
+            const rate = INTEREST_RATE;
+            const numerator = principal * rate * Math.pow(1 + rate, periods);
+            const denominator = Math.pow(1 + rate, periods) - 1;
+            return numerator / denominator;
+        }
+        
+        function updateInstallmentValue() {
+            const select = document.getElementById('installments-select');
+            const total = congressistas.length * REGISTRATION_VALUE;
+            const installments = parseInt(select.value, 10);
+            const installmentValue = calculateInstallment(total, installments);
+
+            document.getElementById('installment-value').textContent = `R$ ${installmentValue.toFixed(2).replace('.', ',')}`;
+        }
+        
+        function populateInstallments(total) {
+            const select = document.getElementById('installments-select');
+            const currentSelection = select.value;
+            select.innerHTML = '';
+            for (let i = 1; i <= MAX_INSTALLMENTS; i++) {
+                const installmentValue = calculateInstallment(total, i);
+                const totalPaid = installmentValue * i;
                 const option = document.createElement('option');
                 option.value = i;
-                option.textContent = `${i}x`;
-                selectInstallments.appendChild(option);
+                option.textContent = `${i}x de R$ ${installmentValue.toFixed(2).replace('.', ',')} (Total: R$ ${totalPaid.toFixed(2).replace('.', ',')})`;
+                select.appendChild(option);
+            }
+            select.value = currentSelection || 1;
+            updateInstallmentValue();
+        }
+
+        function updatePaymentDetails() {
+            const total = congressistas.length * REGISTRATION_VALUE;
+            document.getElementById('payment-total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            
+            document.getElementById('pix-option-text').textContent = `PIX (R$ ${total.toFixed(2).replace('.', ',')} à vista)`;
+            
+            const cardOptions = document.getElementById('card-options');
+            const isCardSelected = document.querySelector('input[name="payment-method"]:checked')?.value === 'CARD';
+
+            if (isCardSelected) {
+                cardOptions.classList.remove('hidden');
+                populateInstallments(total);
+            } else {
+                cardOptions.classList.add('hidden');
+                document.getElementById('installment-value').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+                const select = document.getElementById('installments-select');
+                if(select.options.length > 0) { select.value = 1; }
+            }
+            
+            renderIndividualProofs();
+            updateSubmitButtonState();
+        }
+
+        // --- FUNÇÃO DE SUBMISSÃO ---
+            
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            if (updateSubmitButtonState()) {
+                return; // O botão está desabilitado, não deve prosseguir
             }
 
-            // Inicializa valores de pagamento
-            selectPayment('pix'); // Começa com PIX selecionado
+            const form = e.target;
+            const paymentMethod = form.querySelector('input[name="payment-method"]:checked')?.value;
+            const numInstallments = paymentMethod === 'CARD' ? parseInt(form.querySelector('#installments-select').value, 10) : 1;
+            const totalValue = congressistas.length * REGISTRATION_VALUE;
+            
+            // 1. Cálculo Final do Pagamento
+            const totalPaid = (numInstallments > 1) ? calculateInstallment(totalValue, numInstallments) * numInstallments : totalValue;
+            
+            // 2. Finaliza o objeto para salvamento
+            const submissionDate = new Date().toISOString();
+            const storedRegistrations = loadRegistrations();
+            
+            // Prepara a string de nomes de arquivos anexados para o CSV
+            const proofFileNames = Object.values(individualProofsState)
+                                        .filter(p => p && p.fileName)
+                                        .map(p => p.fileName)
+                                        .join(', '); // Ex: "pix_joao.pdf, cartao_maria.jpg"
+
+
+            const newRegistrations = congressistas.map(c => {
+                const isMinorFinal = isMinor(c.dob);
+                
+                let guardianData = { name: '', cpf: '', phone: '', email: '' };
+                let termSignedDate = null;
+
+                if (isMinorFinal) {
+                    // Se for menor, replica os dados UNIVERSAIS do responsável para o registro individual
+                    guardianData = { ...universalGuardian };
+                    termSignedDate = universalGuardian.termSigned;
+                }
+                
+                return {
+                    ...c,
+                    submissionDate: submissionDate,
+                    paymentMethod: paymentMethod + (numInstallments > 1 ? ` (${numInstallments}x)` : ' (à vista)'),
+                    proofAttachedCount: congressistas.length, // Contagem total anexada (para submissão, deve ser igual ao número de congressistas)
+                    proofFileName: proofFileNames, // Nomes dos arquivos anexados
+                    totalPaid: totalPaid / congressistas.length, // Valor individual
+                    isMinor: isMinorFinal, // Confirma se é menor na submissão
+                    guardian: guardianData,
+                    termSigned: termSignedDate,
+                };
+            });
+
+            // 3. Salva no LocalStorage
+            localStorage.setItem(STORAGE_KEY, JSON.stringify([...storedRegistrations, ...newRegistrations]));
+
+            // 4. Resetar o Formulário e Estado (LIMPEZA COMPLETA)
+            form.reset();
+            
+            // Reset state variables
+            congressistas = [];
+            individualProofsState = {};
+            proofsAttachedCount = 0;
+            
+            // Reset universal guardian state
+            universalGuardian = { name: '', cpf: '', phone: '', email: '', termSigned: null };
+            
+            // Reset DOM inputs for Universal Guardian
+            document.getElementById('guardianNameUniversal').value = '';
+            document.getElementById('guardianCpfUniversal').value = '';
+            document.getElementById('guardianPhoneUniversal').value = '';
+            document.getElementById('guardianEmailUniversal').value = '';
+            
+            // Reset term status display
+            document.getElementById('universal-term-status').textContent = 'PENDENTE';
+            document.getElementById('universal-term-status').classList.remove('text-accent-success');
+            document.getElementById('universal-term-status').classList.add('text-accent-error');
+            document.getElementById('universal-signature-date').textContent = '';
+            
+            // Limpa o container de congressistas
+            document.getElementById('congressistas-container').innerHTML = '';
+
+
+            // 5. Re-inicializa a ficha com o primeiro congressista
+            addCongressista(); 
+            updateSignButtonState();
+            
+            // 6. Feedback Final (Usa o número de congressistas na submissão, que é o número de comprovantes)
+            showMessageModal('Inscrição Concluída!', `Sua inscrição (${newRegistrations.length} pessoa(s)) e ${newRegistrations.length} comprovante(s) foram salvos localmente. A Igreja entrará em contato para confirmação.`, 'accent-success');
+        };
+
+        // --- ADMIN LOGIC ---
+        let clickCount = 0;
+        let lastClickTime = 0;
+
+        function handleTitleClick() {
+            const now = Date.now();
+            if (now - lastClickTime < 500) {
+                clickCount++;
+            } else {
+                clickCount = 1;
+            }
+            lastClickTime = now;
+
+            if (clickCount >= 5) {
+                document.getElementById('admin-login-modal').classList.remove('hidden');
+                document.getElementById('admin-login-modal').classList.add('flex');
+                clickCount = 0; 
+                lastClickTime = 0;
+            }
+        }
+        
+        function handleAdminLogin() {
+            const passwordInput = document.getElementById('admin-password');
+            if (passwordInput.value === ADMIN_PASSWORD) {
+                document.getElementById('admin-login-modal').classList.remove('flex');
+                document.getElementById('admin-login-modal').classList.add('hidden');
+                passwordInput.value = '';
+                renderAdminPanel();
+                document.getElementById('admin-modal').classList.remove('hidden');
+                document.getElementById('admin-modal').classList.add('flex');
+            } else {
+                showMessageModal('Acesso Negado', 'Chave secreta incorreta. Tente novamente.', 'accent-error');
+                passwordInput.value = '';
+            }
+        }
+
+        function renderAdminPanel() {
+            const allRegistrations = loadRegistrations();
+            const tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = '';
+            document.getElementById('admin-count').textContent = allRegistrations.length;
+
+            if (allRegistrations.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-4 text-center text-gray-500">Nenhuma inscrição encontrada no armazenamento local.</td></tr>`;
+                return;
+            }
+
+            allRegistrations.forEach((data, index) => {
+                const isMinorStatus = data.isMinor ? 'Sim' : 'Não';
+                const responsibleName = data.guardian.name || 'N/A';
+                const termStatus = data.termSigned ? `<span class="text-accent-success">Assinado</span>` : `<span class="text-accent-error">Pendente</span>`;
+                const submittedAt = data.submissionDate ? new Date(data.submissionDate).toLocaleString('pt-BR') : 'Desconhecido';
+                
+                const proofCount = data.proofAttachedCount || 0;
+                // Exibe o nome do arquivo, se houver (útil se for apenas 1 por registro, mas aqui estamos agrupando)
+                const proofNames = data.proofFileName || 'N/A'; 
+                
+                const proofDisplay = proofCount > 0 
+                    ? `<span class="font-semibold text-accent-success">${proofCount} anexo(s)</span><span class="text-xs text-gray-500 block break-all">${proofNames}</span>`
+                    : `<span class="text-accent-error">0</span>`;
+
+
+                const row = document.createElement('tr');
+                row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">${data.id.substring(0, 8)}...</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${data.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${isMinorStatus}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${responsibleName}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">${termStatus}</td>
+                    <td class="px-6 py-4 text-sm">${proofDisplay}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${submittedAt}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        function exportToCSV() {
+            const allRegistrations = loadRegistrations();
+            if (allRegistrations.length === 0) {
+                showMessageModal('Erro de Exportação', 'Não há dados para exportar.', 'accent-error');
+                return;
+            }
+
+            const csvContent = convertToCSV(allRegistrations);
+
+            const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `inscricoes_safira_${new Date().toISOString().substring(0, 10)}.csv`);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            showMessageModal('Exportação Concluída', `Dados de ${allRegistrations.length} congressistas exportados para CSV com sucesso!`, 'accent-success');
+        }
+
+
+        // --- HELPERS E INICIALIZAÇÃO ---
+        function showMessageModal(title, content, color) {
+            const modal = document.getElementById('message-modal');
+            modal.querySelector('#modal-title').textContent = title;
+            modal.querySelector('#modal-title').className = `text-xl font-bold mb-3 text-${color}`;
+            modal.querySelector('#modal-content').textContent = content;
+            
+            const closeBtn = modal.querySelector('#modal-close-btn');
+            closeBtn.className = `px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition`;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        // Listener de Fechar Modal
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('modal-close-btn').addEventListener('click', () => {
+                document.getElementById('message-modal').classList.remove('flex');
+                document.getElementById('message-modal').classList.add('hidden');
+            });
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa o primeiro congressista
+            addCongressista();
+            
+            // Inicializa ouvintes da seção universal e do pagamento
+            initUniversalGuardianListeners();
+            
+            // OUVINTES GLOBAIS
+            document.getElementById('add-congressista-btn').addEventListener('click', () => addCongressista());
+            document.getElementById('registration-form').addEventListener('submit', handleSubmit);
+            
+            // OUVINTES DE PAGAMENTO
+            document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
+                radio.addEventListener('change', updatePaymentDetails);
+            });
+            document.getElementById('installments-select').addEventListener('change', updateInstallmentValue);
+
+            // ADMIN LOGIC LISTENERS
+            document.getElementById('main-title').addEventListener('click', handleTitleClick);
+            document.getElementById('admin-login-btn').addEventListener('click', handleAdminLogin);
+            document.getElementById('admin-close-btn').addEventListener('click', () => {
+                document.getElementById('admin-modal').classList.remove('flex');
+                document.getElementById('admin-modal').classList.add('hidden');
+            });
+            document.getElementById('admin-login-close-btn').addEventListener('click', () => {
+                document.getElementById('admin-login-modal').classList.remove('flex');
+                document.getElementById('admin-login-modal').classList.add('hidden');
+            });
+            document.getElementById('export-csv-btn').addEventListener('click', exportToCSV);
+
+            // Inicializa estados
+            updatePaymentDetails();
+            updateUniversalGuardianVisibility();
+            updateSubmitButtonState();
         });
     </script>
 </body>
