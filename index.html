@@ -6,15 +6,16 @@
     <title>Inscrição | JUBACZOMA 26</title>
     <!-- Carregando Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configuração de Cores (Black & Gray) -->
+    <!-- Configuração de Cores (Black-Out & Teal Accent) -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#1f2937', // Dark Gray/Black (Primary)
-                        'secondary': '#4b5563', // Medium Gray (Accent)
-                        'background': '#f9fafb', // Very Light Gray
+                        'primary': '#1e1e1e', // Deep Charcoal (Quase Preto)
+                        'secondary': '#009688', // Teal/Ciano Vibrante (Accent)
+                        'background': '#0f0f0f', // Near Black (Fundo Principal)
+                        'card-bg': '#ffffff', // Branco para os cartões
                         'accent-success': '#10b981', // Green for success
                         'accent-error': '#ef4444', // Red for error
                     },
@@ -29,17 +30,20 @@
         /* Estilos customizados para a estética jovem e moderna */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
-            background-color: #f3f4f6; /* Light gray background */
+            background-color: #0f0f0f; /* Near Black */
             font-family: 'Inter', sans-serif;
+            color: #ffffff; /* Texto claro no fundo escuro */
         }
         .card-shadow {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.5); /* Sombra mais densa no fundo escuro */
             transition: transform 0.3s ease-in-out;
         }
         .card-shadow:hover {
             transform: translateY(-2px);
         }
-        /* Estilo para ícones SVG */
+        .card-content {
+            background-color: #ffffff; /* Conteúdo dos cards em branco */
+        }
         .icon {
             display: inline-block;
             width: 1em;
@@ -51,17 +55,17 @@
             stroke-linejoin: round;
         }
 
+        /* Ajustes específicos para inputs dentro dos cards */
+        .card-content input:not([type="file"]):not([type="checkbox"]):not([type="radio"]) {
+            border-color: #e5e7eb;
+        }
+        .card-content label {
+            color: #4b5563; /* Texto das labels em cinza escuro para contraste */
+        }
+
         /* Estilo para a interface do Admin */
         #admin-modal {
             max-height: 90vh;
-        }
-        .file-input-wrapper input[type=file] {
-            cursor: pointer;
-            width: 100%;
-        }
-        .file-selected {
-            background-color: #d1fae5; /* Light green background when file is selected */
-            border-color: #10b981;
         }
     </style>
 </head>
@@ -69,24 +73,27 @@
 
     <!-- Container Principal -->
     <div class="max-w-4xl mx-auto">
-        <!-- Título Principal com Contador de Cliques para Admin -->
-        <h1 id="main-title" class="text-4xl font-extrabold text-center mb-2 text-primary cursor-pointer hover:text-secondary transition duration-150">
-            Inscrição | JUBACZOMA 26
-        </h1>
-        <p class="text-center text-secondary mb-1 text-lg">Tema: "Em Adoração". 14/02/2026 - 17/02/2026.</p>
+        <!-- Header Temático Black-Out -->
+        <header class="bg-primary p-6 rounded-t-2xl shadow-xl mb-4">
+            <h1 id="main-title" class="text-4xl font-extrabold text-center mb-2 text-white cursor-pointer hover:text-secondary transition duration-150">
+                Inscrição | JUBACZOMA 26
+            </h1>
+            <p class="text-center text-gray-300 mb-4 text-lg">Tema: "Black-Out". 14/02/2026 - 17/02/2026.</p>
+            
+            <!-- Contato do Líder -->
+            <p class="text-center text-sm text-gray-400">
+                Dúvidas? Fale com o Líder do Congresso, José Marcos: 
+                <a href="https://wa.me/5532988243122" target="_blank" class="text-secondary hover:underline font-medium flex items-center justify-center">
+                    (32) 98824-3122 
+                    <!-- Icone de WhatsApp (Telefone) -->
+                    <svg class="icon ml-1 h-4 w-4 stroke-secondary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3.06a2 2 0 0 1-2.2.82c-3.14-.94-7.25-3.83-10.43-7.01-3.18-3.18-6.07-7.29-7.01-10.43a2 2 0 0 1 .82-2.2H7.08a2 2 0 0 1 2 1.63c.27 1.34.8 2.58 1.55 3.72l-.78.78c-1.25 1.25-1.92 2.76-1.92 4.47s.67 3.22 1.92 4.47c1.25 1.25 2.76 1.92 4.47 1.92s3.22-.67 4.47-1.92l.78-.78c1.14.75 2.38 1.28 3.72 1.55a2 2 0 0 1 1.63 2z"/></svg>
+                </a>
+            </p>
+        </header>
         
-        <!-- Contato do Líder -->
-        <p class="text-center text-sm text-gray-500 mb-10">
-            Dúvidas? Fale com o Líder do Congresso, José Marcos: 
-            <a href="https://wa.me/5532988243122" target="_blank" class="text-primary hover:underline font-medium flex items-center justify-center">
-                (32) 98824-3122 
-                <!-- Icone de WhatsApp (Telefone) -->
-                <svg class="icon ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3.06a2 2 0 0 1-2.2.82c-3.14-.94-7.25-3.83-10.43-7.01-3.18-3.18-6.07-7.29-7.01-10.43a2 2 0 0 1 .82-2.2H7.08a2 2 0 0 1 2 1.63c.27 1.34.8 2.58 1.55 3.72l-.78.78c-1.25 1.25-1.92 2.76-1.92 4.47s.67 3.22 1.92 4.47c1.25 1.25 2.76 1.92 4.47 1.92s3.22-.67 4.47-1.92l.78-.78c1.14.75 2.38 1.28 3.72 1.55a2 2 0 0 1 1.63 2z"/></svg>
-            </a>
-        </p>
 
         <!-- Formulário de Inscrição -->
-        <form id="registration-form" class="space-y-8">
+        <form id="registration-form" class="space-y-8 pb-10">
 
             <!-- Container para os Congressistas -->
             <div id="congressistas-container" class="space-y-10">
@@ -95,15 +102,15 @@
 
             <!-- Botão Adicionar Congressista -->
             <div class="flex justify-center mt-8">
-                <button type="button" id="add-congressista-btn" class="flex items-center px-6 py-3 bg-secondary text-white font-bold rounded-xl shadow-lg hover:bg-gray-700 transition duration-200">
+                <button type="button" id="add-congressista-btn" class="flex items-center px-6 py-3 bg-secondary text-white font-bold rounded-xl shadow-lg hover:bg-[#00796b] transition duration-200">
                     <!-- Icone de Usuário Plus (lucide-react icon: UserPlus) -->
-                    <svg class="icon mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                    <svg class="icon mr-2 stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
                     Adicionar Outro Congressista
                 </button>
             </div>
 
             <!-- Seção Universal do Responsável Legal (Aparece se houver menores) -->
-            <section id="universal-guardian-section" class="p-6 bg-white rounded-2xl card-shadow border-t-4 border-accent-error space-y-4 hidden">
+            <section id="universal-guardian-section" class="p-6 card-content rounded-2xl card-shadow border-t-4 border-accent-error space-y-4 hidden">
                 <h2 class="text-2xl font-bold text-accent-error mb-4">Dados do Responsável Legal</h2>
                 <!-- Inputs do Responsável -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -130,7 +137,7 @@
                 </div>
 
                 <!-- Termo de Autorização Dinâmico e ÚNICO -->
-                <div class="mt-6 p-4 bg-white border border-secondary rounded-lg">
+                <div class="mt-6 p-4 bg-gray-50 border border-gray-300 rounded-lg">
                     <h3 class="font-bold text-lg mb-3 text-primary">Termo de Autorização e Responsabilidade</h3>
                     <div class="text-sm text-gray-600 space-y-2">
                         <p id="universal-term-text">Eu, <span class="font-bold text-secondary">[NOME DO RESPONSÁVEL]</span>, portador do CPF <span class="font-bold text-secondary">[CPF DO RESPONSÁVEL]</span>, autorizo o(a) menor(es): <span class="font-bold text-primary" id="minors-list">[NOME(S) DO(S) CONGRESSISTA(S) MENOR(ES)]</span> a participar do Congresso JUBACZOMA 26, nos dias 14/02/2026 a 17/02/2026. Declaro estar ciente de todas as regras e assumo total responsabilidade civil e legal pelos(as) menores durante o período do evento. </p>
@@ -146,60 +153,34 @@
             </section>
 
             <!-- Seção de Pagamento -->
-            <section class="p-6 bg-white rounded-2xl card-shadow border-t-4 border-primary">
+            <section class="p-6 card-content rounded-2xl card-shadow border-t-4 border-secondary">
                 <h2 class="text-2xl font-bold text-primary mb-6">
                     Detalhes de Pagamento
                 </h2>
 
                 <div class="mb-4 text-xl font-semibold text-gray-800">
-                    Total: <span id="payment-total" class="text-primary">R$ 200,00</span>
+                    Total Estimado da Ficha: <span id="payment-total" class="text-secondary">R$ 200,00</span>
                 </div>
                 
-                <!-- Aviso de Fluxo de Pagamento ATUALIZADO (Removido negrito extra) -->
+                <!-- Aviso de Fluxo de Pagamento ATUALIZADO (Conteúdo injetado via JS) -->
                 <div id="payment-warning" class="p-3 mb-4 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-lg">
-                    ⚠️ Fluxo Obrigatório: Primeiro, <strong>realize o pagamento</strong> clicando no botão abaixo. Em seguida, envie o comprovante por WhatsApp para o Líder José Marcos (32) 98824-3122. Por fim, anexe o(s) comprovante(s) abaixo e clique em "Finalizar Inscrição".
+                    <!-- Conteúdo injetado via JS -->
                 </div>
 
-
-                <!-- Escolha de Método de Pagamento -->
-                <div class="space-y-4">
-                    <label class="flex items-center space-x-3 cursor-pointer p-4 bg-gray-50 rounded-xl border border-gray-200 hover:bg-gray-100 transition">
-                        <input type="radio" name="payment-method" value="PIX" class="h-5 w-5 text-primary focus:ring-primary" checked>
-                        <!-- ID para atualização dinâmica -->
-                        <span id="pix-option-text" class="text-lg font-medium text-gray-700">PIX (R$ 200,00 à vista)</span>
-                    </label>
-
-                    <label class="flex items-center space-x-3 cursor-pointer p-4 bg-gray-50 rounded-xl border border-gray-200 hover:bg-gray-100 transition">
-                        <input type="radio" name="payment-method" value="CARD" class="h-5 w-5 text-primary focus:ring-primary">
-                        <span class="text-lg font-medium text-gray-700">Cartão de Crédito (Ver parcelamento)</span>
-                    </label>
-                </div>
-
-                <!-- Simulação de Parcelamento (Aparece se CARD for selecionado) -->
-                <div id="card-options" class="mt-4 p-4 bg-white border border-gray-200 rounded-lg hidden">
-                    <h3 class="font-semibold text-gray-700 mb-3">Simulação de Parcelamento (Juros de 2.99% a.m.):</h3>
-                    <select id="installments-select" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
-                        <!-- Opções serão preenchidas via JS -->
-                    </select>
-                    <p class="mt-2 text-sm text-gray-500">Valor da parcela: <span id="installment-value" class="font-bold">R$ 200,00</span></p>
-                </div>
-
-                <!-- Botão de Iniciar Pagamento - Removido "(Abrir Mercado Pago)" -->
+                <!-- Botão de Iniciar Pagamento - Agora com texto dinâmico -->
                 <div class="mt-6">
-                    <button type="button" id="initiate-payment-btn" class="w-full flex items-center justify-center px-6 py-3 bg-primary text-white text-lg font-bold rounded-xl shadow-md hover:bg-secondary transition duration-200">
-                        <!-- Icone de PIX/Transferência (lucide-react icon: Send) -->
-                        <svg class="icon mr-2 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    <button type="button" id="initiate-payment-btn" class="w-full flex items-center justify-center px-6 py-3 bg-secondary text-white text-lg font-bold rounded-xl shadow-md hover:bg-[#00796b] transition duration-200">
                         Realizar Pagamento
                     </button>
                 </div>
 
-                <!-- NOVO: Anexo de Comprovante Individual -->
+                <!-- Anexo de Comprovante Individual -->
                 <div class="mt-6">
                     <label id="proof-label-general" class="block text-sm font-medium text-gray-700 mb-2">
-                        Anexar Comprovante(s) de Pagamento (0/0)
+                        Anexar Voucher(s) de Credenciamento (0/0)
                     </label>
                     <p class="mt-2 text-sm text-gray-500 mb-4" id="proof-instruction">
-                        Anexe um comprovante de pagamento individual para cada congressista listado (Lembre-se de enviar também por WhatsApp!).
+                        Anexe o Voucher de Credenciamento individual para cada congressista listado. Este documento será exigido no credenciamento! (Lembre-se de enviar também por WhatsApp!).
                     </p>
                     
                     <!-- BOTÃO WHATSAPP AO LADO DOS ANEXOS -->
@@ -208,7 +189,7 @@
                            class="flex items-center px-6 py-3 bg-accent-success text-white font-bold rounded-xl shadow-lg hover:bg-green-700 transition duration-200">
                             <!-- Ícone do WhatsApp -->
                             <svg class="icon mr-2 h-5 w-5 fill-white stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3.06a2 2 0 0 1-2.2.82c-3.14-.94-7.25-3.83-10.43-7.01-3.18-3.18-6.07-7.29-7.01-10.43a2 2 0 0 1 .82-2.2H7.08a2 2 0 0 1 2 1.63c.27 1.34.8 2.58 1.55 3.72l-.78.78c-1.25 1.25-1.92 2.76-1.92 4.47s.67 3.22 1.92 4.47c1.25 1.25 2.76 1.92 4.47 1.92s3.22-.67 4.47-1.92l.78-.78c1.14.75 2.38 1.28 3.72 1.55a2 2 0 0 1 1.63 2z"/></svg>
-                            Enviar Comprovante por WhatsApp
+                            Enviar Voucher por WhatsApp
                         </a>
                     </div>
                     
@@ -222,9 +203,9 @@
 
             <!-- Botão de Submissão Final -->
             <div class="flex justify-center pt-4">
-                <button type="submit" id="submit-btn" class="w-full sm:w-2/3 flex items-center justify-center px-8 py-4 bg-accent-success text-white text-xl font-bold rounded-xl shadow-2xl hover:bg-green-700 transition duration-300 transform hover:scale-[1.01]" disabled>
+                <button type="submit" id="submit-btn" class="w-full sm:w-2/3 flex items-center justify-center px-8 py-4 bg-secondary text-white text-xl font-bold rounded-xl shadow-2xl hover:bg-[#00796b] transition duration-300 transform hover:scale-[1.01]" disabled>
                     <!-- Icone de Checagem (lucide-react icon: CheckSquare) -->
-                    <svg class="icon mr-3 h-7 w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m9 12 2 2 4-4"/></svg>
+                    <svg class="icon mr-3 h-7 w-7 stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m9 12 2 2 4-4"/></svg>
                     Finalizar Inscrição
                 </button>
             </div>
@@ -232,8 +213,8 @@
     </div>
 
     <!-- Modal de Mensagem (Submissão, Erros, etc.) -->
-    <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
-        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full text-center">
+    <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center p-4 z-50">
+        <div class="card-content p-6 rounded-xl shadow-2xl max-w-sm w-full text-center">
             <h3 id="modal-title" class="text-xl font-bold mb-3 text-primary">Sucesso!</h3>
             <p id="modal-content" class="text-gray-700 mb-5">Sua inscrição foi salva localmente.</p>
             <button id="modal-close-btn" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition">Fechar</button>
@@ -242,55 +223,53 @@
 
     <!-- Modal de Login Admin -->
     <div id="admin-login-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center p-4 z-50">
-        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full">
+        <div class="card-content p-6 rounded-xl shadow-2xl max-w-sm w-full">
             <div class="flex justify-between items-start">
                 <h3 class="text-xl font-bold mb-4 text-primary">Acesso Administrativo</h3>
                 <button type="button" id="admin-login-close-btn" class="text-gray-400 hover:text-gray-600 transition">
                     <!-- Icone de Fechar (X) -->
-                    <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    <svg class="icon h-6 w-6 stroke-gray-400 hover:stroke-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
             </div>
-            <input type="password" id="admin-password" placeholder="Chave Secreta" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary mb-4">
-            <button id="admin-login-btn" class="w-full p-3 bg-primary text-white rounded-lg hover:bg-secondary transition">Entrar</button>
+            <input type="password" id="admin-password" placeholder="Chave Secreta" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary mb-4">
+            <button id="admin-login-btn" class="w-full p-3 bg-secondary text-white rounded-lg hover:bg-[#00796b] transition">Entrar</button>
         </div>
     </div>
 
     <!-- Modal do Painel Admin -->
-    <div id="admin-modal" class="fixed inset-0 bg-white hidden flex-col p-4 sm:p-8 z-50">
-        <div class="flex justify-between items-center mb-6 border-b pb-4">
-            <h2 class="text-3xl font-bold text-primary">Relatório de Inscritos (Admin)</h2>
+    <div id="admin-modal" class="fixed inset-0 bg-background hidden flex-col p-4 sm:p-8 z-50">
+        <div class="flex justify-between items-center mb-6 border-b pb-4 border-gray-700">
+            <h2 class="text-3xl font-bold text-white">Relatório de Inscritos (Admin)</h2>
             <div class="flex space-x-3">
                  <button id="export-csv-btn" class="px-4 py-2 bg-accent-success text-white rounded-lg hover:bg-green-700 transition flex items-center">
                     <!-- Icone de Download (lucide-react icon: Download) -->
-                    <svg class="icon mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    <svg class="icon mr-2 h-5 w-5 stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                     Exportar CSV
                 </button>
                 <button id="admin-close-btn" class="px-4 py-2 bg-accent-error text-white rounded-lg hover:bg-red-600 transition">Fechar</button>
             </div>
         </div>
         
-        <!-- O Aviso sobre Comprovantes foi removido daqui para despoluir a UI. -->
-
-        <div class="overflow-y-auto flex-grow rounded-lg border border-gray-200">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50 sticky top-0">
+        <div class="overflow-y-auto flex-grow rounded-lg border border-gray-700">
+            <table class="min-w-full divide-y divide-gray-700">
+                <thead class="bg-primary sticky top-0">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Menor</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Resp.</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assinatura Termo</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comprovantes</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Inscrito em</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nome</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Menor</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Resp.</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Assinatura Termo</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Comprovantes</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Inscrito em</th>
                     </tr>
                 </thead>
-                <tbody id="admin-table-body" class="bg-white divide-y divide-gray-200">
+                <tbody id="admin-table-body" class="bg-gray-900 divide-y divide-gray-700 text-white">
                     <!-- Dados serão inseridos aqui -->
                 </tbody>
             </table>
         </div>
-        <p class="mt-4 text-sm text-gray-500">
-            Total de Inscritos: <span id="admin-count" class="font-bold text-primary">0</span>. 
+        <p class="mt-4 text-sm text-gray-400">
+            Total de Inscritos: <span id="admin-count" class="font-bold text-secondary">0</span>. 
             (O CSV incluirá os nomes dos arquivos anexados para referência.)
         </p>
     </div>
@@ -301,11 +280,10 @@
         const EVENT_DATE_STR = '2026-02-14';
         const EVENT_DATE = new Date(EVENT_DATE_STR + 'T00:00:00'); // Evento começa em 14/02/2026
         const REGISTRATION_VALUE = 200.00;
-        const INTEREST_RATE = 0.0299; // 2.99% ao mês
-        const MAX_INSTALLMENTS = 12;
         const STORAGE_KEY = 'safira2026_inscricoes';
-        const MERCADO_PAGO_PLACEHOLDER_LINK = 'https://link.mercadopago.com.br/placeholder_pagamento?total=';
+        const ASAAS_PAYMENT_LINK = 'https://www.asaas.com/c/8y324xb3rj14riuc'; // Link fixo para pagamento individual (R$ 200,00)
         const ADMIN_PASSWORD = 'safira2026';
+
 
         // Array que armazena o estado dos congressistas
         let congressistas = [];
@@ -458,13 +436,13 @@
             const isRemovable = index !== 0;
 
             return `
-                <section id="congressista-${id}" data-id="${id}" class="congressista-card p-6 bg-white rounded-2xl card-shadow border-t-4 border-secondary">
+                <section id="congressista-${id}" data-id="${id}" class="congressista-card p-6 card-content rounded-2xl card-shadow border-t-4 border-secondary">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-2xl font-bold text-primary">${title}</h2>
                         ${isRemovable ? `
                             <button type="button" data-id="${id}" class="remove-congressista-btn p-2 text-accent-error hover:text-red-700 transition rounded-full hover:bg-red-50">
                                 <!-- Icone de Lixo (lucide-react icon: Trash2) -->
-                                <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M14 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                                <svg class="icon h-6 w-6 stroke-accent-error" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M14 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
                             </button>
                         ` : ''}
                     </div>
@@ -640,7 +618,7 @@
                                    class="individual-proof-input block w-full text-sm text-gray-500 
                                           file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 
                                           file:text-sm file:font-semibold file:bg-secondary file:text-white 
-                                          hover:file:bg-gray-700 transition" 
+                                          hover:file:bg-[#00796b] transition" 
                                    accept="image/*,application/pdf">
                             <span class="text-xs text-gray-400 block mt-1 overflow-hidden whitespace-nowrap overflow-ellipsis">${fileName}</span>
                         </div>
@@ -707,10 +685,10 @@
         function updateProofStatusDisplay() {
             const total = congressistas.length;
             document.getElementById('proof-status-display').textContent = 
-                `Status: ${proofsAttachedCount}/${total} Comprovante(s) Anexado(s)`;
+                `Status: ${proofsAttachedCount}/${total} Voucher(s) Anexado(s)`;
             
             document.getElementById('proof-label-general').textContent = 
-                `Anexar Comprovante(s) de Pagamento (${proofsAttachedCount}/${total})`;
+                `Anexar Voucher(s) de Credenciamento (${proofsAttachedCount}/${total})`;
             
             updateSubmitButtonState();
         }
@@ -862,7 +840,7 @@
             if (!isAllCongressistasFilled) {
                 reason = "Preencha todos os campos dos Congressistas.";
             } else if (!isProofCountValid) {
-                reason = `Anexe os ${congressistas.length} Comprovante(s).`;
+                reason = `Anexe os ${congressistas.length} Voucher(s) de Credenciamento.`;
             } else if (minorsExist && !isGuardianDataValid) {
                  reason = "Preencha todos os dados do Responsável Legal.";
             } else if (minorsExist && !isTermSignedValid) {
@@ -888,79 +866,53 @@
          * Lida com o clique no botão de realizar pagamento (inicia a transação).
          */
         function handleInitiatePayment() {
-            const paymentMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
-            const totalValue = congressistas.length * REGISTRATION_VALUE;
-            const numInstallments = paymentMethod === 'CARD' ? parseInt(document.getElementById('installments-select').value, 10) : 1;
+            const count = congressistas.length;
             
-            const finalAmount = (numInstallments > 1) 
-                ? calculateInstallment(totalValue, numInstallments) * numInstallments 
-                : totalValue;
-            
-            const finalRedirectLink = MERCADO_PAGO_PLACEHOLDER_LINK + finalAmount.toFixed(2);
-            
+            let modalMessage = '';
+
+            if (count === 1) {
+                modalMessage = `A inscrição custa R$ ${REGISTRATION_VALUE.toFixed(2).replace('.', ',')} (valor que pode incluir taxas de serviço). Você será redirecionado para a página do ASAAS. Lembre-se de enviar o Voucher por WhatsApp para o Líder José Marcos (32) 98824-3122, além de anexar aqui!`;
+            } else {
+                 modalMessage = `A inscrição custa R$ ${REGISTRATION_VALUE.toFixed(2).replace('.', ',')} por pessoa (valor que pode incluir taxas de serviço). Você será redirecionado para a página do ASAAS. Lembre-se de repetir o pagamento <strong>${count} vez(es)</strong> para cobrir todas as pessoas desta ficha e enviar todos os Vouchers por WhatsApp para o Líder José Marcos (32) 98824-3122, além de anexar aqui!`;
+            }
+
             showMessageModal(
-                'Aguardando Pagamento',
-                `Redirecionando para o Mercado Pago com o valor total de R$ ${finalAmount.toFixed(2).replace('.', ',')}. Lembre-se de enviar o comprovante por WhatsApp para o Líder José Marcos (32) 98824-3122, além de anexar aqui!`,
+                'Pagamento Individual',
+                modalMessage,
                 'primary'
             );
             
             setTimeout(() => {
-                 window.open(finalRedirectLink, '_blank');
+                 window.open(ASAAS_PAYMENT_LINK, '_blank');
             }, 2000);
         }
-
-        function calculateInstallment(principal, periods) {
-            if (periods === 1) return principal;
-            const rate = INTEREST_RATE;
-            const numerator = principal * rate * Math.pow(1 + rate, periods);
-            const denominator = Math.pow(1 + rate, periods) - 1;
-            return numerator / denominator;
-        }
         
-        function updateInstallmentValue() {
-            const select = document.getElementById('installments-select');
-            const total = congressistas.length * REGISTRATION_VALUE;
-            const installments = parseInt(select.value, 10);
-            const installmentValue = calculateInstallment(total, installments);
-
-            document.getElementById('installment-value').textContent = `R$ ${installmentValue.toFixed(2).replace('.', ',')}`;
-        }
-        
-        function populateInstallments(total) {
-            const select = document.getElementById('installments-select');
-            const currentSelection = select.value;
-            select.innerHTML = '';
-            for (let i = 1; i <= MAX_INSTALLMENTS; i++) {
-                const installmentValue = calculateInstallment(total, i);
-                const totalPaid = installmentValue * i;
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = `${i}x de R$ ${installmentValue.toFixed(2).replace('.', ',')} (Total: R$ ${totalPaid.toFixed(2).replace('.', ',')})`;
-                select.appendChild(option);
-            }
-            select.value = currentSelection || 1;
-            updateInstallmentValue();
-        }
-
         function updatePaymentDetails() {
             const total = congressistas.length * REGISTRATION_VALUE;
-            document.getElementById('payment-total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            const count = congressistas.length;
             
-            document.getElementById('pix-option-text').textContent = `PIX (R$ ${total.toFixed(2).replace('.', ',')} à vista)`;
+            // Atualiza Total Estimado
+            document.getElementById('payment-total').textContent = `R$ ${total.toFixed(2).replace('.', ',')} (Taxa de Serviço não inclusa)`;
             
-            const cardOptions = document.getElementById('card-options');
-            const isCardSelected = document.querySelector('input[name="payment-method"]:checked')?.value === 'CARD';
-
-            if (isCardSelected) {
-                cardOptions.classList.remove('hidden');
-                populateInstallments(total);
+            // --- Dynamic Payment Warning and Button Text ---
+            const paymentWarningEl = document.getElementById('payment-warning');
+            const initiatePaymentBtn = document.getElementById('initiate-payment-btn');
+            
+            let warningText = '';
+            let buttonText = 'Realizar Pagamento';
+            
+            if (count === 1) {
+                warningText = `⚠️ Fluxo Obrigatório: Clique no botão para <strong>realize o pagamento</strong>. Envie o <strong>Voucher</strong> por WhatsApp para o Líder José Marcos, anexe-o aqui e clique em "Finalizar Inscrição".`;
+                buttonText = `Realizar Pagamento (1 Pessoa)`;
             } else {
-                cardOptions.classList.add('hidden');
-                document.getElementById('installment-value').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
-                const select = document.getElementById('installments-select');
-                if(select.options.length > 0) { select.value = 1; }
+                warningText = `⚠️ Fluxo Obrigatório: Você deve clicar no botão "Realizar Pagamento" <strong>${count} vez(es)</strong> para cobrir todas as pessoas. Envie o <strong>Voucher</strong> de cada pagamento por WhatsApp para o Líder José Marcos, anexe-os aqui e clique em "Finalizar Inscrição".`;
+                buttonText = `Pagar Individualmente (${count} Pessoas)`;
             }
             
+            paymentWarningEl.innerHTML = warningText;
+            initiatePaymentBtn.textContent = buttonText;
+            // --- End Dynamic Payment Warning and Button Text ---
+
             renderIndividualProofs();
             updateSubmitButtonState();
         }
@@ -973,15 +925,6 @@
                 return; // O botão está desabilitado, não deve prosseguir
             }
 
-            const form = e.target;
-            const paymentMethod = form.querySelector('input[name="payment-method"]:checked')?.value;
-            const numInstallments = paymentMethod === 'CARD' ? parseInt(form.querySelector('#installments-select').value, 10) : 1;
-            const totalValue = congressistas.length * REGISTRATION_VALUE;
-            
-            // 1. Cálculo Final do Pagamento
-            const totalPaid = (numInstallments > 1) ? calculateInstallment(totalValue, numInstallments) * numInstallments : totalValue;
-            
-            // 2. Finaliza o objeto para salvamento
             const submissionDate = new Date().toISOString();
             const storedRegistrations = loadRegistrations();
             
@@ -1007,10 +950,10 @@
                 return {
                     ...c,
                     submissionDate: submissionDate,
-                    paymentMethod: paymentMethod + (numInstallments > 1 ? ` (${numInstallments}x)` : ' (à vista)'),
+                    paymentMethod: 'Pagamento Individual ASAAS (R$ 200,00)',
                     proofAttachedCount: congressistas.length, // Contagem total anexada (para submissão, deve ser igual ao número de congressistas)
                     proofFileName: proofFileNames, // Nomes dos arquivos anexados
-                    totalPaid: totalPaid / congressistas.length, // Valor individual
+                    totalPaid: REGISTRATION_VALUE, // Valor individual por congressista
                     isMinor: isMinorFinal, // Confirma se é menor na submissão
                     guardian: guardianData,
                     termSigned: termSignedDate,
@@ -1021,6 +964,7 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify([...storedRegistrations, ...newRegistrations]));
 
             // 4. Resetar o Formulário e Estado (LIMPEZA COMPLETA)
+            const form = document.getElementById('registration-form');
             form.reset();
             
             // Reset state variables
@@ -1052,7 +996,7 @@
             updateSignButtonState();
             
             // 6. Feedback Final (Usa o número de congressistas na submissão, que é o número de comprovantes)
-            showMessageModal('Inscrição Concluída!', `Sua inscrição (${newRegistrations.length} pessoa(s)) e ${newRegistrations.length} comprovante(s) foram salvos localmente. A Igreja entrará em contato para confirmação.`, 'accent-success');
+            showMessageModal('Inscrição Concluída!', `Sua inscrição (${newRegistrations.length} pessoa(s)) e ${newRegistrations.length} voucher(s) foram salvos localmente. A Igreja entrará em contato para confirmação.`, 'accent-success');
         };
 
         // --- ADMIN LOGIC ---
@@ -1118,15 +1062,15 @@
 
 
                 const row = document.createElement('tr');
-                row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                row.className = index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800'; // Ajustado para fundo escuro do Admin
                 row.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">${data.id.substring(0, 8)}...</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${data.name}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${isMinorStatus}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${responsibleName}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-400">${data.id.substring(0, 8)}...</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">${data.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${isMinorStatus}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${responsibleName}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm">${termStatus}</td>
                     <td class="px-6 py-4 text-sm">${proofDisplay}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${submittedAt}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${submittedAt}</td>
                 `;
                 tbody.appendChild(row);
             });
@@ -1159,7 +1103,7 @@
             const modal = document.getElementById('message-modal');
             modal.querySelector('#modal-title').textContent = title;
             modal.querySelector('#modal-title').className = `text-xl font-bold mb-3 text-${color}`;
-            modal.querySelector('#modal-content').textContent = content;
+            modal.querySelector('#modal-content').innerHTML = content; // Usa innerHTML para processar <strong>
             
             const closeBtn = modal.querySelector('#modal-close-btn');
             closeBtn.className = `px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition`;
@@ -1189,11 +1133,8 @@
             document.getElementById('registration-form').addEventListener('submit', handleSubmit);
             
             // OUVINTES DE PAGAMENTO
-            document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
-                radio.addEventListener('change', updatePaymentDetails);
-            });
-            document.getElementById('installments-select').addEventListener('change', updateInstallmentValue);
-
+            document.getElementById('initiate-payment-btn').addEventListener('click', handleInitiatePayment);
+            
             // ADMIN LOGIC LISTENERS
             document.getElementById('main-title').addEventListener('click', handleTitleClick);
             document.getElementById('admin-login-btn').addEventListener('click', handleAdminLogin);
