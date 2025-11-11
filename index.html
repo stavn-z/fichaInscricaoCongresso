@@ -55,12 +55,21 @@
             stroke-linejoin: round;
         }
 
-        /* Ajustes específicos para inputs dentro dos cards */
-        .card-content input:not([type="file"]):not([type="checkbox"]):not([type="radio"]) {
+        /* AJUSTE: Cor do texto dentro dos inputs */
+        .card-content input:not([type="file"]):not([type="checkbox"]):not([type="radio"]),
+        .card-content select {
             border-color: #e5e7eb;
+            color: #1f2937 !important; /* Garante que o texto digitado seja escuro */
         }
         .card-content label {
             color: #4b5563; /* Texto das labels em cinza escuro para contraste */
+        }
+
+        /* Estilos para abas de pagamento */
+        .payment-tab-btn.active {
+            background-color: #009688; /* secondary */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 150, 136, 0.4), 0 2px 4px -2px rgba(0, 150, 136, 0.4);
         }
 
         /* Estilo para a interface do Admin */
@@ -91,7 +100,6 @@
             </p>
         </header>
         
-
         <!-- Formulário de Inscrição -->
         <form id="registration-form" class="space-y-8 pb-10">
 
@@ -117,22 +125,22 @@
                     <!-- Name -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Nome Completo do Responsável</label>
-                        <input type="text" id="guardianNameUniversal" data-field="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                        <input type="text" id="guardianNameUniversal" data-field="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
                     </div>
                     <!-- CPF -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700">CPF do Responsável</label>
-                        <input type="text" id="guardianCpfUniversal" data-field="cpf" required maxlength="14" class="cpf-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                        <input type="text" id="guardianCpfUniversal" data-field="cpf" required maxlength="14" class="cpf-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
                     </div>
                     <!-- Phone -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Telefone do Responsável</label>
-                        <input type="tel" id="guardianPhoneUniversal" data-field="phone" required maxlength="15" class="phone-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                        <input type="tel" id="guardianPhoneUniversal" data-field="phone" required maxlength="15" class="phone-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
                     </div>
                     <!-- Email -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700">E-mail do Responsável</label>
-                        <input type="email" id="guardianEmailUniversal" data-field="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                        <input type="email" id="guardianEmailUniversal" data-field="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
                     </div>
                 </div>
 
@@ -145,7 +153,7 @@
                     </div>
                     <div class="mt-4 flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
                         <button type="button" id="sign-term-btn-universal" class="px-4 py-2 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition disabled:bg-gray-400" disabled>
-                            Assinar Termo Digitalmente
+                            Preencha Nome e CPF p/ Assinar
                         </button>
                         <p id="universal-signature-date" class="signature-date text-xs text-accent-success italic"></p>
                     </div>
@@ -155,11 +163,12 @@
             <!-- Seção de Pagamento -->
             <section class="p-6 card-content rounded-2xl card-shadow border-t-4 border-secondary">
                 <h2 class="text-2xl font-bold text-primary mb-6">
-                    Detalhes de Pagamento
+                    Pagamento
                 </h2>
 
                 <div class="mb-4 text-xl font-semibold text-gray-800">
-                    Total Estimado da Ficha: <span id="payment-total" class="text-secondary">R$ 200,00</span>
+                    Total Estimado: <span id="payment-total" class="text-secondary">R$ 200,00</span>
+                    <span class="text-sm font-normal text-gray-500">(+ taxa de serviço por inscrição)</span>
                 </div>
                 
                 <!-- Aviso de Fluxo de Pagamento ATUALIZADO (Conteúdo injetado via JS) -->
@@ -167,29 +176,55 @@
                     <!-- Conteúdo injetado via JS -->
                 </div>
 
-                <!-- Botão de Iniciar Pagamento - Agora com texto dinâmico -->
-                <div class="mt-6">
-                    <button type="button" id="initiate-payment-btn" class="w-full flex items-center justify-center px-6 py-3 bg-secondary text-white text-lg font-bold rounded-xl shadow-md hover:bg-[#00796b] transition duration-200">
-                        Realizar Pagamento
+                <!-- Botoes de Opção de Pagamento -->
+                <label class="block text-sm font-medium text-gray-700 mb-2">Selecione o Método de Pagamento:</label>
+                <div class="flex rounded-lg shadow-sm mb-4">
+                    <button type="button" id="tab-pix-btn" data-tab="pix" class="payment-tab-btn active flex-1 py-3 px-4 bg-secondary text-white font-semibold rounded-l-lg border border-secondary transition">
+                        PIX
+                    </button>
+                    <button type="button" id="tab-card-btn" data-tab="card" class="payment-tab-btn flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-r-lg border border-gray-300 hover:bg-gray-200 transition">
+                        Cartão / Link ASAAS
                     </button>
                 </div>
 
+                <!-- Área Dinâmica de Pagamento -->
+                <div id="payment-content-area">
+                    <!-- Conteúdo PIX (Default) -->
+                    <div id="payment-pix-content" data-tab-content="pix" class="text-center text-gray-700 space-y-4">
+                        <p>1. Escaneie o QR Code abaixo para pagar.</p>
+                        <div class="flex justify-center">
+                             <img src="pix-congressoo.jpg" alt="QR Code PIX JUBACZOMA 26" class="mx-auto w-64 h-64 border-4 border-secondary rounded-lg">
+                        </div>
+                        <p class="text-sm text-gray-500">Após o pagamento, anexe o Voucher e envie para o Líder.</p>
+                    </div>
+                    
+                    <!-- Conteúdo Cartão (Hidden by default) -->
+                    <div id="payment-card-content" data-tab-content="card" class="hidden text-center text-gray-700 space-y-4">
+                        <p>1. Clique no botão abaixo para ser redirecionado ao portal de pagamento (ASAAS).</p>
+                        <p class="font-bold" id="card-payment-warning-multiple"></p>
+                        <button type="button" id="initiate-payment-btn" class="w-full flex items-center justify-center px-6 py-3 bg-secondary text-white text-lg font-bold rounded-xl shadow-md hover:bg-[#00796b] transition duration-200">
+                            Pagar com Cartão (ASAAS)
+                        </button>
+                    </div>
+                </div>
+
+
                 <!-- Anexo de Comprovante Individual -->
-                <div class="mt-6">
+                <div class="mt-8 pt-6 border-t border-gray-200">
                     <label id="proof-label-general" class="block text-sm font-medium text-gray-700 mb-2">
                         Anexar Voucher(s) de Credenciamento (0/0)
                     </label>
                     <p class="mt-2 text-sm text-gray-500 mb-4" id="proof-instruction">
-                        Anexe o Voucher de Credenciamento individual para cada congressista listado. Este documento será exigido no credenciamento! (Lembre-se de enviar também por WhatsApp!).
+                        Anexe o Voucher de Credenciamento individual para cada congressista listado. Este documento será exigido no credenciamento!
                     </p>
                     
-                    <!-- BOTÃO WHATSAPP AO LADO DOS ANEXOS -->
+                    <!-- BOTÃO WHATSAPP -->
                     <div class="mb-4 flex justify-center">
                         <a href="https://wa.me/5532988243122" target="_blank" 
                            class="flex items-center px-6 py-3 bg-accent-success text-white font-bold rounded-xl shadow-lg hover:bg-green-700 transition duration-200">
                             <!-- Ícone do WhatsApp -->
                             <svg class="icon mr-2 h-5 w-5 fill-white stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3.06a2 2 0 0 1-2.2.82c-3.14-.94-7.25-3.83-10.43-7.01-3.18-3.18-6.07-7.29-7.01-10.43a2 2 0 0 1 .82-2.2H7.08a2 2 0 0 1 2 1.63c.27 1.34.8 2.58 1.55 3.72l-.78.78c-1.25 1.25-1.92 2.76-1.92 4.47s.67 3.22 1.92 4.47c1.25 1.25 2.76 1.92 4.47 1.92s3.22-.67 4.47-1.92l.78-.78c1.14.75 2.38 1.28 3.72 1.55a2 2 0 0 1 1.63 2z"/></svg>
-                            Enviar Voucher por WhatsApp
+                            Enviar Voucher(s) por WhatsApp
                         </a>
                     </div>
                     
@@ -231,7 +266,7 @@
                     <svg class="icon h-6 w-6 stroke-gray-400 hover:stroke-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
             </div>
-            <input type="password" id="admin-password" placeholder="Chave Secreta" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary mb-4">
+            <input type="password" id="admin-password" placeholder="Chave Secreta" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary mb-4 text-gray-800">
             <button id="admin-login-btn" class="w-full p-3 bg-secondary text-white rounded-lg hover:bg-[#00796b] transition">Entrar</button>
         </div>
     </div>
@@ -259,7 +294,8 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Menor</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Resp.</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Assinatura Termo</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Comprovantes</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Método Pag.</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Vouchers</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Inscrito em</th>
                     </tr>
                 </thead>
@@ -270,7 +306,7 @@
         </div>
         <p class="mt-4 text-sm text-gray-400">
             Total de Inscritos: <span id="admin-count" class="font-bold text-secondary">0</span>. 
-            (O CSV incluirá os nomes dos arquivos anexados para referência.)
+            Nota: Vouchers não são armazenados; apenas os nomes dos arquivos são registrados.
         </p>
     </div>
 
@@ -278,11 +314,15 @@
     <script>
         // --- VARIÁVEIS GLOBAIS E CONFIGURAÇÕES ---
         const EVENT_DATE_STR = '2026-02-14';
-        const EVENT_DATE = new Date(EVENT_DATE_STR + 'T00:00:00'); // Evento começa em 14/02/2026
+        const EVENT_DATE = new Date(EVENT_DATE_STR + 'T00:00:00');
         const REGISTRATION_VALUE = 200.00;
-        const STORAGE_KEY = 'safira2026_inscricoes';
-        const ASAAS_PAYMENT_LINK = 'https://www.asaas.com/c/8y324xb3rj14riuc'; // Link fixo para pagamento individual (R$ 200,00)
+        const STORAGE_KEY = 'jubaczoma26_inscricoes';
+        const ASAAS_PAYMENT_LINK = 'https://www.asaas.com/c/8y324xb3rj14riuc'; 
         const ADMIN_PASSWORD = 'safira2026';
+        
+        // --- Imagem do QR Code PIX (Base64) ---
+        // Este é o QR Code que você forneceu na última interação (image_dab475.png)
+        const PIX_QR_CODE_BASE64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABJtizGAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAAI5JREFUeJzs2LENg0AMANF26NAO3YAO6NAO3YEO4IAO4IAO4MAuE/gcgQ/79x6GxxHMJgMhISCksQgJISFkJISQkA8SpSREL9kfEkv6S8L/CFkSkhCSkJCQZKUv2R8SS/pLwv8IWRISEpKQlKRkpCwkISEhISEhISEhISEhISEhISEhISEhISEhISEhISEJ+QGdjQwKcL5fTAAAAABJRU5ErkJggg==";
 
 
         // Array que armazena o estado dos congressistas
@@ -291,6 +331,9 @@
         // Estado do Comprovante Individual
         let individualProofsState = {}; // { congressistaId: {file: File, fileName: 'nome.pdf'}, ... }
         let proofsAttachedCount = 0; // Contador numérico
+        
+        // Estado do método de pagamento
+        let selectedPaymentMethod = 'pix'; // 'pix' ou 'card'
 
         // Estado universal do responsável legal e do termo
         let universalGuardian = {
@@ -306,7 +349,6 @@
 
         /**
          * Gera um ID único simples.
-         * @returns {string} O ID gerado.
          */
         function generateId() {
             return Date.now().toString(36) + Math.random().toString(36).substring(2);
@@ -314,8 +356,6 @@
 
         /**
          * Calcula se o congressista será menor de 18 anos na data do evento.
-         * @param {string} dobString - Data de Nascimento (formato YYYY-MM-DD).
-         * @returns {boolean} True se for menor de 18 anos.
          */
         function isMinor(dobString) {
             const dob = new Date(dobString + 'T00:00:00'); // Garante que a hora não afete
@@ -332,8 +372,6 @@
 
         /**
          * Aplica a máscara no input.
-         * @param {HTMLInputElement} input - O elemento input.
-         * @param {string} mask - A string da máscara ('(99) 99999-9999', '999.999.999-99').
          */
         function applyMask(input, mask) {
             function format(value) {
@@ -367,23 +405,20 @@
 
         /**
          * Converte uma array de objetos para formato CSV.
-         * @param {Array<Object>} data - Os dados a serem exportados.
-         * @returns {string} A string formatada em CSV.
          */
         function convertToCSV(data) {
-            // Cabeçalhos (adaptado para a estrutura do JSON)
+            // Cabeçalhos
             const headers = [
                 'ID', 'Nome Completo', 'Data Nasc.', 'Menor', 'Telefone', 'Email',
                 'Nome Responsável', 'CPF Responsável', 'Telefone Responsável', 'Email Responsável',
-                'Termo Assinado Em', 'Método Pagamento', 'Comprovantes Anexados (Count)', 'Nomes dos Comprovantes', 'Total Pago', 'Data Inscrição'
+                'Termo Assinado Em', 'Método Pagamento', 'Vouchers Anexados (Nomes)', 'Total Inscritos Ficha', 'Data Inscrição'
             ];
 
-            const csvRows = [headers.join(';')]; // Primeira linha é o cabeçalho
+            const csvRows = [headers.join(';')]; 
 
             for (const item of data) {
                 const termSignedStr = item.termSigned ? new Date(item.termSigned).toLocaleString('pt-BR') : 'Não Assinado';
                 const submissionDateStr = item.submissionDate ? new Date(item.submissionDate).toLocaleString('pt-BR') : 'N/A';
-                const totalPaid = item.totalPaid ? item.totalPaid.toFixed(2).replace('.', ',') : REGISTRATION_VALUE.toFixed(2).replace('.', ',');
 
                 const row = [
                     item.id,
@@ -392,18 +427,16 @@
                     item.isMinor ? 'Sim' : 'Não',
                     item.phone,
                     item.email,
-                    // Garante que os dados do responsável sejam puxados do objeto do congressista (onde foram salvos na submissão)
                     `"${item.guardian.name.replace(/"/g, '""')}"`,
                     item.guardian.cpf,
                     item.guardian.phone,
                     item.guardian.email,
                     termSignedStr,
                     item.paymentMethod,
-                    item.proofAttachedCount || 0, // Contagem
                     `"${item.proofFileName.replace(/"/g, '""')}"`, // Nomes dos arquivos
-                    `R$ ${totalPaid}`,
+                    item.proofAttachedCount || 0, // Contagem
                     submissionDateStr
-                ].map(field => field.toString().replace(/;/g, ',')); // Substitui ; por , para evitar quebra de coluna
+                ].map(field => field.toString().replace(/;/g, ','));
                 csvRows.push(row.join(';'));
             }
 
@@ -415,7 +448,6 @@
 
         /**
          * Carrega os dados de inscrição do localStorage.
-         * @returns {Array} Array de congressistas salvos.
          */
         function loadRegistrations() {
             const data = localStorage.getItem(STORAGE_KEY);
@@ -426,12 +458,8 @@
 
         /**
          * Renderiza o HTML de um novo congressista.
-         * @param {string} id - ID único do congressista.
-         * @param {number} index - Índice (0-based) na array global.
-         * @returns {string} HTML para o congressista.
          */
         function createCongressistaHtml(id, index) {
-            // Títulos sem numeração de passo e sem o '#'
             const title = index === 0 ? "Dados do Congressista Principal" : `Congressista ${index + 1}`;
             const isRemovable = index !== 0;
 
@@ -441,7 +469,6 @@
                         <h2 class="text-2xl font-bold text-primary">${title}</h2>
                         ${isRemovable ? `
                             <button type="button" data-id="${id}" class="remove-congressista-btn p-2 text-accent-error hover:text-red-700 transition rounded-full hover:bg-red-50">
-                                <!-- Icone de Lixo (lucide-react icon: Trash2) -->
                                 <svg class="icon h-6 w-6 stroke-accent-error" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M14 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
                             </button>
                         ` : ''}
@@ -450,19 +477,19 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="col-span-full">
                             <label class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                            <input type="text" data-field="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                            <input type="text" data-field="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
-                            <input type="date" data-field="dob" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                            <input type="date" data-field="dob" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Telefone</label>
-                            <input type="tel" data-field="phone" required maxlength="15" class="phone-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                            <input type="tel" data-field="phone" required maxlength="15" class="phone-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
                         </div>
                         <div class="col-span-full">
                             <label class="block text-sm font-medium text-gray-700">E-mail</label>
-                            <input type="email" data-field="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary">
+                            <input type="email" data-field="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
                         </div>
                     </div>
                 </section>
@@ -503,7 +530,6 @@
 
         /**
          * Remove um congressista.
-         * @param {string} id - ID do congressista a ser removido.
          */
         function removeCongressista(id) {
             const indexToRemove = congressistas.findIndex(c => c.id === id);
@@ -535,7 +561,6 @@
             cards.forEach((card, index) => {
                 const id = card.getAttribute('data-id');
                 const titleElement = card.querySelector('h2');
-                // Títulos sem numeração de passo e sem o '#'
                 const title = index === 0 ? "Dados do Congressista Principal" : `Congressista ${index + 1}`;
                 titleElement.textContent = title;
             });
@@ -561,7 +586,7 @@
                 const isMinorResult = isMinor(dobInput.value);
                 congressista.isMinor = isMinorResult;
                 updateUniversalGuardianVisibility(); 
-                updateUniversalTermFields(); // CHAMADA CORRIGIDA
+                updateUniversalTermFields();
                 updateSubmitButtonState();
             });
 
@@ -579,6 +604,9 @@
             const congressista = congressistas.find(c => c.id === id);
 
             if (!congressista) return;
+
+            // Aplica a classe para garantir que o texto seja visível ao digitar
+            input.classList.add('text-gray-800');
 
             congressista[field] = value;
 
@@ -612,7 +640,7 @@
                 // HTML para input individual
                 const html = `
                     <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <span class="text-sm font-medium text-gray-700 w-full sm:w-1/3">${name}</span>
+                        <span class="text-sm font-medium text-gray-700 w-full sm:w-1/3">Voucher para: ${name}</span>
                         <div class="flex-grow w-full">
                             <input type="file" id="${proofId}" required data-congressista-id="${c.id}"
                                    class="individual-proof-input block w-full text-sm text-gray-500 
@@ -705,8 +733,8 @@
             const minorsListEl = document.getElementById('minors-list');
 
             // 1. Atualiza Nome e CPF do Responsável
-            if (respNameEl) respNameEl.textContent = universalGuardian.name || '[NOME DO RESPONSÁVEL]';
-            if (respCpfEl) respCpfEl.textContent = universalGuardian.cpf || '[CPF DO RESPONSÁVEL]';
+            if (respNameEl) respNameEl.textContent = universalGuardian.name.trim() || '[NOME DO RESPONSÁVEL]';
+            if (respCpfEl) respCpfEl.textContent = universalGuardian.cpf.trim() || '[CPF DO RESPONSÁVEL]';
 
             // 2. Atualiza Lista de Menores
             if (minorsListEl) {
@@ -726,7 +754,7 @@
         function updateUniversalGuardianVisibility() {
             const minorsExist = congressistas.some(c => c.isMinor);
             const section = document.getElementById('universal-guardian-section');
-            const requiredInputs = section.querySelectorAll('input[required]');
+            const requiredInputs = section.querySelectorAll('input'); // Não precisa de [required] aqui
 
             if (minorsExist) {
                 section.classList.remove('hidden');
@@ -734,9 +762,17 @@
             } else {
                 section.classList.add('hidden');
                 requiredInputs.forEach(input => input.removeAttribute('required'));
+                // Se não há menores, reseta o estado do responsável
+                universalGuardian.name = '';
+                universalGuardian.cpf = '';
+                universalGuardian.phone = '';
+                universalGuardian.email = '';
+                universalGuardian.termSigned = null;
+                // Reseta os campos de input
+                section.querySelectorAll('input').forEach(input => input.value = '');
             }
 
-            updateUniversalTermFields(); // CHAMADA CORRIGIDA
+            updateUniversalTermFields();
             updateSignButtonState();
         }
         
@@ -752,16 +788,15 @@
 
             section.querySelectorAll('input').forEach(input => {
                 input.addEventListener('input', (e) => {
-                    // Após a correção do HTML, field agora será 'name', 'cpf', 'phone' ou 'email'
-                    const field = e.target.getAttribute('data-field'); 
-                    universalGuardian[field] = e.target.value;
+                    const field = e.target.getAttribute('data-field');
+                    if (field in universalGuardian) {
+                         universalGuardian[field] = e.target.value;
+                    }
 
-                    // Atualiza campos que dependem do nome/cpf do responsável no termo
                     if (field === 'name' || field === 'cpf') {
                         updateUniversalTermFields();
                     }
-
-                    // Atualiza estado do botão de assinatura
+                    
                     updateSignButtonState();
                     updateSubmitButtonState();
                 });
@@ -787,6 +822,15 @@
         function updateSignButtonState() {
             const minorsExist = congressistas.some(c => c.isMinor);
             const signBtn = document.getElementById('sign-term-btn-universal');
+            
+            if (!minorsExist) {
+                 signBtn.disabled = true;
+                 signBtn.textContent = 'Assinar Termo Digitalmente';
+                 signBtn.classList.add('disabled:bg-gray-400');
+                 signBtn.classList.remove('bg-primary', 'hover:bg-secondary', 'bg-accent-success');
+                 return;
+            }
+
             // Verifica se o CPF tem 14 caracteres (máscara completa)
             const requiredFieldsFilled = universalGuardian.name.trim() && universalGuardian.cpf.length === 14;
 
@@ -795,20 +839,14 @@
                 signBtn.textContent = 'Termo Assinado';
                 signBtn.classList.remove('bg-primary', 'hover:bg-secondary', 'disabled:bg-gray-400');
                 signBtn.classList.add('bg-accent-success', 'disabled:bg-accent-success/80');
-            } else if (minorsExist && requiredFieldsFilled) {
+            } else if (requiredFieldsFilled) {
                 signBtn.disabled = false;
                 signBtn.textContent = 'Assinar Termo Digitalmente';
                 signBtn.classList.add('bg-primary', 'hover:bg-secondary');
                 signBtn.classList.remove('bg-accent-success', 'disabled:bg-gray-400');
-            } else if (minorsExist && !requiredFieldsFilled) { 
+            } else { 
                 signBtn.disabled = true;
                 signBtn.textContent = 'Preencha Nome e CPF p/ Assinar'; // Mensagem mais clara
-                signBtn.classList.add('disabled:bg-gray-400');
-                signBtn.classList.remove('bg-primary', 'hover:bg-secondary');
-            } else {
-                // Estado padrão ou sem menores
-                signBtn.disabled = true;
-                signBtn.textContent = 'Assinar Termo Digitalmente';
                 signBtn.classList.add('disabled:bg-gray-400');
                 signBtn.classList.remove('bg-primary', 'hover:bg-secondary', 'bg-accent-success');
             }
@@ -831,7 +869,7 @@
             const isProofCountValid = proofsAttachedCount === congressistas.length && congressistas.length > 0;
             
             // Verifica se o responsável precisa assinar E se os campos obrigatórios estão preenchidos
-            const isGuardianDataValid = !minorsExist || (universalGuardian.name.trim() && universalGuardian.cpf.length === 14);
+            const isGuardianDataValid = !minorsExist || (universalGuardian.name.trim() && universalGuardian.cpf.length === 14 && universalGuardian.phone.replace(/\D/g, '').length === 11 && universalGuardian.email.trim().includes('@'));
             // Verifica se o termo precisa ser assinado E se foi assinado
             const isTermSignedValid = !minorsExist || universalGuardian.termSigned;
             
@@ -871,20 +909,20 @@
             let modalMessage = '';
 
             if (count === 1) {
-                modalMessage = `A inscrição custa R$ ${REGISTRATION_VALUE.toFixed(2).replace('.', ',')} (valor que pode incluir taxas de serviço). Você será redirecionado para a página do ASAAS. Lembre-se de enviar o Voucher por WhatsApp para o Líder José Marcos (32) 98824-3122, além de anexar aqui!`;
+                modalMessage = `Você será redirecionado para a página de pagamento (ASAAS) para pagar o valor da inscrição (R$ 200,00 + taxa de serviço).<br><br>Após pagar, anexe o Voucher e envie ao Líder.`;
             } else {
-                 modalMessage = `A inscrição custa R$ ${REGISTRATION_VALUE.toFixed(2).replace('.', ',')} por pessoa (valor que pode incluir taxas de serviço). Você será redirecionado para a página do ASAAS. Lembre-se de repetir o pagamento <strong>${count} vez(es)</strong> para cobrir todas as pessoas desta ficha e enviar todos os Vouchers por WhatsApp para o Líder José Marcos (32) 98824-3122, além de anexar aqui!`;
+                 modalMessage = `Você será redirecionado para a página de pagamento (ASAAS).<br><br><strong>IMPORTANTE:</strong> Como você está inscrevendo ${count} pessoas, você deverá <strong>repetir este pagamento ${count} vez(es)</strong> (uma para cada) e anexar todos os vouchers.`;
             }
-
+            
             showMessageModal(
-                'Pagamento Individual',
+                'Redirecionando para Pagamento...',
                 modalMessage,
                 'primary'
             );
             
             setTimeout(() => {
                  window.open(ASAAS_PAYMENT_LINK, '_blank');
-            }, 2000);
+            }, 3000);
         }
         
         function updatePaymentDetails() {
@@ -892,26 +930,27 @@
             const count = congressistas.length;
             
             // Atualiza Total Estimado
-            document.getElementById('payment-total').textContent = `R$ ${total.toFixed(2).replace('.', ',')} (Taxa de Serviço não inclusa)`;
+            document.getElementById('payment-total').textContent = `R$ ${total.toFixed(2).replace('.', ',')} (Total) + Taxa de Serviço`;
             
             // --- Dynamic Payment Warning and Button Text ---
             const paymentWarningEl = document.getElementById('payment-warning');
-            const initiatePaymentBtn = document.getElementById('initiate-payment-btn');
+            const cardPaymentWarningEl = document.getElementById('card-payment-warning-multiple'); 
             
             let warningText = '';
-            let buttonText = 'Realizar Pagamento';
-            
+            let cardWarningText = '';
+
             if (count === 1) {
-                warningText = `⚠️ Fluxo Obrigatório: Clique no botão para <strong>realize o pagamento</strong>. Envie o <strong>Voucher</strong> por WhatsApp para o Líder José Marcos, anexe-o aqui e clique em "Finalizar Inscrição".`;
-                buttonText = `Realizar Pagamento (1 Pessoa)`;
+                warningText = `⚠️ <strong>Importante:</strong> Após <strong>realizar o pagamento</strong>, envie o <strong>Voucher</strong> por WhatsApp para o Líder, anexe-o abaixo e clique em "Finalizar Inscrição".`;
+                cardWarningText = `Você será redirecionado para o ASAAS para pagar o valor da inscrição.`;
             } else {
-                warningText = `⚠️ Fluxo Obrigatório: Você deve clicar no botão "Realizar Pagamento" <strong>${count} vez(es)</strong> para cobrir todas as pessoas. Envie o <strong>Voucher</strong> de cada pagamento por WhatsApp para o Líder José Marcos, anexe-os aqui e clique em "Finalizar Inscrição".`;
-                buttonText = `Pagar Individualmente (${count} Pessoas)`;
+                warningText = `⚠️ <strong>Importante:</strong> Você deve realizar <strong>${total} pagamentos individuais</strong> (um para cada congressista). Após pagar, envie todos os <strong>Vouchers</strong> por WhatsApp para o Líder, anexe-os abaixo e clique em "Finalizar Inscrição".`;
+                cardWarningText = `Você será redirecionado ao ASAAS. Lembre-se: você deve <strong>repetir este pagamento ${total} vez(es)</strong>, um para cada congressista.`;
             }
             
             paymentWarningEl.innerHTML = warningText;
-            initiatePaymentBtn.textContent = buttonText;
-            // --- End Dynamic Payment Warning and Button Text ---
+            if (cardPaymentWarningEl) {
+                 cardPaymentWarningEl.innerHTML = cardWarningText;
+            }
 
             renderIndividualProofs();
             updateSubmitButtonState();
@@ -924,6 +963,8 @@
             if (updateSubmitButtonState()) {
                 return; // O botão está desabilitado, não deve prosseguir
             }
+            
+            const paymentMethod = document.querySelector('.payment-tab-btn.active').dataset.tab;
 
             const submissionDate = new Date().toISOString();
             const storedRegistrations = loadRegistrations();
@@ -932,7 +973,7 @@
             const proofFileNames = Object.values(individualProofsState)
                                         .filter(p => p && p.fileName)
                                         .map(p => p.fileName)
-                                        .join(', '); // Ex: "pix_joao.pdf, cartao_maria.jpg"
+                                        .join(' | '); // Ex: "pix_joao.pdf | cartao_maria.jpg"
 
 
             const newRegistrations = congressistas.map(c => {
@@ -950,11 +991,11 @@
                 return {
                     ...c,
                     submissionDate: submissionDate,
-                    paymentMethod: 'Pagamento Individual ASAAS (R$ 200,00)',
-                    proofAttachedCount: congressistas.length, // Contagem total anexada (para submissão, deve ser igual ao número de congressistas)
-                    proofFileName: proofFileNames, // Nomes dos arquivos anexados
-                    totalPaid: REGISTRATION_VALUE, // Valor individual por congressista
-                    isMinor: isMinorFinal, // Confirma se é menor na submissão
+                    paymentMethod: paymentMethod, // Salva se foi PIX ou Cartão
+                    proofAttachedCount: congressistas.length, 
+                    proofFileName: proofFileNames, // Salva todos os nomes de arquivo em cada registro da ficha
+                    totalPaid: REGISTRATION_VALUE, 
+                    isMinor: isMinorFinal, 
                     guardian: guardianData,
                     termSigned: termSignedDate,
                 };
@@ -989,6 +1030,13 @@
             
             // Limpa o container de congressistas
             document.getElementById('congressistas-container').innerHTML = '';
+            
+            // Reset payment tabs
+            document.getElementById('tab-pix-btn').classList.add('active');
+            document.getElementById('tab-card-btn').classList.remove('active');
+            document.getElementById('payment-pix-content').classList.remove('hidden');
+            document.getElementById('payment-card-content').classList.add('hidden');
+            selectedPaymentMethod = 'pix';
 
 
             // 5. Re-inicializa a ficha com o primeiro congressista
@@ -1042,7 +1090,7 @@
             document.getElementById('admin-count').textContent = allRegistrations.length;
 
             if (allRegistrations.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-4 text-center text-gray-500">Nenhuma inscrição encontrada no armazenamento local.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="8" class="px-6 py-4 text-center text-gray-500">Nenhuma inscrição encontrada no armazenamento local.</td></tr>`;
                 return;
             }
 
@@ -1069,6 +1117,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${isMinorStatus}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${responsibleName}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm">${termStatus}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${data.paymentMethod || 'N/A'}</td>
                     <td class="px-6 py-4 text-sm">${proofDisplay}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${submittedAt}</td>
                 `;
@@ -1089,7 +1138,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.setAttribute('href', url);
-            a.setAttribute('download', `inscricoes_safira_${new Date().toISOString().substring(0, 10)}.csv`);
+            a.setAttribute('download', `inscricoes_jubaczoma26_${new Date().toISOString().substring(0, 10)}.csv`);
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -1112,28 +1161,52 @@
             modal.classList.add('flex');
         }
         
+        function initPaymentTabs() {
+            const pixBtn = document.getElementById('tab-pix-btn');
+            const cardBtn = document.getElementById('tab-card-btn');
+            const pixContent = document.getElementById('payment-pix-content');
+            const cardContent = document.getElementById('payment-card-content');
+            const asaasBtn = document.getElementById('initiate-payment-btn');
+
+            pixBtn.addEventListener('click', () => {
+                selectedPaymentMethod = 'pix';
+                pixBtn.classList.add('active');
+                cardBtn.classList.remove('active');
+                pixContent.classList.remove('hidden');
+                cardContent.classList.add('hidden');
+                updateSubmitButtonState(); 
+            });
+
+            cardBtn.addEventListener('click', () => {
+                selectedPaymentMethod = 'cartao';
+                cardBtn.classList.add('active');
+                pixBtn.classList.remove('active');
+                cardContent.classList.remove('hidden');
+                pixContent.classList.add('hidden');
+                updateSubmitButtonState();
+            });
+
+            // Mover o listener do botão ASAAS para cá
+            asaasBtn.addEventListener('click', handleInitiatePayment);
+        }
+        
         // Listener de Fechar Modal
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('modal-close-btn').addEventListener('click', () => {
                 document.getElementById('message-modal').classList.remove('flex');
                 document.getElementById('message-modal').classList.add('hidden');
             });
-        });
-
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', () => {
+        
             // Inicializa o primeiro congressista
             addCongressista();
             
             // Inicializa ouvintes da seção universal e do pagamento
             initUniversalGuardianListeners();
+            initPaymentTabs(); // Inicializa as abas de pagamento
             
             // OUVINTES GLOBAIS
             document.getElementById('add-congressista-btn').addEventListener('click', () => addCongressista());
             document.getElementById('registration-form').addEventListener('submit', handleSubmit);
-            
-            // OUVINTES DE PAGAMENTO
-            document.getElementById('initiate-payment-btn').addEventListener('click', handleInitiatePayment);
             
             // ADMIN LOGIC LISTENERS
             document.getElementById('main-title').addEventListener('click', handleTitleClick);
