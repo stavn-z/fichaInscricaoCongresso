@@ -69,7 +69,14 @@
         .payment-tab-btn.active {
             background-color: #009688; /* secondary */
             color: white;
+            border-color: #009688;
             box-shadow: 0 4px 6px -1px rgba(0, 150, 136, 0.4), 0 2px 4px -2px rgba(0, 150, 136, 0.4);
+        }
+        
+        .payment-tab-btn:not(.active) {
+            background-color: #f3f4f6; /* bg-gray-100 */
+            color: #374151; /* text-gray-700 */
+            border-color: #d1d5db; /* border-gray-300 */
         }
 
         /* Estilo para a interface do Admin */
@@ -91,13 +98,15 @@
             
             <!-- Contato do Líder -->
             <p class="text-center text-sm text-gray-400">
-                Dúvidas? Fale com o Líder do Congresso, José Marcos: 
-                <a href="https://wa.me/5532988243122" target="_blank" class="text-secondary hover:underline font-medium flex items-center justify-center">
-                    (32) 98824-3122 
-                    <!-- Icone de WhatsApp (Telefone) -->
-                    <svg class="icon ml-1 h-4 w-4 stroke-secondary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3.06a2 2 0 0 1-2.2.82c-3.14-.94-7.25-3.83-10.43-7.01-3.18-3.18-6.07-7.29-7.01-10.43a2 2 0 0 1 .82-2.2H7.08a2 2 0 0 1 2 1.63c.27 1.34.8 2.58 1.55 3.72l-.78.78c-1.25 1.25-1.92 2.76-1.92 4.47s.67 3.22 1.92 4.47c1.25 1.25 2.76 1.92 4.47 1.92s3.22-.67 4.47-1.92l.78-.78c1.14.75 2.38 1.28 3.72 1.55a2 2 0 0 1 1.63 2z"/></svg>
-                </a>
-            </p>
+    Dúvidas? Fale com o Líder do Congresso, José Marcos: 
+    <a href="https://wa.me/5532988243122" target="_blank" class="text-secondary hover:underline font-medium inline-flex items-center gap-1">
+        (32) 98824-3122 
+        <!-- Ícone do WhatsApp -->
+        <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+</p>
         </header>
         
         <!-- Formulário de Inscrição -->
@@ -177,15 +186,15 @@
                 </div>
 
                 <!-- Botoes de Opção de Pagamento -->
-                <label class="block text-sm font-medium text-gray-700 mb-2">Selecione o Método de Pagamento:</label>
-                <div class="flex rounded-lg shadow-sm mb-4">
-                    <button type="button" id="tab-pix-btn" data-tab="pix" class="payment-tab-btn active flex-1 py-3 px-4 bg-secondary text-white font-semibold rounded-l-lg border border-secondary transition">
-                        PIX
-                    </button>
-                    <button type="button" id="tab-card-btn" data-tab="card" class="payment-tab-btn flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-r-lg border border-gray-300 hover:bg-gray-200 transition">
-                        Cartão / Link ASAAS
-                    </button>
-                </div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">1. Escolha o método de pagamento:</label>
+<div class="flex rounded-lg shadow-sm mb-4">
+    <button type="button" id="tab-pix-btn" data-tab="pix" class="payment-tab-btn active flex-1 py-3 px-4 bg-secondary text-white font-semibold rounded-l-lg border border-secondary transition">
+        PIX
+    </button>
+    <button type="button" id="tab-card-btn" data-tab="card" class="payment-tab-btn flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-r-lg border border-gray-300 hover:bg-gray-200 transition">
+        Cartão / Link Externo
+    </button>
+</div>
 
                 <!-- Área Dinâmica de Pagamento -->
                 <div id="payment-content-area">
@@ -199,7 +208,7 @@
                     </div>
                     
                     <!-- Conteúdo Cartão (Hidden by default) -->
-                    <div id="payment-card-content" data-tab-content="card" class="hidden text-center text-gray-700 space-y-4">
+                    <div id="payment-card-content" data-tab-content="card" class="hidden text-center text-gray-700 space-y-4"> 
                         <p>1. Clique no botão abaixo para ser redirecionado ao portal de pagamento (ASAAS).</p>
                         <p class="font-bold" id="card-payment-warning-multiple"></p>
                         <button type="button" id="initiate-payment-btn" class="w-full flex items-center justify-center px-6 py-3 bg-secondary text-white text-lg font-bold rounded-xl shadow-md hover:bg-[#00796b] transition duration-200">
@@ -220,11 +229,13 @@
                     
                     <!-- BOTÃO WHATSAPP -->
                     <div class="mb-4 flex justify-center">
-                        <a href="https://wa.me/5532988243122" target="_blank" 
-                           class="flex items-center px-6 py-3 bg-accent-success text-white font-bold rounded-xl shadow-lg hover:bg-green-700 transition duration-200">
+                        <a id="whatsapp-link" href="https://wa.me/5532988243122?text=Ol%C3%A1%2C%20Jos%C3%A9%20Marcos!%20Estou%20enviando%20meu(s)%20Voucher(s)%20de%20Credenciamento%20para%20o%20JUBACZOMA%2026." target="_blank" 
+                           class="flex items-center gap-2 px-6 py-3 bg-[#25D366] text-white font-bold rounded-xl shadow-lg hover:bg-[#20BD5A] transition duration-200">
                             <!-- Ícone do WhatsApp -->
-                            <svg class="icon mr-2 h-5 w-5 fill-white stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3.06a2 2 0 0 1-2.2.82c-3.14-.94-7.25-3.83-10.43-7.01-3.18-3.18-6.07-7.29-7.01-10.43a2 2 0 0 1 .82-2.2H7.08a2 2 0 0 1 2 1.63c.27 1.34.8 2.58 1.55 3.72l-.78.78c-1.25 1.25-1.92 2.76-1.92 4.47s.67 3.22 1.92 4.47c1.25 1.25 2.76 1.92 4.47 1.92s3.22-.67 4.47-1.92l.78-.78c1.14.75 2.38 1.28 3.72 1.55a2 2 0 0 1 1.63 2z"/></svg>
-                            Enviar Voucher(s) por WhatsApp
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                            </svg>
+                            Enviar Voucher(s) para o Líder
                         </a>
                     </div>
                     
@@ -1166,12 +1177,22 @@
             const cardBtn = document.getElementById('tab-card-btn');
             const pixContent = document.getElementById('payment-pix-content');
             const cardContent = document.getElementById('payment-card-content');
+            
             const asaasBtn = document.getElementById('initiate-payment-btn');
+            if (asaasBtn) {
+                asaasBtn.addEventListener('click', handleInitiatePayment);
+            }
 
             pixBtn.addEventListener('click', () => {
                 selectedPaymentMethod = 'pix';
-                pixBtn.classList.add('active');
-                cardBtn.classList.remove('active');
+                // Estilo Ativo (PIX)
+                pixBtn.classList.add('active', 'bg-secondary', 'text-white', 'border-secondary');
+                pixBtn.classList.remove('bg-gray-100', 'text-gray-700', 'border-gray-300', 'hover:bg-gray-200');
+                
+                // Estilo Inativo (Cartão)
+                cardBtn.classList.remove('active', 'bg-secondary', 'text-white', 'border-secondary');
+                cardBtn.classList.add('bg-gray-100', 'text-gray-700', 'border-gray-300', 'hover:bg-gray-200');
+                
                 pixContent.classList.remove('hidden');
                 cardContent.classList.add('hidden');
                 updateSubmitButtonState(); 
@@ -1179,15 +1200,22 @@
 
             cardBtn.addEventListener('click', () => {
                 selectedPaymentMethod = 'cartao';
-                cardBtn.classList.add('active');
-                pixBtn.classList.remove('active');
+                // Estilo Ativo (Cartão)
+                cardBtn.classList.add('active', 'bg-secondary', 'text-white', 'border-secondary');
+                cardBtn.classList.remove('bg-gray-100', 'text-gray-700', 'border-gray-300', 'hover:bg-gray-200');
+
+                // Estilo Inativo (PIX)
+                pixBtn.classList.remove('active', 'bg-secondary', 'text-white', 'border-secondary');
+                pixBtn.classList.add('bg-gray-100', 'text-gray-700', 'border-gray-300', 'hover:bg-gray-200');
+
                 cardContent.classList.remove('hidden');
                 pixContent.classList.add('hidden');
                 updateSubmitButtonState();
             });
-
-            // Mover o listener do botão ASAAS para cá
-            asaasBtn.addEventListener('click', handleInitiatePayment);
+            
+            // Define o conteúdo inicial
+            pixContent.classList.remove('hidden');
+            cardContent.classList.add('hidden');
         }
         
         // Listener de Fechar Modal
