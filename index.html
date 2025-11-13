@@ -209,10 +209,10 @@
                     
                     <!-- Conteúdo Cartão (Hidden by default) -->
                     <div id="payment-card-content" data-tab-content="card" class="hidden text-center text-gray-700 space-y-4"> 
-                        <p>1. Clique no botão abaixo para ser redirecionado ao portal de pagamento (ASAAS).</p>
+                        <p>1. Clique no botão abaixo para ser redirecionado ao portal de pagamento.</p>
                         <p class="font-bold" id="card-payment-warning-multiple"></p>
                         <button type="button" id="initiate-payment-btn" class="w-full flex items-center justify-center px-6 py-3 bg-secondary text-white text-lg font-bold rounded-xl shadow-md hover:bg-[#00796b] transition duration-200">
-                            Pagar com Cartão (ASAAS)
+                            Pagar com Cartão
                         </button>
                     </div>
                 </div>
@@ -920,9 +920,9 @@
             let modalMessage = '';
 
             if (count === 1) {
-                modalMessage = `Você será redirecionado para a página de pagamento (ASAAS) para pagar o valor da inscrição (R$ 200,00 + taxa de serviço).<br><br>Após pagar, anexe o Voucher e envie ao Líder.`;
+                modalMessage = `Você será redirecionado para a página de pagamento para pagar o valor da inscrição (R$ 200,00 + taxa de serviço).<br><br>Após pagar, anexe o Voucher e envie ao Líder.`;
             } else {
-                 modalMessage = `Você será redirecionado para a página de pagamento (ASAAS).<br><br><strong>IMPORTANTE:</strong> Como você está inscrevendo ${count} pessoas, você deverá <strong>repetir este pagamento ${count} vez(es)</strong> (uma para cada) e anexar todos os vouchers.`;
+                 modalMessage = `Você será redirecionado para a página de pagamento.<br><br><strong>IMPORTANTE:</strong> Como você está inscrevendo ${count} pessoas, você deverá <strong>repetir este pagamento ${count} vez(es)</strong> (uma para cada) e anexar todos os vouchers.`;
             }
             
             showMessageModal(
