@@ -1,0 +1,57 @@
+/* Estilos customizados para a estética jovem e moderna */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    background-color: #0f0f0f; /* Near Black */
+    font-family: 'Inter', sans-serif;
+    color: #ffffff; /* Texto claro no fundo escuro */
+}
+.card-shadow {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.5); /* Sombra mais densa no fundo escuro */
+    transition: transform 0.3s ease-in-out;
+}
+.card-shadow:hover {
+    transform: translateY(-2px);
+}
+.card-content {
+    background-color: #ffffff; /* Conteúdo dos cards em branco */
+}
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 2;
+    stroke: currentColor;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* AJUSTE: Cor do texto dentro dos inputs */
+.card-content input:not([type="file"]):not([type="checkbox"]):not([type="radio"]),
+.card-content select {
+    border-color: #e5e7eb;
+    color: #1f2937 !important; /* Garante que o texto digitado seja escuro */
+}
+.card-content label {
+    color: #4b5563; /* Texto das labels em cinza escuro para contraste */
+}
+
+/* Estilos para abas de pagamento */
+.payment-tab-btn.active {
+    background-color: #009688; /* secondary */
+    color: white;
+    border-color: #009688;
+    box-shadow: 0 4px 6px -1px rgba(0, 150, 136, 0.4), 0 2px 4px -2px rgba(0, 150, 136, 0.4);
+}
+
+.payment-tab-btn:not(.active) {
+    background-color: #f3f4f6; /* bg-gray-100 */
+    color: #374151; /* text-gray-700 */
+    border-color: #d1d5db; /* border-gray-300 */
+}
+
+/* Estilo para a interface do Admin */
+#admin-modal {
+    max-height: 90vh;
+}
