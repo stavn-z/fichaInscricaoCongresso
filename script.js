@@ -7,10 +7,12 @@ const ADMIN_PASSWORD = 'safira2026';
 
 const SUPABASE_URL = 'https://qrgspfswrlavvpuqfykz.supabase.co'; 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFyZ3NwZnN3cmxhdnZwdXFmeWt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM4MTkwMjksImV4cCI6MjA3OTM5NTAyOX0.dyvwo-lU97_sAyHW5h_yIqVORNzcDHpKdQZV8qXteo0';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// CORREÇÃO AQUI: Mudamos de 'const supabase' para 'const supabaseClient'
+// para não conflitar com a biblioteca importada no HTML.
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // --- Imagem do QR Code PIX (Base64) ---
-// Este é o QR Code que você forneceu na última interação (image_dab475.png)
 const PIX_QR_CODE_BASE64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABJtizGAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAAI5JREFUeJzs2LENg0AMANF26NAO3YAO6NAO3YEO4IAO4IAO4MAuE/gcgQ/79x6GxxHMJgMhISCksQgJISFkJISQkA8SpSREL9kfEkv6S8L/CFkSkhCSkJCQZKUv2R8SS/pLwv8IWRISEpKQlKRkpCwkISEhISEhISEhISEhISEhISEhISEhISEhISEhISEJ+QGdjQwKcL5fTAAAAABJRU5ErkJggg==";
 
 
@@ -623,7 +625,7 @@ const handleSubmit = async (e) => {
             })
         };
 
-        const { data: fichaResult, error: fichaError } = await supabase
+        const { data: fichaResult, error: fichaError } = await supabaseClient
             .from('fichas')
             .insert(fichaData)
             .select('id')
@@ -645,7 +647,7 @@ const handleSubmit = async (e) => {
                 const fileName = proof.fileName;
                 const filePath = `${novaFichaId}/${c.name.replace(/ /g, '_')}_${fileName}`;
 
-                const { error: uploadError } = await supabase.storage
+                const { error: uploadError } = await supabaseClient.storage
                     .from('vouchers') // Nome do seu balde
                     .upload(filePath, file);
 
@@ -654,7 +656,7 @@ const handleSubmit = async (e) => {
                     throw uploadError;
                 }
 
-                const { data } = supabase.storage
+                const { data } = supabaseClient.storage
                     .from('vouchers')
                     .getPublicUrl(filePath);
                 
@@ -674,7 +676,7 @@ const handleSubmit = async (e) => {
 
         const congressistasData = await Promise.all(uploadPromises);
 
-        const { error: congressistaError } = await supabase
+        const { error: congressistaError } = await supabaseClient
             .from('congressistas')
             .insert(congressistasData);
 
@@ -737,7 +739,7 @@ async function handleAdminLogin() {
 
 async function renderAdminPanel() {
     // 1. Busca os dados do Supabase
-    const { data: allRegistrations, error } = await supabase
+    const { data: allRegistrations, error } = await supabaseClient
         .from('congressistas')
         .select(`
             *,
@@ -857,7 +859,7 @@ function convertToCSV_Supabase(data) {
 
 async function exportToCSV() {
     // 1. Busca os dados do Supabase
-    const { data: allRegistrations, error } = await supabase
+    const { data: allRegistrations, error } = await supabaseClient
         .from('congressistas')
         .select(`
             *,
