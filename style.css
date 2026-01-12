@@ -39,10 +39,11 @@ body {
 
 /* Estilos para abas de pagamento */
 .payment-tab-btn.active {
-    background-color: #009688; /* secondary */
-    color: white;
-    border-color: #009688;
-    box-shadow: 0 4px 6px -1px rgba(0, 150, 136, 0.4), 0 2px 4px -2px rgba(0, 150, 136, 0.4);
+    background-color: #FFC107; /* secondary (Novo Amarelo) */
+    color: #0f0f0f; /* Texto escuro para contraste no amarelo */
+    border-color: #FFC107;
+    /* Sombra amarela brilhante */
+    box-shadow: 0 4px 6px -1px rgba(255, 193, 7, 0.4), 0 2px 4px -2px rgba(255, 193, 7, 0.4);
 }
 
 .payment-tab-btn:not(.active) {
@@ -54,4 +55,58 @@ body {
 /* Estilo para a interface do Admin */
 #admin-modal {
     max-height: 90vh;
+}
+
+/* MANTENHA O SEU CÓDIGO ANTERIOR AQUI, DEPOIS ADICIONE: */
+
+/* Scroll Suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Tipografia */
+.font-display {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Animações Personalizadas */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.animate-title {
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    opacity: 0; /* Começa invisível */
+}
+
+/* Efeito de Brilho no Botão */
+.glow-on-hover:hover {
+    box-shadow: 0 0 15px rgba(0, 150, 136, 0.5);
+}
+
+/* Ajustes Específicos do Card */
+.card-content {
+    background-color: #ffffff;
+    /* Forçar texto escuro dentro dos cards brancos */
+    color: #1f2937; 
+}
+.card-content h2, 
+.card-content h3 {
+    /* Títulos dentro dos cards */
+}
+
+/* Ajuste nos Inputs */
+input, select {
+    color: #1f2937 !important; /* Texto preto nos inputs */
 }

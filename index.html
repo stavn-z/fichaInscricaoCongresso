@@ -1,191 +1,380 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscrição | JUBACZOMA 26</title>
+    <title>JUBACZOMA 26 | Black-Out</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#1e1e1e', // Deep Charcoal (Quase Preto)
-                        'secondary': '#009688', // Teal/Ciano Vibrante (Accent)
-                        'background': '#0f0f0f', // Near Black (Fundo Principal)
-                        'card-bg': '#ffffff', // Branco para os cartões
-                        'accent-success': '#10b981', // Green for success
-                        'accent-error': '#ef4444', // Red for error
+                        'primary': '#1e1e1e', 
+                        // NOVAS CORES AMARELAS AQUI:
+                        'secondary': '#FFC107', // Amarelo Vibrante Principal
+                        'secondary-dark': '#FFA000', // Amarelo mais escuro para o hover
+                        'background': '#0f0f0f', 
+                        'accent-success': '#FFC107', // Usando o amarelo também para sucesso (para manter o tema dark/yellow)
+                        'accent-error': '#ef4444',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
                     },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
                 }
             }
         }
     </script>
 
     <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-background text-white overflow-x-hidden">
 
-    </head>
-<body class="p-4 sm:p-8">
-
-    <div class="max-w-4xl mx-auto">
-        <header class="bg-primary p-6 rounded-t-2xl shadow-xl mb-4">
-            <h1 id="main-title" class="text-4xl font-extrabold text-center mb-2 text-white cursor-pointer hover:text-secondary transition duration-150">
-                Inscrição | JUBACZOMA 26
-            </h1>
-            <p class="text-center text-gray-300 mb-4 text-lg">Tema: "Black-Out". 14/02/2026 - 17/02/2026.</p>
-            
-            <p class="text-center text-sm text-gray-400">
-                Dúvidas? Fale com o Líder do Congresso, José Marcos: 
-                <a href="https://wa.me/5532988243122" target="_blank" class="text-secondary hover:underline font-medium inline-flex items-center gap-1">
-                    (32) 98824-3122 
-                    <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                    </svg>
-                </a>
-            </p>
-        </header>
-        
-        <form id="registration-form" class="space-y-8 pb-10">
-
-            <div id="congressistas-container" class="space-y-10">
+    <nav class="fixed w-full z-50 bg-background/90 backdrop-blur-md border-b border-gray-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 font-display font-black text-2xl tracking-tighter text-white">
+                    JUBAC<span class="text-secondary">ZOMA</span>
                 </div>
-
-            <div class="flex justify-center mt-8">
-                <button type="button" id="add-congressista-btn" class="flex items-center px-6 py-3 bg-secondary text-white font-bold rounded-xl shadow-lg hover:bg-[#00796b] transition duration-200">
-                    <svg class="icon mr-2 stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
-                    Adicionar Outro Congressista
-                </button>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="hover:text-secondary px-3 py-2 rounded-md text-sm font-medium transition">Início</a>
+                        <a href="#tema" class="hover:text-secondary px-3 py-2 rounded-md text-sm font-medium transition">O Tema</a>
+                        <a href="#galeria" class="hover:text-secondary px-3 py-2 rounded-md text-sm font-medium transition">Galeria</a>
+                        <a href="#localizacao" class="hover:text-secondary px-3 py-2 rounded-md text-sm font-medium transition">Local</a>
+                        <a href="#inscricao" class="bg-secondary hover:bg-secondary-dark text-white px-4 py-2 rounded-lg text-sm font-bold transition shadow-lg shadow-secondary/20">Inscrever-se</a>
+                    </div>
+                </div>
             </div>
+        </div>
+    </nav>
 
-            <section id="universal-guardian-section" class="p-6 card-content rounded-2xl card-shadow border-t-4 border-accent-error space-y-4 hidden">
-                <h2 class="text-2xl font-bold text-accent-error mb-4">Dados do Responsável Legal</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Nome Completo do Responsável</label>
-                        <input type="text" id="guardianNameUniversal" data-field="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">CPF do Responsável</label>
-                        <input type="text" id="guardianCpfUniversal" data-field="cpf" required maxlength="14" class="cpf-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Telefone do Responsável</label>
-                        <input type="tel" id="guardianPhoneUniversal" data-field="phone" required maxlength="15" class="phone-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">E-mail do Responsável</label>
-                        <input type="email" id="guardianEmailUniversal" data-field="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('img/blackout.jpg')] bg-cover bg-center opacity-20"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <p class="text-secondary font-bold tracking-[0.2em] uppercase mb-4 animate-fade-in-up">14 a 17 de Fevereiro de 2026</p>
+            
+            <h1 class="font-display text-6xl md:text-8xl font-black mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 drop-shadow-2xl animate-title">
+                BLACK-OUT
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-10 font-light">
+                Quando as luzes do mundo se apagam, a verdadeira Luz brilha mais forte.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#inscricao" class="px-8 py-4 bg-secondary text-white text-lg font-bold rounded-full shadow-[0_0_20px_rgba(0,150,136,0.4)] hover:shadow-[0_0_30px_rgba(0,150,136,0.6)] hover:bg-secondary-dark transition transform hover:-translate-y-1">
+                    Garantir minha vaga
+                </a>
+                <a href="#tema" class="px-8 py-4 bg-transparent border border-gray-600 text-gray-300 text-lg font-medium rounded-full hover:bg-white/5 hover:text-white transition">
+                    Saiba mais
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="tema" class="py-20 px-4 bg-primary relative">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-block p-3 rounded-full bg-black/30 mb-6">
+                <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            </div>
+            
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-white">A Inspiração</h2>
+            
+            <blockquote class="text-2xl md:text-3xl font-serif italic text-gray-300 mb-6 relative">
+                <span class="text-6xl text-secondary absolute -top-8 -left-4 opacity-20">"</span>
+                Pois eis que as trevas cobrirão a terra, e a escuridão os povos; mas sobre ti o Senhor virá surgindo, e a sua glória se verá sobre ti.
+                <span class="text-6xl text-secondary absolute -bottom-12 -right-4 opacity-20">"</span>
+            </blockquote>
+            <cite class="text-secondary font-bold text-lg not-italic">— Isaías 60:2</cite>
+            
+            <p class="mt-10 text-gray-400 leading-relaxed text-lg">
+                Vivemos em tempos onde a confusão e o caos tentam ofuscar a verdade. O <strong>Black-Out</strong> não é sobre o fim, é sobre o contraste. É no escuro total que a menor chama se torna um farol. Prepare-se para dias de desconexão com o mundo e reconexão profunda com a Fonte.
+            </p>
+        </div>
+    </section>
+
+    <section id="galeria" class="py-20 px-4 bg-background border-t border-gray-800">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-white text-center">Momentos Épicos</h2>
+            <p class="text-gray-400 text-center mb-12">Um pouco do que rolou na edição passada</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[250px]">
+                
+                <div class="col-span-1 sm:col-span-2 row-span-2 relative group overflow-hidden rounded-2xl border border-gray-800">
+                    <img src="img/foto8.jpg" loading="lazy" alt="Adoração" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
+                        <span class="text-white font-bold text-lg">Mergulho Profundo</span>
                     </div>
                 </div>
 
-                <div class="mt-6 p-4 bg-gray-50 border border-gray-300 rounded-lg">
-                    <h3 class="font-bold text-lg mb-3 text-primary">Termo de Autorização e Responsabilidade</h3>
-                    <div class="text-sm text-gray-600 space-y-2">
-                        <p id="universal-term-text">Eu, <span class="font-bold text-secondary">[NOME DO RESPONSÁVEL]</span>, portador do CPF <span class="font-bold text-secondary">[CPF DO RESPONSÁVEL]</span>, autorizo o(a) menor(es): <span class="font-bold text-primary" id="minors-list">[NOME(S) DO(S) CONGRESSISTA(S) MENOR(ES)]</span> a participar do Congresso JUBACZOMA 26, nos dias 14/02/2026 a 17/02/2026. Declaro estar ciente de todas as regras e assumo total responsabilidade civil e legal pelos(as) menores durante o período do evento. </p>
-                        <p class="font-semibold text-xs text-gray-400">Status: <span id="universal-term-status" class="term-status text-accent-error">PENDENTE</span></p>
-                    </div>
-                    <div class="mt-4 flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
-                        <button type="button" id="sign-term-btn-universal" class="px-4 py-2 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition disabled:bg-gray-400" disabled>
-                            Preencha Nome e CPF p/ Assinar
-                        </button>
-                        <p id="universal-signature-date" class="signature-date text-xs text-accent-success italic"></p>
-                    </div>
+                <div class="relative group overflow-hidden rounded-2xl border border-gray-800">
+                    <img src="img/foto2.jpg" loading="lazy" alt="Congresso" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                 </div>
-            </section>
 
-            <section class="p-6 card-content rounded-2xl card-shadow border-t-4 border-secondary">
-                <h2 class="text-2xl font-bold text-primary mb-6">
-                    Pagamento
-                </h2>
+                <div class="relative group overflow-hidden rounded-2xl border border-gray-800">
+                    <img src="img/foto3.jpg" loading="lazy" alt="Congresso" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                </div>
 
-                <div class="mb-4 text-xl font-semibold text-gray-800">
-                    Total Estimado: <span id="payment-total" class="text-secondary">R$ 200,00</span>
-                    <span class="text-sm font-normal text-gray-500">(+ taxa de serviço por inscrição)</span>
+                <div class="relative group overflow-hidden rounded-2xl border border-gray-800">
+                    <img src="img/foto4.jpg" loading="lazy" alt="Congresso" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                </div>
+
+                <div class="relative group overflow-hidden rounded-2xl border border-gray-800">
+                    <img src="img/foto5.jpg" loading="lazy" alt="Congresso" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                </div>
+
+                <div class="sm:col-span-2 relative group overflow-hidden rounded-2xl border border-gray-800">
+                    <img src="img/foto7.jpg" loading="lazy" alt="Galera Reunida" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                 </div>
                 
-                <div id="payment-warning" class="p-3 mb-4 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-lg">
-                    </div>
-
-                <label class="block text-sm font-medium text-gray-700 mb-2">1. Escolha o método de pagamento:</label>
-                <div class="flex rounded-lg shadow-sm mb-4">
-                    <button type="button" id="tab-pix-btn" data-tab="pix" class="payment-tab-btn active flex-1 py-3 px-4 bg-secondary text-white font-semibold rounded-l-lg border border-secondary transition">
-                        PIX
-                    </button>
-                    <button type="button" id="tab-card-btn" data-tab="card" class="payment-tab-btn flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-r-lg border border-gray-300 hover:bg-gray-200 transition">
-                        Cartão / Link Externo
-                    </button>
+                <div class="relative group overflow-hidden rounded-2xl border border-gray-800">
+                    <img src="img/foto6.jpg" loading="lazy" alt="Congresso" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                 </div>
 
-                <div id="payment-content-area">
-                    <div id="payment-pix-content" data-tab-content="pix" class="text-center text-gray-700 space-y-4">
-                        <p>1. Escaneie o QR Code abaixo para pagar.</p>
-                        <div class="flex justify-center">
-                             <img src="pix-congressoo.jpg" alt="QR Code PIX JUBACZOMA 26" class="mx-auto w-64 h-64 border-4 border-secondary rounded-lg">
+                <div class="relative group overflow-hidden rounded-2xl border border-gray-800">
+                    <img src="img/foto1.jpg" loading="lazy" alt="Congresso" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="localizacao" class="py-20 px-4 bg-[#121212] relative overflow-hidden border-t border-gray-800">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-secondary rounded-full mix-blend-multiply filter blur-[128px] opacity-10 animate-pulse"></div>
+
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-secondary font-bold tracking-wider text-sm uppercase">Onde vai rolar?</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">Localização</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                
+                <div class="space-y-6 order-2 lg:order-1">
+                    <div class="bg-primary/50 p-8 rounded-2xl border border-gray-800 backdrop-blur-sm">
+                        <h3 class="text-2xl font-bold text-white mb-1">CTL - Centro de Treinamento e Lazer</h3>
+                        <p class="text-secondary font-medium text-lg mb-6">Igreja Batista Parque Safira</p>
+                        
+                        <div class="flex items-start space-x-4 mb-6">
+                            <div class="bg-secondary/10 p-3 rounded-lg">
+                                <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-300 font-medium leading-relaxed">
+                                    Estrada Muriaé - Barão de Monte Alto<br>
+                                    (Próximo à Tripagel)<br>
+                                    Muriaé - MG
+                                </p>
+                            </div>
                         </div>
-                        <p class="text-sm text-gray-500">Após o pagamento, anexe o Voucher e envie para o Líder.</p>
-                    </div>
-                    
-                    <div id="payment-card-content" data-tab-content="card" class="hidden text-center text-gray-700 space-y-4"> 
-                        <p>1. Clique no botão abaixo para ser redirecionado ao portal de pagamento.</p>
-                        <p class="font-bold" id="card-payment-warning-multiple"></p>
-                        <button type="button" id="initiate-payment-btn" class="w-full flex items-center justify-center px-6 py-3 bg-secondary text-white text-lg font-bold rounded-xl shadow-md hover:bg-[#00796b] transition duration-200">
-                            Pagar com Cartão
-                        </button>
-                    </div>
-                </div>
 
-
-                <div class="mt-8 pt-6 border-t border-gray-200">
-                    <label id="proof-label-general" class="block text-sm font-medium text-gray-700 mb-2">
-                        Anexar Voucher(s) de Credenciamento (0/0)
-                    </label>
-                    <p class="mt-2 text-sm text-gray-500 mb-4" id="proof-instruction">
-                        Anexe o Voucher de Credenciamento individual para cada congressista listado. Este documento será exigido no credenciamento!
-                    </p>
-                    
-                    <div class="mb-4 flex justify-center">
-                        <a id="whatsapp-link" href="https://wa.me/5532988243122?text=Ol%C3%A1%2C%20Jos%C3%A9%20Marcos!%20Estou%20enviando%20meu(s)%20Voucher(s)%20de%20Credenciamento%20para%20o%20JUBACZOMA%2026." target="_blank" 
-                           class="flex items-center gap-2 px-6 py-3 bg-[#25D366] text-white font-bold rounded-xl shadow-lg hover:bg-[#20BD5A] transition duration-200">
-                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                            </svg>
-                            Enviar Voucher(s) para o Líder
+                        <a href="https://www.google.com/maps/place/21%C2%B009'37.6%22S+42%C2%B028'27.3%22W/@-21.1610796,-42.4739516,3a,75y,4.02h,78.84t/data=!3m7!1e1!3m5!1sl95vIrn1u2PVX61909rVvQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D11.158516898283509%26panoid%3Dl95vIrn1u2PVX61909rVvQ%26yaw%3D4.015285417655946!7i16384!8i8192!4m4!3m3!8m2!3d-21.1604415!4d-42.4742592?hl=pt-BR&entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" 
+                           target="_blank"
+                           class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-secondary text-secondary font-bold rounded-xl hover:bg-secondary hover:text-primary transition duration-300">
+                            Abrir no GPS
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                         </a>
                     </div>
-                    
-                    <div id="individual-proofs-container" class="space-y-4">
-                        </div>
-                    <p class="mt-2 text-sm font-semibold text-gray-700" id="proof-status-display">Status: 0/0 Anexado(s)</p>
                 </div>
 
-            </section>
+                <div class="h-[400px] w-full rounded-2xl overflow-hidden shadow-2xl border border-gray-800 order-1 lg:order-2 group">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=-21.1610548,-42.4738525&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; filter: grayscale(100%) invert(90%) contrast(1.2);" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="transition duration-500 group-hover:filter-none">
+                    </iframe>
+                </div>
 
-            <div class="flex justify-center pt-4">
-                <button type="submit" id="submit-btn" class="w-full sm:w-2/3 flex items-center justify-center px-8 py-4 bg-secondary text-white text-xl font-bold rounded-xl shadow-2xl hover:bg-[#00796b] transition duration-300 transform hover:scale-[1.01]" disabled>
-                    <svg class="icon mr-3 h-7 w-7 stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m9 12 2 2 4-4"/></svg>
-                    Finalizar Inscrição
-                </button>
             </div>
-        </form>
-    </div>
+        </div>
+    </section>
+
+    <section id="inscricao" class="py-20 px-4 sm:px-8 bg-gradient-to-b from-background to-[#151515]">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="text-center mb-10">
+                <span class="text-secondary font-bold tracking-wider text-sm uppercase">Faça parte da história</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mt-2">Ficha de Inscrição</h2>
+                <div class="h-1 w-20 bg-secondary mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <header class="bg-primary/50 backdrop-blur-sm border border-gray-700 p-6 rounded-t-2xl shadow-xl mb-4">
+                <h1 id="main-title" class="text-3xl font-extrabold text-center mb-2 text-white cursor-pointer hover:text-secondary transition duration-150">
+                    JUBACZOMA 26
+                </h1>
+                <p class="text-center text-gray-300 mb-4 text-lg">Tema: "Black-Out". 14/02/2026 - 17/02/2026.</p>
+                
+                <p class="text-center text-sm text-gray-400">
+                    Dúvidas? Fale com o Líder do Congresso, José Marcos: 
+                    <a href="https://wa.me/5532988243122" target="_blank" class="text-secondary hover:underline font-medium inline-flex items-center gap-1">
+                        (32) 98824-3122 
+                        <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                    </a>
+                </p>
+            </header>
+            
+            <form id="registration-form" class="space-y-8 pb-10">
+
+                <div id="congressistas-container" class="space-y-10">
+                    </div>
+
+                <div class="flex justify-center mt-8">
+                    <button type="button" id="add-congressista-btn" class="flex items-center px-6 py-3 bg-secondary text-white font-bold rounded-xl shadow-lg hover:bg-secondary-dark transition duration-200 ring-2 ring-secondary/50 ring-offset-2 ring-offset-background">
+                        <svg class="icon mr-2 stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                        Adicionar Outro Congressista
+                    </button>
+                </div>
+
+                <section id="universal-guardian-section" class="p-6 card-content rounded-2xl card-shadow border-t-4 border-accent-error space-y-4 hidden bg-white">
+                    <h2 class="text-2xl font-bold text-accent-error mb-4">Dados do Responsável Legal</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Nome Completo do Responsável</label>
+                            <input type="text" id="guardianNameUniversal" data-field="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">CPF do Responsável</label>
+                            <input type="text" id="guardianCpfUniversal" data-field="cpf" required maxlength="14" class="cpf-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Telefone do Responsável</label>
+                            <input type="tel" id="guardianPhoneUniversal" data-field="phone" required maxlength="15" class="phone-mask w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">E-mail do Responsável</label>
+                            <input type="email" id="guardianEmailUniversal" data-field="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary text-gray-800">
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-gray-50 border border-gray-300 rounded-lg">
+                        <h3 class="font-bold text-lg mb-3 text-primary">Termo de Autorização e Responsabilidade</h3>
+                        <div class="text-sm text-gray-600 space-y-2">
+                            <p id="universal-term-text">Eu, <span class="font-bold text-secondary">[NOME DO RESPONSÁVEL]</span>, portador do CPF <span class="font-bold text-secondary">[CPF DO RESPONSÁVEL]</span>, autorizo o(a) menor(es): <span class="font-bold text-primary" id="minors-list">[NOME(S) DO(S) CONGRESSISTA(S) MENOR(ES)]</span> a participar do Congresso JUBACZOMA 26, nos dias 14/02/2026 a 17/02/2026. Declaro estar ciente de todas as regras e assumo total responsabilidade civil e legal pelos(as) menores durante o período do evento. </p>
+                            <p class="font-semibold text-xs text-gray-400">Status: <span id="universal-term-status" class="term-status text-accent-error">PENDENTE</span></p>
+                        </div>
+                        <div class="mt-4 flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
+                            <button type="button" id="sign-term-btn-universal" class="px-4 py-2 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition disabled:bg-gray-400" disabled>
+                                Preencha Nome e CPF p/ Assinar
+                            </button>
+                            <p id="universal-signature-date" class="signature-date text-xs text-accent-success italic"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="p-6 card-content rounded-2xl card-shadow border-t-4 border-secondary bg-white">
+                    <h2 class="text-2xl font-bold text-primary mb-6">
+                        Pagamento
+                    </h2>
+
+                    <div class="mb-4 text-xl font-semibold text-gray-800">
+                        Total Estimado: <span id="payment-total" class="text-secondary">R$ 200,00</span>
+                        <span class="text-sm font-normal text-gray-500">(+ taxa de serviço por inscrição)</span>
+                    </div>
+                    
+                    <div id="payment-warning" class="p-3 mb-4 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-lg">
+                    </div>
+
+                    <label class="block text-sm font-medium text-gray-700 mb-2">1. Escolha o método de pagamento:</label>
+                    <div class="flex rounded-lg shadow-sm mb-4">
+                        <button type="button" id="tab-pix-btn" data-tab="pix" class="payment-tab-btn active flex-1 py-3 px-4 bg-secondary text-white font-semibold rounded-l-lg border border-secondary transition">
+                            PIX
+                        </button>
+                        <button type="button" id="tab-card-btn" data-tab="card" class="payment-tab-btn flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-r-lg border border-gray-300 hover:bg-gray-200 transition">
+                            Cartão / Link Externo
+                        </button>
+                    </div>
+
+                    <div id="payment-content-area">
+                        <div id="payment-pix-content" data-tab-content="pix" class="text-center text-gray-700 space-y-4">
+                            <p>1. Escaneie o QR Code abaixo para pagar.</p>
+                            <div class="flex justify-center">
+                                 <img src="img/pix-congressoo.jpg" alt="QR Code PIX JUBACZOMA 26" class="mx-auto w-64 h-64 border-4 border-secondary rounded-lg">
+                            </div>
+                            <p class="text-sm text-gray-500">Após o pagamento, anexe o Voucher e envie para o Líder.</p>
+                        </div>
+                        
+                        <div id="payment-card-content" data-tab-content="card" class="hidden text-center text-gray-700 space-y-4"> 
+                            <p>1. Clique no botão abaixo para ser redirecionado ao portal de pagamento.</p>
+                            <p class="font-bold" id="card-payment-warning-multiple"></p>
+                            <button type="button" id="initiate-payment-btn" class="w-full flex items-center justify-center px-6 py-3 bg-secondary text-white text-lg font-bold rounded-xl shadow-md hover:bg-secondary-dark transition duration-200">
+                                Pagar com Cartão
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <label id="proof-label-general" class="block text-sm font-medium text-gray-700 mb-2">
+                            Anexar Voucher(s) de Credenciamento (0/0)
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500 mb-4" id="proof-instruction">
+                            Anexe o Voucher de Credenciamento individual para cada congressista listado. Este documento será exigido no credenciamento!
+                        </p>
+                        
+                        <div class="mb-4 flex justify-center">
+                            <a id="whatsapp-link" href="https://wa.me/5532988243122?text=Ol%C3%A1%2C%20Jos%C3%A9%20Marcos!%20Estou%20enviando%20meu(s)%20Voucher(s)%20de%20Credenciamento%20para%20o%20JUBACZOMA%2026." target="_blank" 
+                               class="flex items-center gap-2 px-6 py-3 bg-[#FFC107] text-white font-bold rounded-xl shadow-lg hover:bg-[#ffa000] transition duration-200">
+                                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                                </svg>
+                                Enviar Voucher(s) para o Líder
+                            </a>
+                        </div>
+                        
+                        <div id="individual-proofs-container" class="space-y-4">
+                            </div>
+                        <p class="mt-2 text-sm font-semibold text-gray-700" id="proof-status-display">Status: 0/0 Anexado(s)</p>
+                    </div>
+
+                </section>
+
+                <div class="flex justify-center pt-4">
+                    <button type="submit" id="submit-btn" class="w-full sm:w-2/3 flex items-center justify-center px-8 py-4 bg-secondary text-white text-xl font-bold rounded-xl shadow-2xl hover:bg-secondary-dark transition duration-300 transform hover:scale-[1.01]" disabled>
+                        <svg class="icon mr-3 h-7 w-7 stroke-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m9 12 2 2 4-4"/></svg>
+                        Finalizar Inscrição
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-black py-10 text-center border-t border-gray-900">
+        <p class="text-white font-bold text-xl mb-2">JUBACZOMA 26</p>
+        <p class="text-gray-500 text-sm">© 2026 Todos os direitos reservados.</p>
+    </footer>
 
     <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center p-4 z-50">
-        <div class="card-content p-6 rounded-xl shadow-2xl max-w-sm w-full text-center">
+        <div class="card-content p-6 rounded-xl shadow-2xl max-w-sm w-full text-center bg-white">
             <h3 id="modal-title" class="text-xl font-bold mb-3 text-primary">Sucesso!</h3>
-            <p id="modal-content" class="text-gray-700 mb-5">Sua inscrição foi salva localmente.</p>
+            <p id="modal-content" class="text-gray-700 mb-5">Sua inscrição foi salva.</p>
             <button id="modal-close-btn" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition">Fechar</button>
         </div>
     </div>
 
     <div id="admin-login-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center p-4 z-50">
-        <div class="card-content p-6 rounded-xl shadow-2xl max-w-sm w-full">
+        <div class="card-content p-6 rounded-xl shadow-2xl max-w-sm w-full bg-white">
             <div class="flex justify-between items-start">
                 <h3 class="text-xl font-bold mb-4 text-primary">Acesso Administrativo</h3>
                 <button type="button" id="admin-login-close-btn" class="text-gray-400 hover:text-gray-600 transition">
@@ -193,7 +382,7 @@
                 </button>
             </div>
             <input type="password" id="admin-password" placeholder="Chave Secreta" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary mb-4 text-gray-800">
-            <button id="admin-login-btn" class="w-full p-3 bg-secondary text-white rounded-lg hover:bg-[#00796b] transition">Entrar</button>
+            <button id="admin-login-btn" class="w-full p-3 bg-secondary text-white rounded-lg hover:bg-secondary-dark transition">Entrar</button>
         </div>
     </div>
 
@@ -230,11 +419,9 @@
         </div>
         <p class="mt-4 text-sm text-gray-400">
             Total de Inscritos: <span id="admin-count" class="font-bold text-secondary">0</span>. 
-            Nota: Vouchers não são armazenados; apenas os nomes dos arquivos são registrados.
         </p>
     </div>
 
     <script src="script.js" defer></script>
-
-    </body>
+</body>
 </html>

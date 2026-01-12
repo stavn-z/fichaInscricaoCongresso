@@ -8,8 +8,6 @@ const ADMIN_PASSWORD = 'safira2026';
 const SUPABASE_URL = 'https://qrgspfswrlavvpuqfykz.supabase.co'; 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFyZ3NwZnN3cmxhdnZwdXFmeWt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM4MTkwMjksImV4cCI6MjA3OTM5NTAyOX0.dyvwo-lU97_sAyHW5h_yIqVORNzcDHpKdQZV8qXteo0';
 
-// CORREÇÃO AQUI: Mudamos de 'const supabase' para 'const supabaseClient'
-// para não conflitar com a biblioteca importada no HTML.
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // --- Imagem do QR Code PIX (Base64) ---
@@ -43,6 +41,17 @@ let universalGuardian = {
  */
 function generateId() {
     return Date.now().toString(36) + Math.random().toString(36).substring(2);
+}
+
+/**
+ * Remove acentos e caracteres especiais para salvar no banco/storage (CORREÇÃO DO ERRO).
+ */
+function sanitizeString(str) {
+    if (!str) return "";
+    return str
+        .normalize("NFD") // Separa os acentos das letras
+        .replace(/[\u0300-\u036f]/g, "") // Remove os acentos
+        .replace(/[^a-zA-Z0-9._-]/g, "_"); // Troca espaços e símbolos estranhos por underline
 }
 
 /**
@@ -104,7 +113,7 @@ function createCongressistaHtml(id, index) {
     const isRemovable = index !== 0;
 
     return `
-        <section id="congressista-${id}" data-id="${id}" class="congressista-card p-6 card-content rounded-2xl card-shadow border-t-4 border-secondary">
+        <section id="congressista-${id}" data-id="${id}" class="congressista-card p-6 card-content rounded-2xl card-shadow border-t-4 border-secondary bg-white">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-primary">${title}</h2>
                 ${isRemovable ? `
@@ -286,7 +295,7 @@ function renderIndividualProofs() {
                            class="individual-proof-input block w-full text-sm text-gray-500 
                                   file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 
                                   file:text-sm file:font-semibold file:bg-secondary file:text-white 
-                                  hover:file:bg-[#00796b] transition" 
+                                  hover:file:bg-[#ffa000] transition" 
                            accept="image/*,application/pdf">
                     <span class="text-xs text-gray-400 block mt-1 overflow-hidden whitespace-nowrap overflow-ellipsis">${fileName}</span>
                 </div>
@@ -645,7 +654,12 @@ const handleSubmit = async (e) => {
             if (proof && proof.file) {
                 const file = proof.file;
                 const fileName = proof.fileName;
-                const filePath = `${novaFichaId}/${c.name.replace(/ /g, '_')}_${fileName}`;
+                
+                // --- CORREÇÃO APLICADA AQUI: Limpeza de nomes ---
+                const nomeLimpo = sanitizeString(c.name);
+                const arquivoLimpo = sanitizeString(fileName);
+                const filePath = `${novaFichaId}/${nomeLimpo}_${arquivoLimpo}`;
+                // ------------------------------------------------
 
                 const { error: uploadError } = await supabaseClient.storage
                     .from('vouchers') // Nome do seu balde
